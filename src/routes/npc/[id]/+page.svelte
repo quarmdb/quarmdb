@@ -6,3 +6,4 @@
 <a href="/npc/all">All NPCS</a>
 
 <pre>{JSON.stringify(data.npc, null, 2)}</pre>
+<pre>{JSON.stringify(data.spawn, null, 2)}</pre>

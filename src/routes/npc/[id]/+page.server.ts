@@ -1,13 +1,12 @@
 import { error } from '@sveltejs/kit';
 import { db } from '../../../lib/conn';
 import type { PageServerLoadEvent } from './$types';
-import { NPCSchema } from '$lib/schema';
 
 export async function load({ params }:PageServerLoadEvent) {
   let id = parseInt(params.id);
   if(typeof id !== "number") throw error(404);
 
-  const row = db.prepare(`
+  const npc = db.prepare(`
 			SELECT 
 				npc_types.*, 
 				races.name as racename
@@ -18,9 +17,22 @@ export async function load({ params }:PageServerLoadEvent) {
 			WHERE npc_types.id = ?
 		`).get(id);
 
-	if (!row) throw error(404);
+	if (!npc) throw error(404);
+
+	const spawn = db.prepare(`
+		SELECT
+			sp2.zone, sp2.x, sp2.y, sp2.z
+		FROM 
+			spawn2 sp2
+		INNER JOIN spawnentry ON
+			spawnentry.spawngroupID = sp2.spawngroupID
+		WHERE
+			spawnentry.npcID = ?
+	`).all(id);
+
 
 	return {
-		npc:row
+		npc,
+		spawn
 	};
 }
