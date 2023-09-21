@@ -5,7 +5,7 @@
 
 <div class="wrapper">
 	<nav>
-		<span>Alla-No</span>
+		<span>QuarmDB</span>
 		<ThemeSwitcher />
 	</nav>
 
