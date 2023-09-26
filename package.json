@@ -15,11 +15,15 @@
     "@sveltejs/adapter-auto": "^2.1.0",
     "@sveltejs/kit": "^1.25.0",
     "@types/better-sqlite3": "^7.6.5",
-    "@types/node": "^20.6.2",
+    "@types/node": "^20.6.4",
+    "@types/pg": "^8.10.3",
+    "@types/tar": "^6.1.6",
+    "dotenv": "^16.3.1",
     "prettier": "^3.0.3",
     "prettier-plugin-svelte": "^3.0.3",
-    "svelte": "^4.2.0",
-    "svelte-check": "^3.5.1",
+    "svelte": "^4.2.1",
+    "svelte-check": "^3.5.2",
+    "tar": "^6.2.0",
     "ts-node": "^10.9.1",
     "tslib": "^2.6.2",
     "typescript": "^5.2.2",
@@ -27,8 +31,11 @@
   },
   "type": "module",
   "dependencies": {
+    "@supabase/supabase-js": "^2.36.0",
     "better-sqlite3": "^8.6.0",
-    "open-props": "^1.5.15",
+    "open-props": "^1.5.16",
+    "pg": "^8.11.3",
+    "postgres": "^3.3.5",
     "zod": "^3.22.2"
   }
 }

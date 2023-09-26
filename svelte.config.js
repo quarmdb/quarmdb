@@ -8,6 +8,9 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
+		env: {
+			dir: './'
+		},
 		adapter: adapter()
 	}
 };
