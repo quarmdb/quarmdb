@@ -7,6 +7,8 @@ export async function load({ params }: PageServerLoadEvent) {
 	let id = parseInt(params.id);
 	if (typeof id !== 'number') throw error(404);
 
+	console.log(`Retreiving Item Id ${id}`);
+
 	const client = await pool.connect();
 
 	let result = await client.query(
@@ -16,11 +18,10 @@ export async function load({ params }: PageServerLoadEvent) {
 		FROM
 			items
 		WHERE
-			id = $1
-		`,
-		[id]
+			items.id = ${id}
+		`
 	);
-	const itemParse = ItemsSchema.safeParse(result);
+	const itemParse = ItemsSchema.safeParse(result.rows[0]);
 
 	if (!itemParse.success) {
 		console.error(itemParse.error);
@@ -30,20 +31,22 @@ export async function load({ params }: PageServerLoadEvent) {
 
 	const dropnpcs = await client.query(
 		`
-		SELECT 
-			npc.name, npc.id 
-		From 
+		SELECT
+			npc.name, npc.id
+		From
 			npc_types npc
-		INNER JOIN loottable_entries lt_e ON 
+		INNER JOIN loottable_entries lt_e ON
 			npc.loottable_id = lt_e.loottable_id
 		INNER JOIN lootdrop_entries ld_e ON
 			lt_e.lootdrop_id = ld_e.lootdrop_id
 		WHERE
-			ld_e.item_id = ?
+			ld_e.item_id = ${id}
 		`
 	);
 
-	const dropnpcsParsed = NpcTypesSchema.pick({ name: true, id: true }).array().safeParse(dropnpcs);
+	const dropnpcsParsed = NpcTypesSchema.pick({ name: true, id: true })
+		.array()
+		.safeParse(dropnpcs.rows);
 
 	if (!dropnpcsParsed.success) {
 		console.log(dropnpcsParsed.error);

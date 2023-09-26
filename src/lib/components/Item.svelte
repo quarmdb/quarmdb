@@ -14,22 +14,11 @@
 			}[keyof T]
 		>]: T[P];
 	} => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== 0 && v !== '')) as any;
-
-	function cutDownItem(fullItem: ItemsType) {
-		let obj: Partial<ItemsType> = { ...fullItem };
-		Object.keys(fullItem).forEach((key) => {
-			key = key as keyof ItemsType;
-			if (fullItem[key as keyof ItemsType] === 0 || fullItem[key as keyof ItemsType] === '') {
-				delete obj[key as keyof ItemsType];
-			}
-		});
-		return obj;
-	}
 </script>
 
 <section>
 	<img class="icon" src="/icon/{item.icon}.gif" alt="icon" />
-	<span>{item.Name}</span>
+	<span>{item.name}</span>
 </section>
 <pre>Classes:{#each getUseableClasses(item.classes) as useableClass}{useableClass.shortName},{/each}</pre>
 <pre>Races:{#each getUseableRaces(item.races) as race}{race.shortName},{/each}</pre>
