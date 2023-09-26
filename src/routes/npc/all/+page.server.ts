@@ -1,15 +1,17 @@
-import { db } from '$lib/conn';
 import { NpcTypesSchema, type NpcTypesType } from '$lib/schema';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoadEvent } from './$types';
-import { z } from 'zod';
+import { pool } from '$lib/db';
 
 export async function load({ params }: PageServerLoadEvent) {
-	let rows = await db.prepare('SELECT id, name, level FROM npc_types ORDER BY name').all();
+	const res = await supabase.from('npc_types').select(`id, name, level`);
+	//let rows = await supabase.from('SELECT id, name, level FROM npc_types ORDER BY name');
 
-	let parsedRows = z
-		.array(NpcTypesSchema.pick({ id: true, name: true, level: true }))
-		.safeParse(rows);
+	if (res.error) throw error(404);
+
+	let parsedRows = NpcTypesSchema.pick({ id: true, name: true, level: true })
+		.array()
+		.safeParse(res.data);
 
 	if (!parsedRows.success) {
 		console.log(parsedRows.error);

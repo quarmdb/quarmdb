@@ -1,30 +1,30 @@
 import {z} from 'zod';
 export const ZoneStateDumpSchema= z.object({
-gmspawntype: z.string().nullable().transform(e => { 
+gmspawntype: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-gmspawntype_count: z.number(),
-npc_count: z.number(),
-npc_loot: z.string().nullable().transform(e => { 
+gmspawntype_count: z.coerce.number(),
+npc_count: z.coerce.number(),
+npc_loot: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-npcloot_count: z.number(),
-npcs: z.string().nullable().transform(e => { 
+npcloot_count: z.coerce.number(),
+npcs: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-spawn2: z.string().nullable().transform(e => { 
+spawn2: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-spawn2_count: z.number(),
-time: z.string().nullable().transform(e => { 
+spawn2_count: z.coerce.number(),
+time: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-zonename: z.string().nullable().transform(e => { 
+zonename: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

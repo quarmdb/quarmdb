@@ -1,16 +1,16 @@
 import {z} from 'zod';
 export const AaActionsSchema= z.object({
-aaid: z.number(),
-nonspell_action: z.number(),
-nonspell_duration: z.number(),
-nonspell_mana: z.number(),
-rank: z.number(),
-redux_aa: z.number(),
-redux_aa2: z.number(),
-redux_rate: z.number(),
-redux_rate2: z.number(),
-reuse_time: z.number(),
-spell_id: z.number(),
-target: z.number(),
+aaid: z.coerce.number(),
+nonspell_action: z.coerce.number(),
+nonspell_duration: z.coerce.number(),
+nonspell_mana: z.coerce.number(),
+rank: z.coerce.number(),
+redux_aa: z.coerce.number(),
+redux_aa2: z.coerce.number(),
+redux_rate: z.coerce.number(),
+redux_rate2: z.coerce.number(),
+reuse_time: z.coerce.number(),
+spell_id: z.coerce.number(),
+target: z.coerce.number(),
 });
 export type AaActionsType = z.infer<typeof AaActionsSchema>;

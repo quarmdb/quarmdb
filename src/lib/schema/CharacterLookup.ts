@@ -1,34 +1,34 @@
 import {z} from 'zod';
 export const CharacterLookupSchema= z.object({
-account_id: z.number(),
-class: z.number(),
-firstlogon: z.number(),
-groupid: z.number(),
-id: z.number(),
-inspectmessage: z.string().nullable().transform(e => { 
+account_id: z.coerce.number(),
+class: z.coerce.number(),
+firstlogon: z.coerce.number(),
+groupid: z.coerce.number(),
+id: z.coerce.number(),
+inspectmessage: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-instanceid: z.number(),
-level: z.number(),
-lfg: z.number(),
-lfp: z.number(),
-mailkey: z.string().nullable().transform(e => { 
+instanceid: z.coerce.number(),
+level: z.coerce.number(),
+lfg: z.coerce.number(),
+lfp: z.coerce.number(),
+mailkey: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-name: z.string().nullable().transform(e => { 
+name: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-pktime: z.number(),
-timelaston: z.number(),
-x: z.number(),
-xtargets: z.number(),
-y: z.number(),
-z: z.number(),
-zoneid: z.number(),
-zonename: z.string().nullable().transform(e => { 
+pktime: z.coerce.number(),
+timelaston: z.coerce.number(),
+x: z.coerce.number(),
+xtargets: z.coerce.number(),
+y: z.coerce.number(),
+z: z.coerce.number(),
+zoneid: z.coerce.number(),
+zonename: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

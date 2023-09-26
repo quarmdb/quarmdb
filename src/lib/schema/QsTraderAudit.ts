@@ -1,24 +1,24 @@
 import {z} from 'zod';
 export const QsTraderAuditSchema= z.object({
-buyer: z.string().nullable().transform(e => { 
+buyer: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-itemid: z.number(),
-itemname: z.string().nullable().transform(e => { 
+itemid: z.coerce.number(),
+itemname: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-quantity: z.number(),
-seller: z.string().nullable().transform(e => { 
+quantity: z.coerce.number(),
+seller: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-serialnumber: z.number(),
-time: z.string().nullable().transform(e => { 
+serialnumber: z.coerce.number(),
+time: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-totalcost: z.number(),
+totalcost: z.coerce.number(),
 });
 export type QsTraderAuditType = z.infer<typeof QsTraderAuditSchema>;

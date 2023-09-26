@@ -1,11 +1,11 @@
 import {z} from 'zod';
 export const AccountFlagsSchema= z.object({
-p_accid: z.number(),
-p_flag: z.string().nullable().transform(e => { 
+p_accid: z.coerce.number(),
+p_flag: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-p_value: z.string().nullable().transform(e => { 
+p_value: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

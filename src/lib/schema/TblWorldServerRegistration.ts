@@ -1,32 +1,32 @@
 import {z} from 'zod';
 export const TblWorldServerRegistrationSchema= z.object({
-Note: z.string().nullable().transform(e => { 
+Note: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-ServerAdminID: z.number(),
-ServerID: z.number(),
-ServerLastIPAddr: z.string().nullable().transform(e => { 
+ServerAdminID: z.coerce.number(),
+ServerID: z.coerce.number(),
+ServerLastIPAddr: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-ServerLastLoginDate: z.string().nullable().transform(e => { 
+ServerLastLoginDate: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-ServerListTypeID: z.number(),
-ServerLongName: z.string().nullable().transform(e => { 
+ServerListTypeID: z.coerce.number(),
+ServerLongName: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-ServerShortName: z.string().nullable().transform(e => { 
+ServerShortName: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-ServerTagDescription: z.string().nullable().transform(e => { 
+ServerTagDescription: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-ServerTrusted: z.number(),
+ServerTrusted: z.coerce.number(),
 });
 export type TblWorldServerRegistrationType = z.infer<typeof TblWorldServerRegistrationSchema>;

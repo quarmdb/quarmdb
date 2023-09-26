@@ -1,10 +1,10 @@
 import {z} from 'zod';
 export const SkillDifficultySchema= z.object({
-difficulty: z.number(),
-name: z.string().nullable().transform(e => { 
+difficulty: z.coerce.number(),
+name: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-skillid: z.number(),
+skillid: z.coerce.number(),
 });
 export type SkillDifficultyType = z.infer<typeof SkillDifficultySchema>;

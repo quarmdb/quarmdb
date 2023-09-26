@@ -16,7 +16,7 @@
 			shownData = [];
 			for (let i = 0; i < data.rows.length; i++) {
 				let row = data.rows[i];
-				if (row.Name.toUpperCase().includes(searchText.toUpperCase())) shownData.push(row);
+				if (row.name.toUpperCase().includes(searchText.toUpperCase())) shownData.push(row);
 			}
 		}
 	}
@@ -30,7 +30,7 @@
 	{#each shownData as row}
 		<div class="item">
 			<img src="/icon/{row.icon}.gif" alt="icon" />
-			<a href="/items/{row.id}">{row.Name}</a>
+			<a href="/items/{row.id}">{row.name}</a>
 		</div>
 	{/each}
 </div>

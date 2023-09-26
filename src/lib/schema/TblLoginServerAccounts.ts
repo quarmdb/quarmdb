@@ -1,29 +1,29 @@
 import {z} from 'zod';
 export const TblLoginServerAccountsSchema= z.object({
-AccountCreateDate: z.string().nullable().transform(e => { 
+AccountCreateDate: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-AccountEmail: z.string().nullable().transform(e => { 
+AccountEmail: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-AccountName: z.string().nullable().transform(e => { 
+AccountName: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-AccountPassword: z.string().nullable().transform(e => { 
+AccountPassword: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-LastIPAddress: z.string().nullable().transform(e => { 
+LastIPAddress: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-LastLoginDate: z.string().nullable().transform(e => { 
+LastLoginDate: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-LoginServerID: z.number(),
+LoginServerID: z.coerce.number(),
 });
 export type TblLoginServerAccountsType = z.infer<typeof TblLoginServerAccountsSchema>;

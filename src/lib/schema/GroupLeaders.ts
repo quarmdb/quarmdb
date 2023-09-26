@@ -1,11 +1,11 @@
 import {z} from 'zod';
 export const GroupLeadersSchema= z.object({
-gid: z.number(),
-leadername: z.string().nullable().transform(e => { 
+gid: z.coerce.number(),
+leadername: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-oldleadername: z.string().nullable().transform(e => { 
+oldleadername: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

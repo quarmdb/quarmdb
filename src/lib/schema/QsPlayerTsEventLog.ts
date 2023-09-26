@@ -1,18 +1,18 @@
 import {z} from 'zod';
 export const QsPlayerTsEventLogSchema= z.object({
-chance: z.number(),
-char_id: z.number(),
-recipe_id: z.number(),
-results: z.string().nullable().transform(e => { 
+chance: z.coerce.number(),
+char_id: z.coerce.number(),
+recipe_id: z.coerce.number(),
+results: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-time: z.string().nullable().transform(e => { 
+time: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-tradeskill: z.number(),
-trivial: z.number(),
-zone_id: z.number(),
+tradeskill: z.coerce.number(),
+trivial: z.coerce.number(),
+zone_id: z.coerce.number(),
 });
 export type QsPlayerTsEventLogType = z.infer<typeof QsPlayerTsEventLogSchema>;

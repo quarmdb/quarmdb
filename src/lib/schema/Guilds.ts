@@ -1,26 +1,26 @@
 import {z} from 'zod';
 export const GuildsSchema= z.object({
-channel: z.string().nullable().transform(e => { 
+channel: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-id: z.number(),
-leader: z.number(),
-minstatus: z.number(),
-motd: z.string().nullable().transform(e => { 
+id: z.coerce.number(),
+leader: z.coerce.number(),
+minstatus: z.coerce.number(),
+motd: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-motd_setter: z.string().nullable().transform(e => { 
+motd_setter: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-name: z.string().nullable().transform(e => { 
+name: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-tribute: z.number(),
-url: z.string().nullable().transform(e => { 
+tribute: z.coerce.number(),
+url: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

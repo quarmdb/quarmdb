@@ -86,7 +86,6 @@ if (!sendNetwork) process.exit(1);
 
 console.log('before import');
 
-import { pool } from '../src/lib/db/';
 import { exec, spawn } from 'child_process';
 let sqls = '';
 

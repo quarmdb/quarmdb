@@ -1,9 +1,9 @@
 import {z} from 'zod';
 export const WebdataCharacterSchema= z.object({
-id: z.number(),
-last_login: z.number(),
-last_seen: z.number(),
-name: z.string().nullable().transform(e => { 
+id: z.coerce.number(),
+last_login: z.coerce.number(),
+last_seen: z.coerce.number(),
+name: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

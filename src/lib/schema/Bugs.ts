@@ -1,40 +1,40 @@
 import {z} from 'zod';
 export const BugsSchema= z.object({
-_can_duplicate: z.number(),
-_character_flags: z.number(),
-_crash_bug: z.number(),
-_target_info: z.number(),
-bug: z.string().nullable().transform(e => { 
+_can_duplicate: z.coerce.number(),
+_character_flags: z.coerce.number(),
+_crash_bug: z.coerce.number(),
+_target_info: z.coerce.number(),
+bug: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-date: z.string().nullable().transform(e => { 
+date: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-flag: z.number(),
-id: z.number(),
-name: z.string().nullable().transform(e => { 
+flag: z.coerce.number(),
+id: z.coerce.number(),
+name: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-status: z.number(),
-target: z.string().nullable().transform(e => { 
+status: z.coerce.number(),
+target: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-type: z.string().nullable().transform(e => { 
+type: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-ui: z.string().nullable().transform(e => { 
+ui: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-x: z.number(),
-y: z.number(),
-z: z.number(),
-zone: z.string().nullable().transform(e => { 
+x: z.coerce.number(),
+y: z.coerce.number(),
+z: z.coerce.number(),
+zone: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

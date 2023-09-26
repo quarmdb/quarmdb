@@ -1,36 +1,36 @@
 import {z} from 'zod';
 export const PetitionsSchema= z.object({
-accountname: z.string().nullable().transform(e => { 
+accountname: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-charclass: z.number(),
-charlevel: z.number(),
-charname: z.string().nullable().transform(e => { 
+charclass: z.coerce.number(),
+charlevel: z.coerce.number(),
+charname: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-charrace: z.number(),
-checkouts: z.number(),
-dib: z.number(),
-gmtext: z.string().nullable().transform(e => { 
+charrace: z.coerce.number(),
+checkouts: z.coerce.number(),
+dib: z.coerce.number(),
+gmtext: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-ischeckedout: z.number(),
-lastgm: z.string().nullable().transform(e => { 
+ischeckedout: z.coerce.number(),
+lastgm: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-petid: z.number(),
-petitiontext: z.string().nullable().transform(e => { 
+petid: z.coerce.number(),
+petitiontext: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-senttime: z.number(),
-unavailables: z.number(),
-urgency: z.number(),
-zone: z.string().nullable().transform(e => { 
+senttime: z.coerce.number(),
+unavailables: z.coerce.number(),
+urgency: z.coerce.number(),
+zone: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

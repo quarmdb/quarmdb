@@ -1,6 +1,6 @@
 import {z} from 'zod';
 export const GoallistsSchema= z.object({
-entry: z.number(),
-listid: z.number(),
+entry: z.coerce.number(),
+listid: z.coerce.number(),
 });
 export type GoallistsType = z.infer<typeof GoallistsSchema>;

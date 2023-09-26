@@ -1,50 +1,50 @@
 import {z} from 'zod';
 export const AccountSchema= z.object({
-active: z.number(),
-ban_reason: z.string().nullable().transform(e => { 
+active: z.coerce.number(),
+ban_reason: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-charname: z.string().nullable().transform(e => { 
+charname: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-expansion: z.number(),
-flymode: z.number(),
-forum_id: z.number(),
-gminvul: z.number(),
-gmspeed: z.number(),
-hideme: z.number(),
-id: z.number(),
-ignore_tells: z.number(),
-ip_exemption_multiplier: z.number(),
-karma: z.number(),
-lsaccount_id: z.number(),
-minilogin_ip: z.string().nullable().transform(e => { 
+expansion: z.coerce.number(),
+flymode: z.coerce.number(),
+forum_id: z.coerce.number(),
+gminvul: z.coerce.number(),
+gmspeed: z.coerce.number(),
+hideme: z.coerce.number(),
+id: z.coerce.number(),
+ignore_tells: z.coerce.number(),
+ip_exemption_multiplier: z.coerce.number(),
+karma: z.coerce.number(),
+lsaccount_id: z.coerce.number(),
+minilogin_ip: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-mule: z.number(),
-name: z.string().nullable().transform(e => { 
+mule: z.coerce.number(),
+name: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-password: z.string().nullable().transform(e => { 
+password: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-revoked: z.number(),
-rulesflag: z.number(),
-sharedplat: z.number(),
-status: z.number(),
-suspend_reason: z.string().nullable().transform(e => { 
+revoked: z.coerce.number(),
+rulesflag: z.coerce.number(),
+sharedplat: z.coerce.number(),
+status: z.coerce.number(),
+suspend_reason: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-suspendeduntil: z.string().nullable().transform(e => { 
+suspendeduntil: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-time_creation: z.number(),
+time_creation: z.coerce.number(),
 });
 export type AccountType = z.infer<typeof AccountSchema>;

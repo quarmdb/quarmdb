@@ -1,23 +1,35 @@
-import { error } from '@sveltejs/kit';
-import { db } from '../../../lib/conn';
-import type { PageServerLoadEvent } from './$types';
 import { ItemsSchema, NpcTypesSchema } from '$lib/schema';
+import { error } from '@sveltejs/kit';
+import type { PageServerLoadEvent } from './$types';
+import { pool } from '$lib/db';
 
 export async function load({ params }: PageServerLoadEvent) {
 	let id = parseInt(params.id);
 	if (typeof id !== 'number') throw error(404);
 
-	const row = db.prepare('SELECT * FROM items WHERE id = ?').get(params.id);
-	const parsedRow = ItemsSchema.passthrough().safeParse(row);
+	const client = await pool.connect();
 
-	if (!parsedRow.success) {
-		console.log(parsedRow.error);
+	let result = await client.query(
+		`
+		SELECT
+			*
+		FROM
+			items
+		WHERE
+			id = $1
+		`,
+		[id]
+	);
+	const itemParse = ItemsSchema.safeParse(result);
+
+	if (!itemParse.success) {
+		console.error(itemParse.error);
+		client.release();
 		throw error(404);
 	}
 
-	const dropnpcs = db
-		.prepare(
-			`
+	const dropnpcs = await client.query(
+		`
 		SELECT 
 			npc.name, npc.id 
 		From 
@@ -29,18 +41,20 @@ export async function load({ params }: PageServerLoadEvent) {
 		WHERE
 			ld_e.item_id = ?
 		`
-		)
-		.all(id);
+	);
 
 	const dropnpcsParsed = NpcTypesSchema.pick({ name: true, id: true }).array().safeParse(dropnpcs);
 
 	if (!dropnpcsParsed.success) {
 		console.log(dropnpcsParsed.error);
+		client.release();
 		throw error(404);
 	}
 
+	client.release();
+
 	return {
-		item: parsedRow.data,
+		item: itemParse.data,
 		dropnpcs: dropnpcsParsed.data
 	};
 }

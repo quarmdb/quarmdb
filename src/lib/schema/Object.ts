@@ -1,23 +1,23 @@
 import {z} from 'zod';
 export const ObjectSchema= z.object({
-charges: z.number(),
-heading: z.number(),
-icon: z.number(),
-id: z.number(),
-incline: z.number(),
-itemid: z.number(),
-max_expansion: z.number(),
-min_expansion: z.number(),
-objectname: z.string().nullable().transform(e => { 
+charges: z.coerce.number(),
+heading: z.coerce.number(),
+icon: z.coerce.number(),
+id: z.coerce.number(),
+incline: z.coerce.number(),
+itemid: z.coerce.number(),
+max_expansion: z.coerce.number(),
+min_expansion: z.coerce.number(),
+objectname: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-size: z.number(),
-solid: z.number(),
-type: z.number(),
-xpos: z.number(),
-ypos: z.number(),
-zoneid: z.number(),
-zpos: z.number(),
+size: z.coerce.number(),
+solid: z.coerce.number(),
+type: z.coerce.number(),
+xpos: z.coerce.number(),
+ypos: z.coerce.number(),
+zoneid: z.coerce.number(),
+zpos: z.coerce.number(),
 });
 export type ObjectType = z.infer<typeof ObjectSchema>;

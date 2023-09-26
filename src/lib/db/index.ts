@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { Pool, Client, type PoolClient } from 'pg';
+import { Pool } from 'pg';
 
 dotenv.config();
 
@@ -12,8 +12,13 @@ const pool = new Pool({
 	allowExitOnIdle: true
 });
 
+function poolStatus() {
+	return `idle: ${pool.idleCount}, waiting: ${pool.waitingCount}, total: ${pool.totalCount}`;
+}
+
 pool.on('connect', (client) => {
 	client.query('SET DATESTYLE = iso, mdy');
+	console.log(`Connect (${poolStatus()})`);
 });
 
 pool.on('error', (err, client) => {
@@ -21,19 +26,11 @@ pool.on('error', (err, client) => {
 });
 
 pool.on('acquire', (client) => {
-	// console.log('Aquire ' + ++poolCount);
-	// timeoutMap.set(
-	// 	client,
-	// 	setTimeout(() => {
-	// 		console.error('client was not returned within 5 seconds', client);
-	// 		process.exit(-1); // do whatever you need to do here to trip alarms
-	// 	}, 5000)
-	// );
+	console.log(`Aquire (${poolStatus()})`);
 });
 
 pool.on('release', (error, client) => {
-	// console.log(`Release ${--poolCount}`);
-	// clearTimeout(timeoutMap.get(client));
+	console.log(`Release (${poolStatus()})`);
 });
 
 export { pool };

@@ -56,7 +56,7 @@ for (let i = 0; i < res.length; i++) {
 			col.type === 'double' ||
 			col.type?.includes('decimal')
 		)
-			line += 'z.number()';
+			line += 'z.coerce.number()';
 		else if (
 			col.type === 'TEXT' ||
 			col.type === 'tinytext' ||
@@ -65,7 +65,7 @@ for (let i = 0; i < res.length; i++) {
 			col.type?.includes('date') ||
 			col.type?.includes('time')
 		)
-			line += `z.string().nullable().transform(e => { 
+			line += `z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			})`;

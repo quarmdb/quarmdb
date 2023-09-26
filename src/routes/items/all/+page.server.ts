@@ -1,25 +1,25 @@
-import { ItemsSchema, type ItemsType } from "$lib/schema";
-import type {z} from 'zod';
-import { db } from "../../../lib/conn";
+import { ItemsSchema, type ItemsType } from '$lib/schema';
+import type { z } from 'zod';
 import type { PageServerLoadEvent } from './$types';
-import { error } from "console";
+import { error } from 'console';
+import { pool } from '$lib/db';
 
-export async function load({ params }:PageServerLoadEvent) {
-  const ItemsOverviewSchema = ItemsSchema.pick({id: true, Name: true, icon:true});
-  type ItemsOverviewType = z.infer<typeof ItemsOverviewSchema>
-  const rows = await db.prepare('SELECT id, name, icon FROM items ORDER BY name').all();
+export async function load({ params }: PageServerLoadEvent) {
+	const ItemsOverviewSchema = ItemsSchema.pick({ id: true, name: true, icon: true });
+	type ItemsOverviewType = z.infer<typeof ItemsOverviewSchema>;
 
-  let parsedRows:ItemsOverviewType[] = [];
+	const client = await pool.connect();
+	const res = await client.query('SELECT id, name, icon FROM items ORDER BY name');
 
+	let parsedRows = ItemsOverviewSchema.array().safeParse(res.rows);
+	if (!parsedRows.success) {
+		console.error(parsedRows.error);
+		client.release();
+		throw error(404);
+	}
 
-  for(let i = 0; i< rows.length; i++) {
-    let parsedRow = ItemsOverviewSchema.safeParse(rows[i]);
-    if(!parsedRow.success) 
-      throw error(parsedRow.error);
-    parsedRows.push(parsedRow.data);
-  }
-
-  return {
-    rows:parsedRows
-  }
+	client.release();
+	return {
+		rows: parsedRows.data
+	};
 }

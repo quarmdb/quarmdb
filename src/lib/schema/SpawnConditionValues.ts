@@ -1,8 +1,8 @@
 import {z} from 'zod';
 export const SpawnConditionValuesSchema= z.object({
-id: z.number(),
-value: z.number(),
-zone: z.string().nullable().transform(e => { 
+id: z.coerce.number(),
+value: z.coerce.number(),
+zone: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

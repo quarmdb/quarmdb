@@ -1,7 +1,7 @@
 import {z} from 'zod';
 export const SaylinkSchema= z.object({
-id: z.number(),
-phrase: z.string().nullable().transform(e => { 
+id: z.coerce.number(),
+phrase: z.coerce.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
