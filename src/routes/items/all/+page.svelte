@@ -24,7 +24,12 @@
 	const debouncedUpdate = debounce(updateShownData, 350);
 </script>
 
-<input type="text" bind:value={searchText} on:input={debouncedUpdate} />
+<label for="item_search">(Crappy) Search: </label><input
+	type="text"
+	bind:value={searchText}
+	on:input={debouncedUpdate}
+	id="item_search"
+/>
 
 <div class="wrapper">
 	{#each shownData as row}
