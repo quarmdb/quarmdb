@@ -26,7 +26,10 @@ export async function load({ params }: PageServerLoadEvent) {
 			values: [id]
 		});
 
-		if (npcRes.rowCount === 0) throw error(404);
+		if (npcRes.rowCount === 0) {
+			console.error(`npcRes rowcount === 0`);
+			throw error(404);
+		}
 		const npcParse = NpcTypesSchema.extend({ racename: z.coerce.string() }).safeParse(
 			npcRes.rows[0]
 		);
@@ -50,7 +53,11 @@ export async function load({ params }: PageServerLoadEvent) {
 			values: [id]
 		});
 
-		if (spawnRes.rowCount === 0) throw error(404);
+		if (spawnRes.rowCount === 0) {
+			console.error(`spawnRes rowcount === 0`);
+			//throw error(404);
+		}
+
 		const spawnParse = Spawn2Schema.array().safeParse(spawnRes.rows);
 		if (!spawnParse.success) {
 			console.error(spawnParse.error.errors);
@@ -80,7 +87,7 @@ export async function load({ params }: PageServerLoadEvent) {
 
 		const LootSchema = z.object({ name: z.string(), id: z.number(), chance: z.number() });
 
-		if (lootRes.rowCount === 0) throw error(404);
+		//if (lootRes.rowCount === 0) throw error(404);
 		const lootParse = LootSchema.array().safeParse(lootRes.rows);
 		if (!lootParse.success) {
 			console.error(lootParse.error.errors);
