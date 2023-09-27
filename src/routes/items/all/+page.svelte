@@ -51,4 +51,11 @@
 		justify-content: center;
 		border: 0.0625rem solid var(--surface-3);
 	}
+
+	input[type='text'] {
+		background-color: var(--surface-3);
+		color: var(--text-1);
+		height: 2rem;
+		padding: 0.5rem;
+	}
 </style>

@@ -5,13 +5,10 @@
 
 <div class="wrapper">
 	<aside>
-		<h2>Sidebar</h2>
+		<h2>QuarmDB</h2>
 		<nav>
 			<ul>
-				<li><a href={'#'}>About</a></li>
-				<li><a href={'#'}>Works</a></li>
-				<li><a href={'#'}>Home</a></li>
-				<li><a href={'#'}>Contact</a></li>
+				<li><a href="/items/all">Items</a></li>
 			</ul>
 		</nav>
 	</aside>
@@ -23,18 +20,15 @@
 <style>
 	.wrapper {
 		width: 100%;
-		margin: 1rem auto;
+		min-height: 100dvh;
 		padding: 1rem;
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-gap: 1rem;
+		background-color: var(--surface-2);
 
 		@media (min-width: 60rem) {
 			grid-template-columns: 250px minmax(10px, 1fr);
-		}
-
-		& * {
-			padding: 1rem;
 		}
 	}
 
@@ -42,36 +36,50 @@
 		position: sticky;
 		top: 0;
 		align-self: start;
+		display: flex;
+		flex-direction: column;
 	}
 
 	main {
-		background-color: #f7f7f7;
+		background-color: var(--surface-1);
 		border-radius: 1rem;
-
-		& p {
-			margin-bottom: 1rem;
-		}
+		padding: 1rem;
 	}
 
 	nav {
-		& li:not(:last-child) {
-			margin-bottom: 1rem;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		margin: 0;
+
+		& ul {
+			width: 100%;
+			padding: 0;
+			& li {
+				width: 100%;
+				list-style: none;
+				padding: 0;
+
+				& a {
+					width: 100%;
+					text-decoration: none;
+					display: block;
+					text-align: center;
+					padding: 0;
+					color: var(--text-2);
+				}
+				& a:hover {
+					background-color: var(--surface-3);
+					text-decoration: underline;
+				}
+			}
 		}
 	}
 
 	h2 {
 		font-size: 1.25rem;
 		font-weight: bold;
-		margin-bottom: 1rem;
-	}
-
-	a {
-		color: #222;
-		text-decoration: none;
-	}
-
-	body {
-		font-family: system-ui;
-		line-height: 1.4;
+		color: var(--text-2);
 	}
 </style>
