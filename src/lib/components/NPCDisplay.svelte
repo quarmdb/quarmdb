@@ -13,7 +13,7 @@
 
 <section class="header">
 	<h1>{nameParse(npc.name)}</h1>
-	<h2>Level {npc.level} - {npc.maxlevel} {npc.racename}</h2>
+	<h2>Level {npc.level} {npc.maxlevel > 0 ? '- ' + npc.maxlevel : ''} {npc.racename}</h2>
 	<section class="info">
 		<span>Damage Per Round</span>
 		<span>{npc.mindmg} - {npc.maxdmg}</span>
