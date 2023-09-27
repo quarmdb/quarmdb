@@ -1,19 +1,19 @@
 import {z} from 'zod';
 export const CharacterBuffsSchema= z.object({
-ExtraDIChance: z.coerce.number(),
-bard_modifier: z.coerce.number(),
-caster_level: z.coerce.number(),
-caster_name: z.coerce.string().nullable().transform(e => { 
+extradichance: z.number(),
+bard_modifier: z.number(),
+caster_level: z.number(),
+caster_name: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-counters: z.coerce.number(),
-id: z.coerce.number(),
-magic_rune: z.coerce.number(),
-melee_rune: z.coerce.number(),
-persistent: z.coerce.number(),
-slot_id: z.coerce.number(),
-spell_id: z.coerce.number(),
-ticsremaining: z.coerce.number(),
+counters: z.number(),
+id: z.number(),
+magic_rune: z.number(),
+melee_rune: z.number(),
+persistent: z.number(),
+slot_id: z.number(),
+spell_id: z.number(),
+ticsremaining: z.number(),
 });
 export type CharacterBuffsType = z.infer<typeof CharacterBuffsSchema>;

@@ -1,33 +1,33 @@
 import {z} from 'zod';
 export const TblServerAdminRegistrationSchema= z.object({
-AccountName: z.coerce.string().nullable().transform(e => { 
+accountname: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-AccountPassword: z.coerce.string().nullable().transform(e => { 
+accountpassword: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-Email: z.coerce.string().nullable().transform(e => { 
+email: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-FirstName: z.coerce.string().nullable().transform(e => { 
+firstname: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-LastName: z.coerce.string().nullable().transform(e => { 
+lastname: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-RegistrationDate: z.coerce.string().nullable().transform(e => { 
+registrationdate: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-RegistrationIPAddr: z.coerce.string().nullable().transform(e => { 
+registrationipaddr: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-ServerAdminID: z.coerce.number(),
+serveradminid: z.number(),
 });
 export type TblServerAdminRegistrationType = z.infer<typeof TblServerAdminRegistrationSchema>;

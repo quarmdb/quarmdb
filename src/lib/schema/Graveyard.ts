@@ -1,10 +1,10 @@
 import {z} from 'zod';
 export const GraveyardSchema= z.object({
-heading: z.coerce.number(),
-id: z.coerce.number(),
-x: z.coerce.number(),
-y: z.coerce.number(),
-z: z.coerce.number(),
-zone_id: z.coerce.number(),
+heading: z.number(),
+id: z.number(),
+x: z.number(),
+y: z.number(),
+z: z.number(),
+zone_id: z.number(),
 });
 export type GraveyardType = z.infer<typeof GraveyardSchema>;

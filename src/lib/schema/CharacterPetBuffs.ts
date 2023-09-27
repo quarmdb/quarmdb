@@ -1,17 +1,17 @@
 import {z} from 'zod';
 export const CharacterPetBuffsSchema= z.object({
-caster_level: z.coerce.number(),
-castername: z.coerce.string().nullable().transform(e => { 
+caster_level: z.number(),
+castername: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-char_id: z.coerce.number(),
-counters: z.coerce.number(),
-numhits: z.coerce.number(),
-pet: z.coerce.number(),
-rune: z.coerce.number(),
-slot: z.coerce.number(),
-spell_id: z.coerce.number(),
-ticsremaining: z.coerce.number(),
+char_id: z.number(),
+counters: z.number(),
+numhits: z.number(),
+pet: z.number(),
+rune: z.number(),
+slot: z.number(),
+spell_id: z.number(),
+ticsremaining: z.number(),
 });
 export type CharacterPetBuffsType = z.infer<typeof CharacterPetBuffsSchema>;

@@ -1,15 +1,19 @@
 import { error } from '@sveltejs/kit';
-import {} from '../../../lib/conn';
 import type { PageServerLoadEvent } from './$types';
-import { supabase } from '$lib/db';
+import { pool } from '$lib/db';
+import { NpcTypesSchema, Spawn2Schema } from '$lib/schema';
+import { z } from 'zod';
 
 export async function load({ params }: PageServerLoadEvent) {
-	let id = parseInt(params.id);
-	if (typeof id !== 'number') throw error(404);
+	const client = await pool.connect();
+	try {
+		let id = parseInt(params.id);
+		if (typeof id !== 'number') {
+			throw error(404);
+		}
 
-	const npc = db
-		.prepare(
-			`
+		const npcRes = await client.query({
+			text: `
 			SELECT 
 				npc_types.*, 
 				races.name as racename
@@ -17,30 +21,50 @@ export async function load({ params }: PageServerLoadEvent) {
 				npc_types 
 			INNER JOIN races ON 
 				races.id = npc_types.race 
-			WHERE npc_types.id = ?
-		`
-		)
-		.get(id);
+			WHERE npc_types.id = $1
+		`,
+			values: [id]
+		});
 
-	if (!npc) throw error(404);
+		if (npcRes.rowCount === 0) throw error(404);
+		const npcParse = NpcTypesSchema.extend({ racename: z.coerce.string() }).safeParse(
+			npcRes.rows[0]
+		);
 
-	const spawn = db
-		.prepare(
-			`
+		if (!npcParse.success) {
+			console.error(npcParse.error.errors);
+			throw error(404);
+		}
+
+		const spawnRes = await client.query({
+			text: `
 		SELECT
-			sp2.zone, sp2.x, sp2.y, sp2.z
+			*
 		FROM 
 			spawn2 sp2
 		INNER JOIN spawnentry ON
 			spawnentry.spawngroupID = sp2.spawngroupID
 		WHERE
-			spawnentry.npcID = ?
-	`
-		)
-		.all(id);
+			spawnentry.npcID = $1
+	`,
+			values: [id]
+		});
 
-	return {
-		npc,
-		spawn
-	};
+		if (spawnRes.rowCount === 0) throw error(404);
+		const spawnParse = Spawn2Schema.array().safeParse(spawnRes.rows);
+		if (!spawnParse.success) {
+			console.error(spawnParse.error.errors);
+			throw error(404);
+		}
+		const spawn = spawnParse.data;
+
+		return {
+			npc: npcParse.data,
+			spawn: spawnParse.data
+		};
+	} catch (err) {
+		throw err;
+	} finally {
+		client.release();
+	}
 }

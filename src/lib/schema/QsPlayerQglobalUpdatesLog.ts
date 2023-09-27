@@ -1,22 +1,22 @@
 import {z} from 'zod';
 export const QsPlayerQglobalUpdatesLogSchema= z.object({
-action: z.coerce.string().nullable().transform(e => { 
+action: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-char_id: z.coerce.number(),
-newvalue: z.coerce.string().nullable().transform(e => { 
+char_id: z.number(),
+newvalue: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-time: z.coerce.string().nullable().transform(e => { 
+time: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-varname: z.coerce.string().nullable().transform(e => { 
+varname: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-zone_id: z.coerce.number(),
+zone_id: z.number(),
 });
 export type QsPlayerQglobalUpdatesLogType = z.infer<typeof QsPlayerQglobalUpdatesLogSchema>;

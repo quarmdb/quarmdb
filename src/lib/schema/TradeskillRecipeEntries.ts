@@ -1,11 +1,11 @@
 import {z} from 'zod';
 export const TradeskillRecipeEntriesSchema= z.object({
-componentcount: z.coerce.number(),
-failcount: z.coerce.number(),
-id: z.coerce.number(),
-iscontainer: z.coerce.number(),
-item_id: z.coerce.number(),
-recipe_id: z.coerce.number(),
-successcount: z.coerce.number(),
+componentcount: z.number(),
+failcount: z.number(),
+id: z.number(),
+iscontainer: z.number(),
+item_id: z.number(),
+recipe_id: z.number(),
+successcount: z.number(),
 });
 export type TradeskillRecipeEntriesType = z.infer<typeof TradeskillRecipeEntriesSchema>;

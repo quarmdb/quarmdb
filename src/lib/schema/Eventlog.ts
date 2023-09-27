@@ -1,30 +1,30 @@
 import {z} from 'zod';
 export const EventlogSchema= z.object({
-accountid: z.coerce.number(),
-accountname: z.coerce.string().nullable().transform(e => { 
+accountid: z.number(),
+accountname: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-charname: z.coerce.string().nullable().transform(e => { 
+charname: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-description: z.coerce.string().nullable().transform(e => { 
+description: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-descriptiontype: z.coerce.string().nullable().transform(e => { 
+descriptiontype: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-event_nid: z.coerce.number(),
-id: z.coerce.number(),
-status: z.coerce.number(),
-target: z.coerce.string().nullable().transform(e => { 
+event_nid: z.number(),
+id: z.number(),
+status: z.number(),
+target: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-time: z.coerce.string().nullable().transform(e => { 
+time: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

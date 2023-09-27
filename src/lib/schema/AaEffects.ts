@@ -1,10 +1,10 @@
 import {z} from 'zod';
 export const AaEffectsSchema= z.object({
-aaid: z.coerce.number(),
-base1: z.coerce.number(),
-base2: z.coerce.number(),
-effectid: z.coerce.number(),
-id: z.coerce.number(),
-slot: z.coerce.number(),
+aaid: z.number(),
+base1: z.number(),
+base2: z.number(),
+effectid: z.number(),
+id: z.number(),
+slot: z.number(),
 });
 export type AaEffectsType = z.infer<typeof AaEffectsSchema>;

@@ -1,24 +1,24 @@
 import {z} from 'zod';
 export const QsMerchantTransactionLogSchema= z.object({
-char_cp: z.coerce.number(),
-char_gp: z.coerce.number(),
-char_id: z.coerce.number(),
-char_items: z.coerce.number(),
-char_pp: z.coerce.number(),
-char_slot: z.coerce.number(),
-char_sp: z.coerce.number(),
-charges: z.coerce.number(),
-item_id: z.coerce.number(),
-merchant_cp: z.coerce.number(),
-merchant_gp: z.coerce.number(),
-merchant_id: z.coerce.number(),
-merchant_items: z.coerce.number(),
-merchant_pp: z.coerce.number(),
-merchant_sp: z.coerce.number(),
-time: z.coerce.string().nullable().transform(e => { 
+char_cp: z.number(),
+char_gp: z.number(),
+char_id: z.number(),
+char_items: z.number(),
+char_pp: z.number(),
+char_slot: z.number(),
+char_sp: z.number(),
+charges: z.number(),
+item_id: z.number(),
+merchant_cp: z.number(),
+merchant_gp: z.number(),
+merchant_id: z.number(),
+merchant_items: z.number(),
+merchant_pp: z.number(),
+merchant_sp: z.number(),
+time: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-zone_id: z.coerce.number(),
+zone_id: z.number(),
 });
 export type QsMerchantTransactionLogType = z.infer<typeof QsMerchantTransactionLogSchema>;

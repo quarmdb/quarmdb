@@ -1,7 +1,7 @@
 import {z} from 'zod';
 export const CharacterZoneFlagsSchema= z.object({
-id: z.coerce.number(),
-key_: z.coerce.number(),
-zoneID: z.coerce.number(),
+id: z.number(),
+key_: z.number(),
+zoneid: z.number(),
 });
 export type CharacterZoneFlagsType = z.infer<typeof CharacterZoneFlagsSchema>;

@@ -1,12 +1,12 @@
 import {z} from 'zod';
 export const NpcEmotesSchema= z.object({
-emoteid: z.coerce.number(),
-event_: z.coerce.number(),
-id: z.coerce.number(),
-text: z.coerce.string().nullable().transform(e => { 
+emoteid: z.number(),
+event_: z.number(),
+id: z.number(),
+text: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-type: z.coerce.number(),
+type: z.number(),
 });
 export type NpcEmotesType = z.infer<typeof NpcEmotesSchema>;

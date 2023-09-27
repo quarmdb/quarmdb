@@ -1,10 +1,10 @@
 import {z} from 'zod';
 export const NpcTypesMetadataSchema= z.object({
-isCreatedMob: z.coerce.number(),
-isCustomFeatureNPC: z.coerce.number(),
-isNamedMob: z.coerce.number(),
-isPKMob: z.coerce.number(),
-isRaidTarget: z.coerce.number(),
-npc_types_id: z.coerce.number(),
+iscreatedmob: z.number(),
+iscustomfeaturenpc: z.number(),
+isnamedmob: z.number(),
+ispkmob: z.number(),
+israidtarget: z.number(),
+npc_types_id: z.number(),
 });
 export type NpcTypesMetadataType = z.infer<typeof NpcTypesMetadataSchema>;

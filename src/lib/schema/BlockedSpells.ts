@@ -1,22 +1,22 @@
 import {z} from 'zod';
 export const BlockedSpellsSchema= z.object({
-description: z.coerce.string().nullable().transform(e => { 
+description: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-id: z.coerce.number(),
-message: z.coerce.string().nullable().transform(e => { 
+id: z.number(),
+message: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-spellid: z.coerce.number(),
-type: z.coerce.number(),
-x: z.coerce.number(),
-x_diff: z.coerce.number(),
-y: z.coerce.number(),
-y_diff: z.coerce.number(),
-z: z.coerce.number(),
-z_diff: z.coerce.number(),
-zoneid: z.coerce.number(),
+spellid: z.number(),
+type: z.number(),
+x: z.number(),
+x_diff: z.number(),
+y: z.number(),
+y_diff: z.number(),
+z: z.number(),
+z_diff: z.number(),
+zoneid: z.number(),
 });
 export type BlockedSpellsType = z.infer<typeof BlockedSpellsSchema>;

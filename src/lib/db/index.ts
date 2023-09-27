@@ -2,6 +2,23 @@ import dotenv from 'dotenv';
 import pkg from 'pg';
 const { Pool } = pkg;
 
+const types = pkg.types;
+
+//ints
+types.setTypeParser(20, (val) => {
+	return parseInt(val, 10);
+});
+
+//floating point numbers
+types.setTypeParser(1700, (val) => {
+	return Number(val);
+});
+
+//dates
+types.setTypeParser(1114, (val) => {
+	return String(val);
+});
+
 dotenv.config();
 
 let poolCount = 0;

@@ -49,14 +49,14 @@ for (let i = 0; i < res.length; i++) {
 
 	cols.forEach((col) => {
 		if (!col.type) return;
-		let line = col.column + ': ';
+		let line = col.column?.toLocaleLowerCase() + ': ';
 		if (
 			col.type?.startsWith('INTEGER') ||
 			col.type?.startsWith('float') ||
 			col.type === 'double' ||
 			col.type?.includes('decimal')
 		)
-			line += 'z.coerce.number()';
+			line += 'z.number()';
 		else if (
 			col.type === 'TEXT' ||
 			col.type === 'tinytext' ||
@@ -65,7 +65,7 @@ for (let i = 0; i < res.length; i++) {
 			col.type?.includes('date') ||
 			col.type?.includes('time')
 		)
-			line += `z.coerce.string().nullable().transform(e => { 
+			line += `z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			})`;

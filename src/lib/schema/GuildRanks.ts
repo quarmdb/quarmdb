@@ -1,16 +1,16 @@
 import {z} from 'zod';
 export const GuildRanksSchema= z.object({
-can_demote: z.coerce.number(),
-can_hear: z.coerce.number(),
-can_invite: z.coerce.number(),
-can_motd: z.coerce.number(),
-can_promote: z.coerce.number(),
-can_remove: z.coerce.number(),
-can_speak: z.coerce.number(),
-can_warpeace: z.coerce.number(),
-guild_id: z.coerce.number(),
-rank: z.coerce.number(),
-title: z.coerce.string().nullable().transform(e => { 
+can_demote: z.number(),
+can_hear: z.number(),
+can_invite: z.number(),
+can_motd: z.number(),
+can_promote: z.number(),
+can_remove: z.number(),
+can_speak: z.number(),
+can_warpeace: z.number(),
+guild_id: z.number(),
+rank: z.number(),
+title: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

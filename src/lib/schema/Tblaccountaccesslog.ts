@@ -1,21 +1,21 @@
 import {z} from 'zod';
 export const TblaccountaccesslogSchema= z.object({
-IP: z.coerce.string().nullable().transform(e => { 
+ip: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-SQL_Time: z.coerce.string().nullable().transform(e => { 
+sql_time: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-accessed: z.coerce.number(),
-account_id: z.coerce.number(),
-account_name: z.coerce.string().nullable().transform(e => { 
+accessed: z.number(),
+account_id: z.number(),
+account_name: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-id: z.coerce.number(),
-reason: z.coerce.string().nullable().transform(e => { 
+id: z.number(),
+reason: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

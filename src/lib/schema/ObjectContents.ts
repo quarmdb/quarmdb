@@ -1,13 +1,13 @@
 import {z} from 'zod';
 export const ObjectContentsSchema= z.object({
-bagidx: z.coerce.number(),
-charges: z.coerce.number(),
-droptime: z.coerce.string().nullable().transform(e => { 
+bagidx: z.number(),
+charges: z.number(),
+droptime: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-itemid: z.coerce.number(),
-parentid: z.coerce.number(),
-zoneid: z.coerce.number(),
+itemid: z.number(),
+parentid: z.number(),
+zoneid: z.number(),
 });
 export type ObjectContentsType = z.infer<typeof ObjectContentsSchema>;

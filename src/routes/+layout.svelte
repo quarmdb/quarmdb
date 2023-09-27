@@ -1,21 +1,28 @@
 <script lang="ts">
+	import ThemeWrapper from '$lib/components/ThemeWrapper.svelte';
 	import '../app.css';
 	import ThemeSwitcher from '../lib/components/ThemeSwitcher.svelte';
 </script>
 
-<div class="wrapper">
-	<aside>
-		<h2>QuarmDB</h2>
-		<nav>
-			<ul>
-				<li><a href="/items/all">Items</a></li>
-			</ul>
-		</nav>
-	</aside>
-	<main>
-		<slot />
-	</main>
-</div>
+<ThemeWrapper>
+	<div class="wrapper">
+		<aside>
+			<section>
+				<h2>QuarmDB</h2>
+				<ThemeSwitcher />
+			</section>
+			<nav>
+				<ul>
+					<li><a href="/items/all">Items</a></li>
+					<li><a href="/npc/all">NPCS</a></li>
+				</ul>
+			</nav>
+		</aside>
+		<main>
+			<slot />
+		</main>
+	</div>
+</ThemeWrapper>
 
 <style>
 	.wrapper {
@@ -30,6 +37,13 @@
 		@media (min-width: 60rem) {
 			grid-template-columns: 250px minmax(10px, 1fr);
 		}
+	}
+
+	section {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		align-items: center;
 	}
 
 	aside {

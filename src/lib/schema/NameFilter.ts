@@ -1,6 +1,6 @@
 import {z} from 'zod';
 export const NameFilterSchema= z.object({
-name: z.coerce.string().nullable().transform(e => { 
+name: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

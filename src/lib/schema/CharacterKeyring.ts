@@ -1,6 +1,6 @@
 import {z} from 'zod';
 export const CharacterKeyringSchema= z.object({
-id: z.coerce.number(),
-item_id: z.coerce.number(),
+id: z.number(),
+item_id: z.number(),
 });
 export type CharacterKeyringType = z.infer<typeof CharacterKeyringSchema>;

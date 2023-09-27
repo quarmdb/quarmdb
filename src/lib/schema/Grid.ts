@@ -1,8 +1,8 @@
 import {z} from 'zod';
 export const GridSchema= z.object({
-id: z.coerce.number(),
-type: z.coerce.number(),
-type2: z.coerce.number(),
-zoneid: z.coerce.number(),
+id: z.number(),
+type: z.number(),
+type2: z.number(),
+zoneid: z.number(),
 });
 export type GridType = z.infer<typeof GridSchema>;

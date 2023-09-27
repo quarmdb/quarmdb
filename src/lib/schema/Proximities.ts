@@ -1,12 +1,12 @@
 import {z} from 'zod';
 export const ProximitiesSchema= z.object({
-exploreid: z.coerce.number(),
-maxx: z.coerce.number(),
-maxy: z.coerce.number(),
-maxz: z.coerce.number(),
-minx: z.coerce.number(),
-miny: z.coerce.number(),
-minz: z.coerce.number(),
-zoneid: z.coerce.number(),
+exploreid: z.number(),
+maxx: z.number(),
+maxy: z.number(),
+maxz: z.number(),
+minx: z.number(),
+miny: z.number(),
+minz: z.number(),
+zoneid: z.number(),
 });
 export type ProximitiesType = z.infer<typeof ProximitiesSchema>;

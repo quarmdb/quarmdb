@@ -1,15 +1,15 @@
 import {z} from 'zod';
 export const SpellGlobalsSchema= z.object({
-qglobal: z.coerce.string().nullable().transform(e => { 
+qglobal: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-spell_name: z.coerce.string().nullable().transform(e => { 
+spell_name: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),
-spellid: z.coerce.number(),
-value: z.coerce.string().nullable().transform(e => { 
+spellid: z.number(),
+value: z.string().nullable().transform(e => { 
 				if(e === null) return '';
 				else return e;
 			}),

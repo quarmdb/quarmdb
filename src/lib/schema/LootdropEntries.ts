@@ -1,16 +1,16 @@
 import {z} from 'zod';
 export const LootdropEntriesSchema= z.object({
-chance: z.coerce.number(),
-disabled_chance: z.coerce.number(),
-equip_item: z.coerce.number(),
-item_charges: z.coerce.number(),
-item_id: z.coerce.number(),
-lootdrop_id: z.coerce.number(),
-max_expansion: z.coerce.number(),
-maxlevel: z.coerce.number(),
-min_expansion: z.coerce.number(),
-min_looter_level: z.coerce.number(),
-minlevel: z.coerce.number(),
-multiplier: z.coerce.number(),
+chance: z.number(),
+disabled_chance: z.number(),
+equip_item: z.number(),
+item_charges: z.number(),
+item_id: z.number(),
+lootdrop_id: z.number(),
+max_expansion: z.number(),
+maxlevel: z.number(),
+min_expansion: z.number(),
+min_looter_level: z.number(),
+minlevel: z.number(),
+multiplier: z.number(),
 });
 export type LootdropEntriesType = z.infer<typeof LootdropEntriesSchema>;
