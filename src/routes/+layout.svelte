@@ -80,11 +80,12 @@
 					text-decoration: none;
 					display: block;
 					text-align: center;
-					padding: 0;
+					padding: 0.5rem;
 					color: var(--text-2);
+					border-radius: 5rem;
 				}
 				& a:hover {
-					background-color: var(--surface-3);
+					background-color: var(--surface-1);
 					text-decoration: underline;
 				}
 			}
