@@ -70,6 +70,7 @@ export async function load({ params }: PageServerLoadEvent) {
 			SELECT
 				i.name,
 				i.id,
+				i.icon,
 				drop.chance
 			FROM
 				items i
@@ -85,7 +86,12 @@ export async function load({ params }: PageServerLoadEvent) {
 			values: [id]
 		});
 
-		const LootSchema = z.object({ name: z.string(), id: z.number(), chance: z.number() });
+		const LootSchema = z.object({
+			name: z.string(),
+			icon: z.number(),
+			id: z.number(),
+			chance: z.number()
+		});
 
 		//if (lootRes.rowCount === 0) throw error(404);
 		const lootParse = LootSchema.array().safeParse(lootRes.rows);
