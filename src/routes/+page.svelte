@@ -1,5 +1,1 @@
-<p>
-	Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quidem, ex deserunt esse nemo
-	accusantium quisquam nesciunt modi, animi reiciendis nam exercitationem in! Sed dolore optio
-	excepturi. Et, magni suscipit?
-</p>
+<p>This is a hobby project. I will do my best to keep making it more functional.</p>
