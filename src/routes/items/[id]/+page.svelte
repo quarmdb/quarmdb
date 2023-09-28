@@ -4,7 +4,7 @@
 	export let data: PageData;
 </script>
 
-<a href="/items/all">All Items</a>
+<a href="/items/search">Items Search</a>
 <Item item={data.item} />
 <p>Dropped by:</p>
 <ul>

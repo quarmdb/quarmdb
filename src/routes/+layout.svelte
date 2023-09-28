@@ -13,7 +13,7 @@
 			</section>
 			<nav>
 				<ul>
-					<li><a href="/items/all">Items</a></li>
+					<li><a href="/items/search">Items</a></li>
 					<li><a href="/npc/all">NPCS</a></li>
 				</ul>
 			</nav>
@@ -58,6 +58,7 @@
 		background-color: var(--surface-1);
 		border-radius: 1rem;
 		padding: 1rem;
+		position: relative;
 	}
 
 	nav {
