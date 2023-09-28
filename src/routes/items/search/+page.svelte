@@ -1,9 +1,6 @@
 <script lang="ts">
 	import ItemSmall from '$lib/components/ItemSmall.svelte';
-	import { browser } from '$app/environment';
-	import Item from '$lib/components/Item.svelte';
 	import { ItemsSchema, type ItemsType } from '$lib/schema';
-	import { onMount } from 'svelte';
 
 	let searchText = '';
 

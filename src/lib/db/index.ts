@@ -21,12 +21,10 @@ types.setTypeParser(1114, (val) => {
 
 dotenv.config();
 
-let poolCount = 0;
-
 const pool = new Pool({
 	connectionString: process.env.SECRET_POSTGRES_URL as string,
 	connectionTimeoutMillis: 10000,
-	max: 1,
+	max: 5,
 	allowExitOnIdle: true
 });
 

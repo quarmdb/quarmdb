@@ -8,7 +8,8 @@ export async function POST({ request }) {
 	const client = await pool.connect();
 	try {
 		const { searchText } = await request.json();
-		let searchString = searchText.split(' ').join(',');
+		let searchString = (searchText as string).trim().split(' ').join(' & ');
+		console.log(searchString);
 		const res = await client.query(
 			`
 			SELECT

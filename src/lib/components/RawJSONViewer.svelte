@@ -36,11 +36,6 @@
 		display: grid;
 	}
 
-	button {
-		color: var(--text-1);
-		padding: 0.25rem;
-	}
-
 	div.kvPair {
 		width: 100%;
 		display: grid;
