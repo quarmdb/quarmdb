@@ -118,6 +118,8 @@ export async function load({ params }: PageServerLoadEvent) {
 			throw error(404);
 		}
 
+		console.log(`Zone -> ${parsedZones.data[0].short_name}`);
+
 		return {
 			zone: parsedZones.data[0],
 			ground_spawns: parsedGroundSpawns.data,

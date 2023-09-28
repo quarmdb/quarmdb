@@ -54,6 +54,7 @@ export async function load({ params }: PageServerLoadEvent) {
 		throw error(404);
 	}
 
+	console.log(`Item -> ${itemParse.data.name}`);
 	client.release();
 
 	return {

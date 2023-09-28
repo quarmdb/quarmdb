@@ -100,6 +100,8 @@ export async function load({ params }: PageServerLoadEvent) {
 			throw error(404);
 		}
 
+		console.log(`NPC -> ${npcParse.data.name}`);
+
 		return {
 			npc: npcParse.data,
 			spawn: spawnParse.data,
