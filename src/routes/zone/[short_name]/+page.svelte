@@ -8,6 +8,11 @@
 
 <h1>{data.zone.long_name}</h1>
 <div class="groundSpawnWrapper">
+	<h2>Connected Zones ({data.connected_zones.length})</h2>
+	{#each data.connected_zones as cz}
+		<span><a href="/zone/{cz.short_name}">{cz.long_name}</a></span>
+	{/each}
+	<h2>Ground Spawns ({data.ground_spawns.length})</h2>
 	{#each data.ground_spawns as gs}
 		<span><a href="/items/{gs.id}">{gs.name}</a> - ({gs.x},{gs.y},{gs.z})</span>
 	{/each}

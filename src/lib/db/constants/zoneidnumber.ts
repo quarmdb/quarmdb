@@ -1,4 +1,4 @@
-type ZoneIdNumberType = { id: number; long_name: string; short_name: string };
+export type ZoneIdNumberType = { id: number; long_name: string; short_name: string };
 
 const zoneidnumber: ZoneIdNumberType[] = [
 	{ id: 1, long_name: 'South Qeynos ', short_name: 'qeynos' },

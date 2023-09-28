@@ -29,7 +29,7 @@
 	.wrapper {
 		width: 100%;
 		min-height: 100dvh;
-		padding: 1rem;
+		padding: 1rem 1rem 1rem 0;
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-gap: 1rem;
@@ -53,6 +53,13 @@
 		align-self: start;
 		display: flex;
 		flex-direction: column;
+	}
+
+	aside {
+		background-color: var(--surface-1);
+		border-radius: 0 1rem 1rem 0;
+		padding: 1rem;
+		position: relative;
 	}
 
 	main {
@@ -87,7 +94,7 @@
 					border-radius: 5rem;
 				}
 				& a:hover {
-					background-color: var(--surface-1);
+					background-color: var(--surface-2);
 					text-decoration: underline;
 				}
 			}

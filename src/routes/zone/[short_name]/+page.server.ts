@@ -3,12 +3,14 @@ import type { PageServerLoadEvent } from './$types';
 import { pool } from '$lib/db';
 import { ZoneSchema } from '$lib/schema';
 import { z } from 'zod';
+import { getZoneFromNumber, type ZoneIdNumberType } from '$lib/db/constants/zoneidnumber';
 
 export async function load({ params }: PageServerLoadEvent) {
 	const client = await pool.connect();
 	try {
 		let short_name = params.short_name;
 		if (typeof short_name !== 'string') {
+			console.error('Somehow param isnt a string');
 			throw error(404);
 		}
 		const zoneRes = await client.query(`SELECT * from zone where zone.short_name = $1`, [
@@ -38,7 +40,10 @@ export async function load({ params }: PageServerLoadEvent) {
 			[short_name]
 		);
 
-		if (groundSpawnRes.rowCount === 0) throw error(404);
+		// if (groundSpawnRes.rowCount === 0) {
+		// 	console.error(`ground`);
+		// 	throw error(404);
+		// }
 		const parsedGroundSpawns = z
 			.object({
 				name: z.string(),
@@ -55,9 +60,42 @@ export async function load({ params }: PageServerLoadEvent) {
 			throw error(404);
 		}
 
+		const connectedZonesRes = await client.query(
+			`
+			SELECT
+				target_zone_id
+			FROM
+				zone_points
+			WHERE
+				zone_points.zone = $1
+		`,
+			[short_name]
+		);
+
+		const connectedZonesParse = z
+			.object({ target_zone_id: z.number() })
+			.array()
+			.safeParse(connectedZonesRes.rows);
+
+		if (!connectedZonesParse.success) {
+			console.error(connectedZonesParse.error);
+			throw error(404);
+		}
+
+		let connected_zones: ZoneIdNumberType[] = [];
+		connectedZonesParse.data.forEach(({ target_zone_id }) => {
+			let zone = getZoneFromNumber(target_zone_id);
+			if (
+				!connected_zones.find((value) => {
+					return zone.short_name === value.short_name;
+				})
+			)
+				connected_zones.push(zone);
+		});
 		return {
 			zone: parsedZones.data[0],
-			ground_spawns: parsedGroundSpawns.data
+			ground_spawns: parsedGroundSpawns.data,
+			connected_zones
 		};
 	} catch (e) {
 		console.error(e);
