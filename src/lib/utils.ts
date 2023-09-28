@@ -1,4 +1,7 @@
+import type { QueryResult } from 'pg';
 import type { Spawn2Type } from './schema';
+import type { ZodSchema, z } from 'zod';
+import { error } from '@sveltejs/kit';
 
 export function sort_obj_keys(obj: { [key: string]: any }): Object {
 	let allKeys = Object.keys(obj);
@@ -35,4 +38,22 @@ export function groupSpawnTable(spawns: Spawn2Type[]): Map<string, Spawn2Type[]>
 	});
 
 	return spawnMap;
+}
+
+export function parseDatabaseResponse<T extends ZodSchema>(
+	res: QueryResult<any>,
+	schema: T
+): z.infer<typeof schema> {
+	if (res.rowCount === 0) {
+		console.error(`Row Count === 0 on ${res.command}`);
+		throw error(404);
+	}
+
+	const parsedRes = schema.safeParse(res.rows);
+	if (!parsedRes.success) {
+		console.error(parsedRes.error);
+		throw error(404);
+	}
+
+	return parsedRes.data;
 }

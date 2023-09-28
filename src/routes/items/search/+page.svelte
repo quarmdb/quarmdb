@@ -23,7 +23,11 @@
 			console.log(res);
 			const itemsParse = ItemsSchema.array().safeParse(res);
 			if (!itemsParse.success) return [];
-			return itemsParse.data;
+			return itemsParse.data.sort((a, b) => {
+				if (a.name < b.name) return -1;
+				else if (a.name === b.name) return 0;
+				return 1;
+			});
 		} catch (err) {
 			console.error(err);
 			throw err;
@@ -68,8 +72,7 @@
 	}
 
 	.itemWrapper {
-		display: flex;
-		flex-direction: row;
-		flex-flow: column;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
 	}
 </style>

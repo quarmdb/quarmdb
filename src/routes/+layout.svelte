@@ -15,6 +15,7 @@
 				<ul>
 					<li><a href="/items/search">Items</a></li>
 					<li><a href="/npc/all">NPCS</a></li>
+					<li><a href="/zone">Zones</a></li>
 				</ul>
 			</nav>
 		</aside>

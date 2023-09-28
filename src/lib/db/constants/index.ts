@@ -73,3 +73,12 @@ export const playerRaceList: PlayerRaceType[] = [
 export function getUseableRaces(search: number): PlayerRaceType[] {
 	return getFromMask<PlayerRaceType>(search, playerRaceList);
 }
+
+const expansionLookup: Map<number, string> = new Map();
+expansionLookup.set(1, 'Vanilla Everquest');
+expansionLookup.set(2, 'Ruins of Kunark');
+expansionLookup.set(3, 'Scars of Velious');
+expansionLookup.set(4, 'The Shadows of Luclin');
+expansionLookup.set(5, 'The Planes of Power');
+expansionLookup.set(99, 'Special Zones');
+export { expansionLookup };
