@@ -10,6 +10,7 @@ export const handle: Handle = async ({ resolve, event }) => {
 		let originDomain: string = '';
 		try {
 			//console.log(event.request.headers);
+			if (event.request.headers.get('origin') === null) return await resolve(event);
 			originDomain = new URL(event.request.headers.get('origin') || '').hostname;
 			validDomains.forEach((domainRegEx) => {
 				if (domainRegEx.test(originDomain)) {
