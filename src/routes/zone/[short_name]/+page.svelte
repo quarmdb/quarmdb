@@ -16,6 +16,10 @@
 	{#each data.ground_spawns as gs}
 		<span><a href="/items/{gs.id}">{gs.name}</a> - ({gs.x},{gs.y},{gs.z})</span>
 	{/each}
+	<h2>NPCS</h2>
+	{#each data.npcs as npc}
+		<span><a href="/npcs/{npc.id}">{npc.name}</a></span>
+	{/each}
 </div>
 
 <style>

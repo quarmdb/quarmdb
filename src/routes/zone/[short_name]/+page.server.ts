@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoadEvent } from './$types';
 import { pool } from '$lib/db';
-import { ZoneSchema } from '$lib/schema';
+import { NpcTypesSchema, ZoneSchema } from '$lib/schema';
 import { z } from 'zod';
 import { getZoneFromNumber, type ZoneIdNumberType } from '$lib/db/constants/zoneidnumber';
 
@@ -92,10 +92,37 @@ export async function load({ params }: PageServerLoadEvent) {
 			)
 				connected_zones.push(zone);
 		});
+
+		const npcsRes = await client.query(
+			`
+				SELECT
+					npc.*
+				FROM
+					npc_types npc
+				INNER JOIN spawnentry spen
+					ON spen.npcID = npc.id
+				INNER JOIN spawngroup sg
+					ON sg.id = spen.spawngroupID
+				INNER JOIN spawn2 sp2
+					ON sp2.spawngroupID = sg.id
+				WHERE
+					sp2.zone = $1
+			`,
+			[short_name]
+		);
+
+		const parsedNpcs = NpcTypesSchema.array().safeParse(npcsRes.rows);
+
+		if (!parsedNpcs.success) {
+			console.error(parsedNpcs.error);
+			throw error(404);
+		}
+
 		return {
 			zone: parsedZones.data[0],
 			ground_spawns: parsedGroundSpawns.data,
-			connected_zones
+			connected_zones,
+			npcs: parsedNpcs.data
 		};
 	} catch (e) {
 		console.error(e);
