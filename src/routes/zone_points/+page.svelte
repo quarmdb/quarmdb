@@ -10,6 +10,7 @@
 		<th>X</th>
 		<th>Y</th>
 		<th>Z</th>
+		<th>Number</th>
 		<th>Target Y</th>
 		<th>Target X</th>
 		<th>Target Z</th>
@@ -22,6 +23,7 @@
 			<td>{zp.x}</td>
 			<td>{zp.y}</td>
 			<td>{zp.z}</td>
+			<td>{zp.number}</td>
 			<td>{zp.target_x}</td>
 			<td>{zp.target_y}</td>
 			<td>{zp.target_z}</td>
