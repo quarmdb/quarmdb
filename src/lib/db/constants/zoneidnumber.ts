@@ -506,3 +506,12 @@ export function getZoneFromNumber(id: number): ZoneIdNumberType {
 		return { id: 0, short_name: 'UNDEFINED', long_name: 'UNDEFINED' };
 	} else return f;
 }
+
+export function getZoneFromShortName(short_name: string): ZoneIdNumberType {
+	const f = zoneidnumber.find((value, idx) => {
+		return value.short_name === short_name;
+	});
+	if (f === undefined) {
+		return { id: 0, short_name: 'UNDEFINED', long_name: 'UNDEFINED' };
+	} else return f;
+}

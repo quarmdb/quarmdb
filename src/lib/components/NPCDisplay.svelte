@@ -4,6 +4,7 @@
 	import { quintIn } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
 	import RawJsonViewer from './RawJSONViewer.svelte';
+	import { getZoneFromShortName } from '$lib/db/constants/zoneidnumber';
 
 	export let npc: NpcTypesType & { racename: string };
 	export let loot: { icon: number; id: number; name: string; chance: number }[] = [];
@@ -42,7 +43,7 @@
 		<span>No Spawns</span>
 	{:else}
 		{#each groupSpawnTable(spawn) as [keys, spawns]}
-			<h3>{keys}</h3>
+			<h3><a href="/zone/{keys}">{getZoneFromShortName(keys).long_name}</a></h3>
 			<section class="spawnGroup">
 				{#each spawns as s}
 					<span>(X:{s.x}, Y:{s.y}, Z:{s.z}) - Respawn: {s.respawntime}s</span>
