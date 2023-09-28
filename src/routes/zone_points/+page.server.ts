@@ -10,20 +10,14 @@ export async function load({ params }: PageServerLoadEvent) {
 	try {
 		const res = await client.query(`
       SELECT 
-        zp.*, z.short_name
+        zp.*
       FROM 
         zone_points zp
-      INNER JOIN zone z
-        on zp.target_zone_id = z.id
       ORDER BY zone
     
     `);
-		console.log(JSON.stringify(res.rows[0]));
 
-		const data = parseDatabaseResponse(
-			res,
-			ZonePointsSchema.extend({ short_name: z.string() }).array()
-		);
+		const data = parseDatabaseResponse(res, ZonePointsSchema.array());
 		return {
 			zone_points: data
 		};

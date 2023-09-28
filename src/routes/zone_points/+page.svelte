@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { z } from 'zod';
 	import type { PageData } from './$types';
+	import { getZoneFromNumber } from '$lib/db/constants/zoneidnumber';
 	export let data: PageData;
 </script>
 
@@ -27,7 +28,7 @@
 			<td>{zp.target_x}</td>
 			<td>{zp.target_y}</td>
 			<td>{zp.target_z}</td>
-			<td>{zp.short_name}</td>
+			<td>{getZoneFromNumber(zp.target_zone_id).short_name}</td>
 		</tr>
 	{/each}
 </table>
