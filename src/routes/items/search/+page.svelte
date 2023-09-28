@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import ItemSmall from '$lib/components/ItemSmall.svelte';
 	import { ItemsSchema, type ItemsType } from '$lib/schema';
 
@@ -37,25 +38,10 @@
 		<input type="text" bind:value={searchText} />
 		<button
 			on:click|preventDefault={() => {
-				itemsPromise = search();
+				goto(`/items/search/${searchText}`);
 			}}>search</button
 		>
 	</section>
-	{#if itemsPromise !== undefined}
-		{#await itemsPromise}
-			<span>...Loading</span>
-		{:then items}
-			{#if items.length === 0}
-				<span>No items</span>
-			{:else}
-				<div class="itemWrapper">
-					{#each items as item}
-						<ItemSmall {item} />
-					{/each}
-				</div>
-			{/if}
-		{/await}
-	{/if}
 </div>
 
 <style>
@@ -66,10 +52,5 @@
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
-	}
-
-	.itemWrapper {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
 	}
 </style>
