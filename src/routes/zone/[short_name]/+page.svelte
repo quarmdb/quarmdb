@@ -18,7 +18,7 @@
 	{/each}
 	<h2>NPCS ({data.npcs.length})</h2>
 	{#each data.npcs as npc}
-		<span><a href="/npcs/{npc.id}">{npc.name}</a></span>
+		<span><a href="/npc/{npc.id}">{npc.name}</a></span>
 	{/each}
 </div>
 
