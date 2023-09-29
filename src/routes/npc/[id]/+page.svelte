@@ -6,4 +6,4 @@
 
 <a href="/npc/all">All NPCS</a>
 
-<NpcDisplay npc={data.npc} loot={data.loot} spawn={data.spawn} />
+<NpcDisplay npc={data.npc} loot={data.loot} spawn={data.spawn} factions={data.factions} />

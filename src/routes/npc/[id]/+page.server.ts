@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoadEvent } from './$types';
 import { pool } from '$lib/db';
-import { NpcTypesSchema, Spawn2Schema } from '$lib/schema';
+import { FactionListSchema, NpcTypesSchema, Spawn2Schema } from '$lib/schema';
 import { z } from 'zod';
 
 export async function load({ params }: PageServerLoadEvent) {
@@ -100,23 +100,41 @@ export async function load({ params }: PageServerLoadEvent) {
 			throw error(404);
 		}
 
-		// const factionRes = client.query(`
-		// 	SELECT
-		// 		nf.name,
-		// 		nf.id,
-		// 		nfe.value
-		// 	FROM
-		// 		npc_faction_entries nfe
-		// 	INNER JOIN npc_faction nf
-		// 		ON nfe.faction_id = nf.id
-		// 	`)
+		const factionRes = await client.query(
+			`
+			SELECT
+				fl.*,
+				nfe.value
+			FROM
+				faction_list fl
+			INNER JOIN npc_faction_entries nfe
+				ON nfe.faction_id = fl.id
+			INNER JOIN npc_faction nf
+				ON nf.id = nfe.npc_faction_id
+			INNER JOIN npc_types npc
+				ON npc.npc_faction_id = nf.id
+			WHERE
+				nfe.value != 0 AND npc.id = $1
+			`,
+			[id]
+		);
+
+		const factionParse = FactionListSchema.extend({ value: z.number() })
+			.array()
+			.safeParse(factionRes.rows);
+
+		if (!factionParse.success) {
+			console.error(factionParse.error);
+			throw error(404);
+		}
 
 		console.log(`NPC -> ${npcParse.data.name}`);
 
 		return {
 			npc: npcParse.data,
 			spawn: spawnParse.data,
-			loot: lootParse.data
+			loot: lootParse.data,
+			factions: factionParse.data
 		};
 	} catch (err) {
 		throw err;

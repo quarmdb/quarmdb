@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { NpcTypesType, Spawn2Type } from '$lib/schema';
+	import type { FactionListType, NpcTypesType, Spawn2Type } from '$lib/schema';
 	import { groupSpawnTable, nameParse } from '$lib/utils';
 	import { quintIn } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
@@ -9,6 +9,7 @@
 	export let npc: NpcTypesType & { racename: string };
 	export let loot: { icon: number; id: number; name: string; chance: number }[] = [];
 	export let spawn: Spawn2Type[] = [];
+	export let factions: (FactionListType & { value: number })[] = [];
 
 	let showRaw = false;
 </script>
@@ -52,6 +53,16 @@
 		{/each}
 	{/if}
 </section>
+<h2>Faction Table</h2>
+<section class="factionWrapper">
+	{#if factions.length <= 0}
+		<span>No Factions</span>
+	{:else}
+		{#each factions as faction}
+			<span><a href="/faction/{faction.id}">{faction.name}({faction.value})</a></span>
+		{/each}
+	{/if}
+</section>
 
 <style>
 	section.header {
@@ -69,6 +80,11 @@
 	}
 
 	section.spawnGroup {
+		display: flex;
+		flex-direction: column;
+	}
+
+	section.factionWrapper {
 		display: flex;
 		flex-direction: column;
 	}
