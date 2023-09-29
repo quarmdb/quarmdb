@@ -12,7 +12,7 @@
 		{#each data.factions as faction}
 			<tr>
 				<td>{faction.id}</td>
-				<td>{faction.name}</td>
+				<td><a href="/faction/{faction.id}">{faction.name}</a></td>
 			</tr>
 		{/each}
 	</table>
