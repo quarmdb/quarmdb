@@ -53,7 +53,7 @@
 		{/each}
 	{/if}
 </section>
-<h2>Faction Table</h2>
+<h2>Faction Changes</h2>
 <section class="factionWrapper">
 	{#if factions.length <= 0}
 		<span>No Factions</span>
