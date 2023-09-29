@@ -17,6 +17,9 @@ dependencies:
   pg:
     specifier: ^8.11.3
     version: 8.11.3
+  svelte-table:
+    specifier: ^0.6.1
+    version: 0.6.1
   zod:
     specifier: ^3.22.2
     version: 3.22.2
@@ -1654,6 +1657,10 @@ packages:
       svelte: 4.2.1
       typescript: 5.2.2
     dev: true
+
+  /svelte-table@0.6.1:
+    resolution: {integrity: sha512-DfSwLs19mtp9V4rFo4oYv8T0YWFOR0Yy+43qtj3fPbZhd1h3vyycJ5c6mFlxICnsNYOD7WOjmQ/EpXY85mmJMQ==}
+    dev: false
 
   /svelte@4.2.1:
     resolution: {integrity: sha512-LpLqY2Jr7cRxkrTc796/AaaoMLF/1ax7cto8Ot76wrvKQhrPmZ0JgajiWPmg9mTSDqO16SSLiD17r9MsvAPTmw==}

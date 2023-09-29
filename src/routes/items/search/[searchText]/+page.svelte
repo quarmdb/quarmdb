@@ -2,10 +2,28 @@
 	import { goto } from '$app/navigation';
 	import Item from '$lib/components/Item.svelte';
 	import ItemSearchForm from '$lib/components/ItemSearchForm.svelte';
-	import ItemSmall from '$lib/components/ItemSmall.svelte';
+	import SvelteTable from 'svelte-table';
 	import type { PageData } from './$types';
+	import type { ItemsType } from '$lib/schema';
 	export let data: PageData;
 	let searchText = '';
+
+	const rows = data.items;
+	const cols = [
+		{ key: 'id', title: 'ID', value: (v: ItemsType) => v.id, sortable: true },
+		{ key: 'icon', title: 'icon', value: (v: ItemsType) => v.icon },
+		{
+			key: 'name',
+			title: 'Name',
+			value: (v: ItemsType) => v.name,
+			sortable: true
+		}
+	];
+
+	function rowClick(value: CustomEvent) {
+		console.log(value.detail);
+		goto('/items/' + value.detail.row.id);
+	}
 </script>
 
 <div class="wrapper">
@@ -15,11 +33,7 @@
 	{#if data.items.length === 1}
 		<Item item={data.items[0]} />
 	{:else}
-		{#each data.items as item, i}
-			<div class="itemWrapper">
-				<ItemSmall item={data.items[i]} />
-			</div>
-		{/each}
+		<SvelteTable {rows} columns={cols} rowKey="id" on:clickRow={rowClick}></SvelteTable>
 	{/if}
 </div>
 

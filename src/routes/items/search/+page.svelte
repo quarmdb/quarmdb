@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import ItemSearchForm from '$lib/components/ItemSearchForm.svelte';
-	import ItemSmall from '$lib/components/ItemSmall.svelte';
 	import { ItemsSchema, type ItemsType } from '$lib/schema';
 
 	let searchText = '';
