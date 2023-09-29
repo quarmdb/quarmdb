@@ -27,7 +27,7 @@ export async function load({ params }: PageServerLoadEvent) {
 		}
 
 		return {
-			factions: factionParse.data || []
+			factions: factionParse.data
 		};
 	} catch (err) {
 		console.log(err);
