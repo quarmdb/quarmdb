@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Item from '$lib/components/Item.svelte';
+	import ItemSearchForm from '$lib/components/ItemSearchForm.svelte';
 	import ItemSmall from '$lib/components/ItemSmall.svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
@@ -9,12 +10,7 @@
 
 <div class="wrapper">
 	<section>
-		<input type="text" bind:value={searchText} />
-		<button
-			on:click|preventDefault={() => {
-				goto(`/items/search/${searchText}`);
-			}}>search</button
-		>
+		<ItemSearchForm />
 	</section>
 	{#if data.items.length === 1}
 		<Item item={data.items[0]} />

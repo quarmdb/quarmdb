@@ -1,3 +1,5 @@
+import type Item from '$lib/components/Item.svelte';
+
 type MaskType = {
 	mask: number;
 };
@@ -15,29 +17,29 @@ export function getFromMask<T extends MaskType>(search: number, listToSearch: T[
 
 export type PlayerClassType = {
 	id: number;
-	name: string;
-	shortName: string;
+	long_name: string;
+	short_name: string;
 	mask: number;
 	spellListID?: number;
 };
 
 export const playerClassList: PlayerClassType[] = [
-	{ id: 1, name: 'Warrior', shortName: 'WAR', mask: 1 << 0 },
-	{ id: 2, name: 'Cleric', shortName: 'CLR', mask: 1 << 1, spellListID: 1 },
-	{ id: 3, name: 'Paladin', shortName: 'PAL', mask: 1 << 2, spellListID: 8 },
-	{ id: 4, name: 'Ranger', shortName: 'RNG', mask: 1 << 3, spellListID: 10 },
-	{ id: 5, name: 'Shadow Knight', shortName: 'SHD', mask: 1 << 4, spellListID: 9 },
-	{ id: 6, name: 'Druid', shortName: 'DRU', mask: 1 << 5, spellListID: 7 },
-	{ id: 7, name: 'Monk', shortName: 'MNK', mask: 1 << 6 },
-	{ id: 8, name: 'Bard', shortName: 'BRD', mask: 1 << 7, spellListID: 11 },
-	{ id: 9, name: 'Rogue', shortName: 'ROG', mask: 1 << 8 },
-	{ id: 10, name: 'Shaman', shortName: 'SHM', mask: 1 << 9, spellListID: 6 },
-	{ id: 11, name: 'Necromancer', shortName: 'NEC', mask: 1 << 10, spellListID: 3 },
-	{ id: 12, name: 'Wizard', shortName: 'WIZ', mask: 1 << 11, spellListID: 2 },
-	{ id: 13, name: 'Magician', shortName: 'MAG', mask: 1 << 12, spellListID: 4 },
-	{ id: 14, name: 'Enchanter', shortName: 'ENC', mask: 1 << 13, spellListID: 5 },
-	{ id: 15, name: 'Beastlord', shortName: 'BST', mask: 1 << 14, spellListID: 12 },
-	{ id: 15, name: 'Beastlord', shortName: 'BST', mask: 1 << 15 }
+	{ id: 1, long_name: 'Warrior', short_name: 'WAR', mask: 1 << 0 },
+	{ id: 2, long_name: 'Cleric', short_name: 'CLR', mask: 1 << 1, spellListID: 1 },
+	{ id: 3, long_name: 'Paladin', short_name: 'PAL', mask: 1 << 2, spellListID: 8 },
+	{ id: 4, long_name: 'Ranger', short_name: 'RNG', mask: 1 << 3, spellListID: 10 },
+	{ id: 5, long_name: 'Shadow Knight', short_name: 'SHD', mask: 1 << 4, spellListID: 9 },
+	{ id: 6, long_name: 'Druid', short_name: 'DRU', mask: 1 << 5, spellListID: 7 },
+	{ id: 7, long_name: 'Monk', short_name: 'MNK', mask: 1 << 6 },
+	{ id: 8, long_name: 'Bard', short_name: 'BRD', mask: 1 << 7, spellListID: 11 },
+	{ id: 9, long_name: 'Rogue', short_name: 'ROG', mask: 1 << 8 },
+	{ id: 10, long_name: 'Shaman', short_name: 'SHM', mask: 1 << 9, spellListID: 6 },
+	{ id: 11, long_name: 'Necromancer', short_name: 'NEC', mask: 1 << 10, spellListID: 3 },
+	{ id: 12, long_name: 'Wizard', short_name: 'WIZ', mask: 1 << 11, spellListID: 2 },
+	{ id: 13, long_name: 'Magician', short_name: 'MAG', mask: 1 << 12, spellListID: 4 },
+	{ id: 14, long_name: 'Enchanter', short_name: 'ENC', mask: 1 << 13, spellListID: 5 },
+	{ id: 15, long_name: 'Beastlord', short_name: 'BST', mask: 1 << 14, spellListID: 12 },
+	{ id: 15, long_name: 'Beastlord', short_name: 'BST', mask: 1 << 15 }
 ];
 
 export function getUseableClasses(search: number): PlayerClassType[] {
@@ -47,27 +49,27 @@ export function getUseableClasses(search: number): PlayerClassType[] {
 export type PlayerRaceType = {
 	id: number;
 	mask: number;
-	shortName: string;
-	name: string;
+	short_name: string;
+	long_name: string;
 };
 
 export const playerRaceList: PlayerRaceType[] = [
-	{ id: 1, name: 'Human', shortName: 'HUM', mask: 1 << 0 },
-	{ id: 2, name: 'Barbarian', shortName: 'BAR', mask: 1 << 1 },
-	{ id: 3, name: 'Erudite', shortName: 'ERU', mask: 1 << 2 },
-	{ id: 4, name: 'Wood Elf', shortName: 'ELF', mask: 1 << 3 },
-	{ id: 5, name: 'High Elf', shortName: 'HIE', mask: 1 << 4 },
-	{ id: 6, name: 'Dark_Elf', shortName: 'DEF', mask: 1 << 5 },
-	{ id: 7, name: 'Half Elf', shortName: 'HEF', mask: 1 << 6 },
-	{ id: 8, name: 'Dwarf', shortName: 'DWF', mask: 1 << 7 },
-	{ id: 9, name: 'Troll', shortName: 'TRL', mask: 1 << 8 },
-	{ id: 10, name: 'Ogre', shortName: 'OGR', mask: 1 << 9 },
-	{ id: 11, name: 'Halfling', shortName: 'HFL', mask: 1 << 10 },
-	{ id: 12, name: 'Gnome', shortName: 'GNM', mask: 1 << 11 },
-	{ id: 13, name: 'Iksar', shortName: 'IKS', mask: 1 << 12 },
-	{ id: 14, name: 'Vah Shir', shortName: 'VAH', mask: 1 << 13 },
-	{ id: 15, name: 'Froglok', shortName: 'VAH', mask: 1 << 14 },
-	{ id: 16, name: 'Drakkin', shortName: 'VAH', mask: 1 << 15 }
+	{ id: 1, long_name: 'Human', short_name: 'HUM', mask: 1 << 0 },
+	{ id: 2, long_name: 'Barbarian', short_name: 'BAR', mask: 1 << 1 },
+	{ id: 3, long_name: 'Erudite', short_name: 'ERU', mask: 1 << 2 },
+	{ id: 4, long_name: 'Wood Elf', short_name: 'ELF', mask: 1 << 3 },
+	{ id: 5, long_name: 'High Elf', short_name: 'HIE', mask: 1 << 4 },
+	{ id: 6, long_name: 'Dark_Elf', short_name: 'DEF', mask: 1 << 5 },
+	{ id: 7, long_name: 'Half Elf', short_name: 'HEF', mask: 1 << 6 },
+	{ id: 8, long_name: 'Dwarf', short_name: 'DWF', mask: 1 << 7 },
+	{ id: 9, long_name: 'Troll', short_name: 'TRL', mask: 1 << 8 },
+	{ id: 10, long_name: 'Ogre', short_name: 'OGR', mask: 1 << 9 },
+	{ id: 11, long_name: 'Halfling', short_name: 'HFL', mask: 1 << 10 },
+	{ id: 12, long_name: 'Gnome', short_name: 'GNM', mask: 1 << 11 },
+	{ id: 13, long_name: 'Iksar', short_name: 'IKS', mask: 1 << 12 },
+	{ id: 14, long_name: 'Vah Shir', short_name: 'VAH', mask: 1 << 13 },
+	{ id: 15, long_name: 'Froglok', short_name: 'VAH', mask: 1 << 14 },
+	{ id: 16, long_name: 'Drakkin', short_name: 'VAH', mask: 1 << 15 }
 ];
 
 export function getUseableRaces(search: number): PlayerRaceType[] {
@@ -82,3 +84,153 @@ expansionLookup.set(4, 'The Shadows of Luclin');
 expansionLookup.set(5, 'The Planes of Power');
 expansionLookup.set(99, 'Special Zones');
 export { expansionLookup };
+
+export const itemSizes = [
+	{ id: 0, name: 'TINY' },
+	{ id: 1, name: 'SMALL' },
+	{ id: 2, name: 'MEDIUM' },
+	{ id: 3, name: 'LARGE' },
+	{ id: 4, name: 'GIANT' }
+];
+
+export const skills: { id: number; name: string }[] = [
+	{ id: 0, name: '1H Blunt' },
+	{ id: 1, name: '1H Slashing' },
+	{ id: 2, name: '2H Blunt' },
+	{ id: 3, name: '2H Slashing' },
+	{ id: 4, name: 'Abjuration' },
+	{ id: 5, name: 'Alteration' },
+	{ id: 6, name: 'Apply Poison' },
+	{ id: 7, name: 'Archery' },
+	{ id: 8, name: 'Backstab' },
+	{ id: 9, name: 'Bind Wound' },
+	{ id: 10, name: 'Bash' },
+	{ id: 11, name: 'Block' },
+	{ id: 12, name: 'Brass Instruments' },
+	{ id: 13, name: 'Channeling' },
+	{ id: 14, name: 'Conjuration' },
+	{ id: 15, name: 'Defense' },
+	{ id: 16, name: 'Disarm' },
+	{ id: 17, name: 'Disarm Traps' },
+	{ id: 18, name: 'Divination' },
+	{ id: 19, name: 'Dodge' },
+	{ id: 20, name: 'Double Attack' },
+	{ id: 21, name: 'Dragon Punch' },
+	{ id: 22, name: 'Dual Wield' },
+	{ id: 23, name: 'Eagle Strike' },
+	{ id: 24, name: 'Evocation' },
+	{ id: 25, name: 'Feign Death' },
+	{ id: 26, name: 'Flying Kick' },
+	{ id: 27, name: 'Forage' },
+	{ id: 28, name: 'Hand to Hand' },
+	{ id: 29, name: 'Hide' },
+	{ id: 30, name: 'Kick' },
+	{ id: 31, name: 'Meditate' },
+	{ id: 32, name: 'Mend' },
+	{ id: 33, name: 'Offense' },
+	{ id: 34, name: 'Parry' },
+	{ id: 35, name: 'Pick Lock' },
+	{ id: 36, name: 'Piercing' },
+	{ id: 37, name: 'Riposte' },
+	{ id: 38, name: 'Round Kick' },
+	{ id: 39, name: 'Safe Fall' },
+	{ id: 40, name: 'Sense Heading' },
+	{ id: 41, name: 'Singing' },
+	{ id: 42, name: 'Sneak' },
+	{ id: 43, name: 'Specialize Abjure' },
+	{ id: 44, name: 'Specialize Alteration' },
+	{ id: 45, name: 'Specialize Conjuration' },
+	{ id: 46, name: 'Specialize Divination' },
+	{ id: 47, name: 'Specialize Evocation' },
+	{ id: 48, name: 'Pick Pockets' },
+	{ id: 49, name: 'Stringed Instruments' },
+	{ id: 50, name: 'Swimming' },
+	{ id: 51, name: 'Throwing' },
+	{ id: 52, name: 'Tiger Claw' },
+	{ id: 53, name: 'Tracking' },
+	{ id: 54, name: 'Wind Instruments' },
+	{ id: 55, name: 'Fishing' },
+	{ id: 56, name: 'Make Poison' },
+	{ id: 57, name: 'Tinkering' },
+	{ id: 58, name: 'Research' },
+	{ id: 59, name: 'Alchemy' },
+	{ id: 60, name: 'Baking' },
+	{ id: 61, name: 'Tailoring' },
+	{ id: 62, name: 'Sense Traps' },
+	{ id: 63, name: 'Blacksmithing' },
+	{ id: 64, name: 'Fletching' },
+	{ id: 65, name: 'Brewing' },
+	{ id: 66, name: 'Alcohol Tolerance' },
+	{ id: 67, name: 'Begging' },
+	{ id: 68, name: 'Jewelry Making' },
+	{ id: 69, name: 'Pottery' },
+	{ id: 70, name: 'Percussion Instruments' },
+	{ id: 71, name: 'Intimidation' },
+	{ id: 72, name: 'Berserking' },
+	{ id: 73, name: 'Taunt' }
+];
+
+export type ItemSlotType = {
+	id: number;
+	name: string;
+	mask: number;
+};
+
+export const itemSlots = [
+	{ id: 0, name: 'HELD', mask: 1 << 0 },
+	{ id: 1, name: 'EAR', mask: 1 << 1 },
+	{ id: 2, name: 'HEAD', mask: 1 << 2 },
+	{ id: 3, name: 'FACE', mask: 1 << 3 },
+	{ id: 4, name: 'EAR', mask: 1 << 4 },
+	{ id: 5, name: 'NECK', mask: 1 << 5 },
+	{ id: 6, name: 'SHOULDERS', mask: 1 << 6 },
+	{ id: 7, name: 'ARMS', mask: 1 << 7 },
+	{ id: 8, name: 'BACK', mask: 1 << 8 },
+	{ id: 9, name: 'WRIST', mask: 1 << 9 },
+	{ id: 10, name: 'WRIST', mask: 1 << 10 },
+	{ id: 11, name: 'RANGE', mask: 1 << 11 },
+	{ id: 12, name: 'HANDS', mask: 1 << 12 },
+	{ id: 13, name: 'PRIMARY', mask: 1 << 13 },
+	{ id: 14, name: 'SECONDARY', mask: 1 << 14 },
+	{ id: 15, name: 'FINGERS', mask: 1 << 15 },
+	{ id: 16, name: 'FINGERS', mask: 1 << 16 },
+	{ id: 17, name: 'CHEST', mask: 1 << 17 },
+	{ id: 18, name: 'LEGS', mask: 1 << 18 },
+	{ id: 19, name: 'FEET', mask: 1 << 19 },
+	{ id: 20, name: 'WAIST', mask: 1 << 20 },
+	{ id: 21, name: 'AMMO', mask: 1 << 21 }
+];
+
+export function getUseableSlots(search: number): ItemSlotType[] {
+	return getFromMask<ItemSlotType>(search, itemSlots);
+}
+
+export type DietyType = {
+	id: number;
+	name: string;
+	mask: number;
+};
+
+export const dieties = [
+	{ id: 0, name: 'Agnostic', mask: 1 << 0 },
+	{ id: 1, name: 'Bertoxxulous', mask: 1 << 1 },
+	{ id: 2, name: 'Brell Serilis', mask: 1 << 2 },
+	{ id: 3, name: 'Cazic Thule', mask: 1 << 3 },
+	{ id: 4, name: 'Erollisi Marr', mask: 1 << 4 },
+	{ id: 5, name: 'Bristlebane', mask: 1 << 5 },
+	{ id: 6, name: 'Innoruuk', mask: 1 << 6 },
+	{ id: 7, name: 'Karana', mask: 1 << 7 },
+	{ id: 8, name: 'Mithaniel Marr', mask: 1 << 8 },
+	{ id: 9, name: 'Prexus', mask: 1 << 9 },
+	{ id: 10, name: 'Quellious', mask: 1 << 10 },
+	{ id: 11, name: 'Rallos Zek', mask: 1 << 11 },
+	{ id: 12, name: 'Rodcet Nife', mask: 1 << 12 },
+	{ id: 13, name: 'Solusek Ro', mask: 1 << 13 },
+	{ id: 14, name: 'The Tribunal', mask: 1 << 14 },
+	{ id: 15, name: 'Tunare', mask: 1 << 15 },
+	{ id: 16, name: 'Veeshan', mask: 1 << 16 }
+];
+
+export function getDieties(search: number): DietyType[] {
+	return getFromMask<DietyType>(search, dieties);
+}

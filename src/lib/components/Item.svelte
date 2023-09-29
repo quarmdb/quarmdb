@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ItemsType } from '$lib/schema';
 	import { getUseableClasses, getUseableRaces } from '$lib/db/constants';
+	import RawJsonViewer from './RawJSONViewer.svelte';
 
 	export let item: ItemsType;
 
@@ -14,20 +15,42 @@
 			}[keyof T]
 		>]: T[P];
 	} => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== 0 && v !== '')) as any;
+
+	const getClassList = (classMask: number): string => {
+		return getUseableClasses(classMask)
+			.reduce<string[]>((acc, value, idx) => {
+				acc.push(value.short_name);
+				return acc;
+			}, [])
+			.join(',');
+	};
+
+	const getRaceList = (raceMask: number): string => {
+		return getUseableRaces(raceMask)
+			.reduce<string[]>((acc, value, idx) => {
+				acc.push(value.short_name);
+				return acc;
+			}, [])
+			.join(',');
+	};
 </script>
 
-<section>
+<section class="heading">
 	<img class="icon" src="/icon/{item.icon}.gif" alt="icon" />
-	<span>{item.name}</span>
+	<span class="name">{item.name}</span>
 </section>
-<pre>Classes:{#each getUseableClasses(item.classes) as useableClass}{useableClass.shortName},{/each}</pre>
-<pre>Races:{#each getUseableRaces(item.races) as race}{race.shortName},{/each}</pre>
+<RawJsonViewer obj={item} />
+<section class="info">
+	<section class="class_race">
+		<span class="classes">Classes:{getClassList(item.classes)}</span>
+		<span class="races">Races:{getRaceList(item.races)}</span>
+	</section>
+</section>
 
-<pre></pre>
 <pre>{JSON.stringify(omitZeroEmpty(item), null, 2)}</pre>
 
 <style>
-	section {
+	section.heading {
 		display: flex;
 		flex-direction: row;
 		width: 100%;
@@ -41,6 +64,16 @@
 			align-self: center;
 			height: 5rem;
 			aspect-ratio: 1/1;
+		}
+	}
+
+	section.info {
+		display: flex;
+		flex-direction: column;
+
+		& section.class_race {
+			display: flex;
+			flex-direction: column;
 		}
 	}
 </style>

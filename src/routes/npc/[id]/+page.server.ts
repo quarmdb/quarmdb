@@ -100,6 +100,17 @@ export async function load({ params }: PageServerLoadEvent) {
 			throw error(404);
 		}
 
+		// const factionRes = client.query(`
+		// 	SELECT
+		// 		nf.name,
+		// 		nf.id,
+		// 		nfe.value
+		// 	FROM
+		// 		npc_faction_entries nfe
+		// 	INNER JOIN npc_faction nf
+		// 		ON nfe.faction_id = nf.id
+		// 	`)
+
 		console.log(`NPC -> ${npcParse.data.name}`);
 
 		return {
