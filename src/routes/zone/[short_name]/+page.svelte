@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ItemSmall from '$lib/components/ItemSmall.svelte';
+	import { nameCompare, nameParse } from '$lib/utils';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
@@ -18,7 +19,7 @@
 	{/each}
 	<h2>Spawns ({data.spawns.length})</h2>
 	<table>
-		<tr><th>Spawn ID</th><th>X</th><th>Y</th><th>Z</th><th>Spawns</th></tr>
+		<tr><th>Spawn ID</th><th>X</th><th>Y</th><th>Z</th><th>Spawns</th><th>Respawn Time</th></tr>
 		{#each data.spawns as spawn}
 			<tr
 				><td>{spawn.id}</td><td>{spawn.x.toPrecision(5)}</td><td>{spawn.y.toPrecision(5)}</td><td
@@ -26,15 +27,16 @@
 				>
 				<td class="spawncell">
 					{#each spawn.spawns as s}
-						<span><a href="/npc/{s.npcid}">{s.name}</a>({s.chance}%)</span>
+						<span><a href="/npc/{s.npcid}">{nameParse(s.name)}</a>({s.chance}%)</span>
 					{/each}
 				</td>
+				<td>{spawn.respawntime}s</td>
 			</tr>
 		{/each}
 	</table>
-	<h2>NPCS ({data.npcs.length})</h2>
-	{#each data.npcs as npc}
-		<span><a href="/npc/{npc.id}">{npc.name}</a></span>
+	<h2>Unique NPCS ({data.npcs.length})</h2>
+	{#each data.npcs.sort((a, b) => nameCompare(a.name, b.name)) as npc}
+		<span><a href="/npc/{npc.id}">{nameParse(npc.name)}</a></span>
 	{/each}
 </div>
 

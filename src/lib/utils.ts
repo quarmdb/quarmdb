@@ -25,7 +25,9 @@ export function nameParse(name: string): string {
 	let pieces = name.replace(/_/gi, ' ').split(' ');
 	for (let i = 0; i < pieces.length; i++)
 		pieces[i] = pieces[i].at(0)?.toUpperCase() + pieces[i].slice(1);
-	return pieces.join(' ');
+	name = pieces.join(' ');
+	while (name.at(0) === '#') name = name.slice(1);
+	return name;
 }
 
 export function groupSpawnTable(spawns: Spawn2Type[]): Map<string, Spawn2Type[]> {
@@ -56,4 +58,13 @@ export function parseDatabaseResponse<T extends ZodSchema>(
 	}
 
 	return parsedRes.data;
+}
+
+export function removeLeadingA(str: string) {
+	if (str.match(/^a /gi) || str.match(/^a_/gi)) return str.slice(2);
+	return str;
+}
+
+export function nameCompare(a: string, b: string) {
+	return removeLeadingA(a).localeCompare(removeLeadingA(b));
 }

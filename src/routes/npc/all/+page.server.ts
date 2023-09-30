@@ -5,7 +5,21 @@ import { pool } from '$lib/db';
 
 export async function load({ params }: PageServerLoadEvent) {
 	const client = await pool.connect();
-	const res = await client.query('SELECT id, name, level FROM npc_types ORDER BY name');
+	const searchStr = `
+		SELECT 
+			id, name, level 
+		FROM 
+			npc_types 
+		WHERE 
+			name != '_' 
+			AND name != '__' 
+			AND name != '___'
+			AND name != '____'
+			AND name != '_____'
+			AND name != '______'
+			`;
+	console.log(searchStr);
+	const res = await client.query(searchStr);
 
 	let parsedRows = NpcTypesSchema.pick({ id: true, name: true, level: true })
 		.array()

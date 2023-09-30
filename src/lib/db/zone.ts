@@ -1,4 +1,4 @@
-import { Spawn2Schema } from '$lib/schema';
+import { NpcTypesSchema, Spawn2Schema } from '$lib/schema';
 import { error } from '@sveltejs/kit';
 import type { PoolClient } from 'pg';
 import { z } from 'zod';
@@ -49,4 +49,33 @@ export const getSpawnsByZone = async (short_name: string, client: PoolClient) =>
 	}
 
 	return spawnsParsed.data;
+};
+
+export const getUniqueNpcsByZone = async (short_name: string, client: PoolClient) => {
+	const npcsRes = await client.query(
+		`
+			SELECT DISTINCT
+				npc.*
+			FROM
+				npc_types npc
+			INNER JOIN spawnentry spen
+				ON spen.npcID = npc.id
+			INNER JOIN spawn2 sp2
+				ON sp2.spawngroupID = spen.spawngroupID
+			WHERE
+				sp2.zone = $1
+			ORDER BY
+				npc.name
+		`,
+		[short_name]
+	);
+
+	const parsedNpcs = NpcTypesSchema.array().safeParse(npcsRes.rows);
+
+	if (!parsedNpcs.success) {
+		console.error(parsedNpcs.error);
+		throw error(404);
+	}
+
+	return parsedNpcs.data;
 };

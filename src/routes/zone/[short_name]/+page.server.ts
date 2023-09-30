@@ -4,7 +4,7 @@ import { pool } from '$lib/db';
 import { NpcTypesSchema, ZoneSchema } from '$lib/schema';
 import { z } from 'zod';
 import { getZoneFromNumber, type ZoneIdNumberType } from '$lib/db/constants/zoneidnumber';
-import { getSpawnsByZone } from '$lib/db/spawns';
+import { getSpawnsByZone, getUniqueNpcsByZone } from '$lib/db/zone';
 
 export async function load({ params }: PageServerLoadEvent) {
 	const client = await pool.connect();
@@ -125,7 +125,7 @@ export async function load({ params }: PageServerLoadEvent) {
 			zone: parsedZones.data[0],
 			ground_spawns: parsedGroundSpawns.data,
 			connected_zones,
-			npcs: parsedNpcs.data,
+			npcs: await getUniqueNpcsByZone(short_name, client),
 			spawns: await getSpawnsByZone(short_name, client)
 		};
 	} catch (e) {
