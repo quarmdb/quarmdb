@@ -6,20 +6,18 @@
 
 <ThemeWrapper>
 	<div class="wrapper">
-		<aside>
-			<section>
-				<h2>QuarmDB</h2>
-				<ThemeSwitcher />
-			</section>
+		<section class="topbar">
+			<span class="title"> QuarmDB </span>
 			<nav>
 				<ul>
 					<li><a href="/items/search">Items</a></li>
 					<li><a href="/npc/all">NPCS</a></li>
 					<li><a href="/zone">Zones</a></li>
 					<li><a href="/faction/all">Factions</a></li>
+					<li><ThemeSwitcher /></li>
 				</ul>
 			</nav>
-		</aside>
+		</section>
 		<main>
 			<slot />
 		</main>
@@ -30,52 +28,54 @@
 	.wrapper {
 		width: 100%;
 		min-height: 100dvh;
-		padding: 1rem 1rem 1rem 0;
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-gap: 1rem;
-		background-color: var(--surface-2);
-
-		@media (min-width: 60rem) {
-			grid-template-columns: 250px minmax(10px, 1fr);
-		}
-	}
-
-	section {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-evenly;
-		align-items: center;
-	}
-
-	aside {
-		position: sticky;
-		top: 0;
-		align-self: start;
+		padding: 1rem;
 		display: flex;
 		flex-direction: column;
-		background-color: var(--surface-1);
-		border-radius: 0 1rem 1rem 0;
+		background-color: var(--surface-2);
+	}
+
+	section.topbar {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		position: sticky;
+		top: 0;
+		height: 3rem;
+		padding-bottom: 1rem;
+	}
+
+	span.title {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 		padding: 1rem;
+		font-size: 2rem;
 	}
 
 	main {
 		background-color: var(--surface-1);
-		border-radius: 1rem;
-		padding: 1rem;
+		border-radius: 0.5rem;
+		padding: 1rem 2rem;
 		position: relative;
+		min-height: 100%;
+		width: 100%;
 	}
 
 	nav {
 		width: 100%;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		padding: 0;
 		margin: 0;
 
 		& ul {
 			width: 100%;
 			padding: 0;
+			display: flex;
+			flex-direction: row;
 			& li {
 				width: 100%;
 				list-style: none;
@@ -91,7 +91,7 @@
 					border-radius: 5rem;
 				}
 				& a:hover {
-					background-color: var(--surface-2);
+					background-color: var(--surface-1);
 					text-decoration: underline;
 				}
 			}
