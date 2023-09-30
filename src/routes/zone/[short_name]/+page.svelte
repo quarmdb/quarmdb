@@ -16,6 +16,22 @@
 	{#each data.ground_spawns as gs}
 		<span><a href="/items/{gs.id}">{gs.name}</a> - ({gs.x},{gs.y},{gs.z})</span>
 	{/each}
+	<h2>Spawns ({data.spawns.length})</h2>
+	<table>
+		<tr><th>Spawn ID</th><th>X</th><th>Y</th><th>Z</th><th>Spawns</th></tr>
+		{#each data.spawns as spawn}
+			<tr
+				><td>{spawn.id}</td><td>{spawn.x.toPrecision(5)}</td><td>{spawn.y.toPrecision(5)}</td><td
+					>{spawn.z.toPrecision(5)}</td
+				>
+				<td class="spawncell">
+					{#each spawn.spawns as s}
+						<span><a href="/npc/{s.npcid}">{s.name}</a>({s.chance}%)</span>
+					{/each}
+				</td>
+			</tr>
+		{/each}
+	</table>
 	<h2>NPCS ({data.npcs.length})</h2>
 	{#each data.npcs as npc}
 		<span><a href="/npc/{npc.id}">{npc.name}</a></span>
@@ -24,6 +40,11 @@
 
 <style>
 	.groundSpawnWrapper {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.spawncell {
 		display: flex;
 		flex-direction: column;
 	}

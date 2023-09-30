@@ -23,11 +23,6 @@
 </table>
 
 <style>
-	section {
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
-	}
-
 	td.items_cell {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);

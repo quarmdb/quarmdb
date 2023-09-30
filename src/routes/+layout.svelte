@@ -54,13 +54,9 @@
 		align-self: start;
 		display: flex;
 		flex-direction: column;
-	}
-
-	aside {
 		background-color: var(--surface-1);
 		border-radius: 0 1rem 1rem 0;
 		padding: 1rem;
-		position: relative;
 	}
 
 	main {
