@@ -62,9 +62,10 @@ export function parseDatabaseResponse<T extends ZodSchema>(
 
 export function removeLeadingA(str: string) {
 	if (str.match(/^a /gi) || str.match(/^a_/gi)) return str.slice(2);
+	if (str.match(/^an /gi) || str.match(/^an_/gi)) return str.slice(3);
 	return str;
 }
 
 export function nameCompare(a: string, b: string) {
-	return removeLeadingA(a).localeCompare(removeLeadingA(b));
+	return removeLeadingA(nameParse(a)).localeCompare(removeLeadingA(nameParse(b)));
 }
