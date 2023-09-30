@@ -15,7 +15,12 @@
 	{/each}
 	<h2>Ground Spawns ({data.ground_spawns.length})</h2>
 	{#each data.ground_spawns as gs}
-		<span><a href="/items/{gs.id}">{gs.name}</a> - ({gs.x},{gs.y},{gs.z})</span>
+		<span><a href="/items/{gs.id}">{gs.name} ({gs.locs.length})</a></span>
+		<span>
+			{#each gs.locs as loc, idx}
+				<span>({loc.x},{loc.y},{loc.z})</span>
+			{/each}
+		</span>
 	{/each}
 	<h2>Spawns ({data.spawns.length})</h2>
 	<table>

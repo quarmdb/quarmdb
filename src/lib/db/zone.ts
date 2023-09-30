@@ -1,7 +1,8 @@
-import { NpcTypesSchema, Spawn2Schema } from '$lib/schema';
+import { NpcTypesSchema, Spawn2Schema, ZoneSchema } from '$lib/schema';
 import { error } from '@sveltejs/kit';
-import type { PoolClient } from 'pg';
+import type { Pool, PoolClient } from 'pg';
 import { z } from 'zod';
+import { getZoneFromNumber, type ZoneIdNumberType } from './constants/zoneidnumber';
 
 export const getSpawnsByZone = async (short_name: string, client: PoolClient) => {
 	const spawnRes = await client.query(
@@ -78,4 +79,98 @@ export const getUniqueNpcsByZone = async (short_name: string, client: PoolClient
 	}
 
 	return parsedNpcs.data;
+};
+
+export const getConnectedZones = async (short_name: string, client: PoolClient) => {
+	const connectedZonesRes = await client.query(
+		`
+		SELECT DISTINCT
+			target_zone_id
+		FROM
+			zone_points
+		WHERE
+			zone_points.zone = $1
+	`,
+		[short_name]
+	);
+
+	const connectedZonesParse = z
+		.object({ target_zone_id: z.number() })
+		.array()
+		.safeParse(connectedZonesRes.rows);
+
+	if (!connectedZonesParse.success) {
+		console.error(connectedZonesParse.error);
+		throw error(404);
+	}
+
+	let connected_zones: ZoneIdNumberType[] = [];
+	connectedZonesParse.data.forEach(({ target_zone_id }) => {
+		connected_zones.push(getZoneFromNumber(target_zone_id));
+	});
+
+	return connected_zones;
+};
+
+export const getGroundSpawns = async (short_name: string, client: PoolClient) => {
+	const groundSpawnRes = await client.query(
+		`
+		SELECT 
+			i.name, i.id,
+			JSON_AGG(JSON_BUILD_OBJECT(
+				'x', gs.max_x,
+				'y', gs.max_y,
+				'z', gs.max_z
+			)) as locs
+		FROM
+			ground_spawns gs
+		INNER JOIN zone z
+			ON z.zoneidnumber = gs.zoneid
+		INNER JOIN items i
+			ON i.id = gs.item
+		WHERE
+			z.short_name = $1
+		GROUP BY
+			i.name, i.id
+	`,
+		[short_name]
+	);
+
+	// if (groundSpawnRes.rowCount === 0) {
+	// 	console.error(`ground`);
+	// 	throw error(404);
+	// }
+	const parsedGroundSpawns = z
+		.object({
+			name: z.string(),
+			id: z.number(),
+			locs: z
+				.object({
+					x: z.number(),
+					y: z.number(),
+					z: z.number()
+				})
+				.array()
+		})
+		.array()
+		.safeParse(groundSpawnRes.rows);
+
+	if (!parsedGroundSpawns.success) {
+		console.error(parsedGroundSpawns.error);
+		throw error(404);
+	}
+
+	return parsedGroundSpawns.data;
+};
+
+export const getZone = async (short_name: string, client: PoolClient) => {
+	const zoneRes = await client.query(`SELECT * from zone where zone.short_name = $1`, [short_name]);
+	if (zoneRes.rowCount === 0) throw error(404);
+	const parsedZones = ZoneSchema.array().safeParse(zoneRes.rows);
+	if (!parsedZones.success) {
+		console.error(parsedZones.error);
+		throw error(404);
+	}
+
+	return parsedZones.data[0];
 };
