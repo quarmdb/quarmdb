@@ -11,12 +11,14 @@ export async function load({ params }: PageServerLoadEvent) {
 		FROM 
 			npc_types 
 		WHERE 
-			name != '_' 
-			AND name != '__' 
-			AND name != '___'
-			AND name != '____'
-			AND name != '_____'
-			AND name != '______'
+			name !~* '^[_]+$'
+			AND name !~* '^[_]+ $'
+			AND name != ' '
+			AND name != ''
+			AND name != '#_'
+			AND name != '#'
+			AND name is not NULL
+			AND name !~* '^[_]+[a-zA-Z_]+$'
 			`;
 	console.log(searchStr);
 	const res = await client.query(searchStr);
