@@ -21,6 +21,12 @@ export const debounce = (fn: Function, ms = 300) => {
 	};
 };
 
+/**
+ * This database puts names in here that are version of "___" and "##A_Stupid_Beast"
+ * This is to clean it up
+ * @param name
+ * @returns
+ */
 export function nameParse(name: string): string {
 	let pieces = name.replace(/_/gi, ' ').split(' ');
 	for (let i = 0; i < pieces.length; i++)

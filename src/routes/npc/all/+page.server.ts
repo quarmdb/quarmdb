@@ -20,7 +20,7 @@ export async function load({ params }: PageServerLoadEvent) {
 			AND name is not NULL
 			AND name !~* '^[_]+[a-zA-Z_]+$'
 			`;
-	console.log(searchStr);
+	//console.log(searchStr);
 	const res = await client.query(searchStr);
 
 	let parsedRows = NpcTypesSchema.pick({ id: true, name: true, level: true })
