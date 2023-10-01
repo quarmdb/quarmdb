@@ -7,7 +7,7 @@
 <ThemeWrapper>
 	<div class="wrapper">
 		<section class="topbar">
-			<span class="title"> QuarmDB </span>
+			<span class="title"><a href="/" class="title">QuarmDB</a></span>
 			<nav>
 				<ul>
 					<li><a href="/class">Classes</a></li>
@@ -22,6 +22,12 @@
 		<main>
 			<slot />
 		</main>
+		<footer>
+			<p>
+				This is not affiliated with <a href="https://www.projectquarm.com">Project Quarm</a>. Just a
+				labor of love.
+			</p>
+		</footer>
 	</div>
 </ThemeWrapper>
 
@@ -47,6 +53,17 @@
 		padding-bottom: 1rem;
 	}
 
+	a.title:visited,
+	a.title {
+		color: var(--text-2);
+		text-decoration-color: var(--text-2);
+	}
+
+	a.title:hover {
+		color: var(--brand);
+		text-decoration-color: var(--brand);
+	}
+
 	span.title {
 		width: 100%;
 		display: flex;
@@ -59,10 +76,17 @@
 	main {
 		background-color: var(--surface-1);
 		border-radius: 0.5rem;
-		padding: 1rem 2rem;
+		padding: 1rem;
 		position: relative;
-		min-height: 100%;
 		width: 100%;
+		flex-grow: 1;
+	}
+
+	footer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-top: 1rem;
 	}
 
 	nav {
