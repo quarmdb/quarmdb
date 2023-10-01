@@ -14,7 +14,7 @@ let sendNetwork = false;
 if (process.argv[2]) sendNetwork = process.argv[2] === 'true';
 
 let locationQuarmDB =
-	'https://raw.githubusercontent.com/SecretsOTheP/EQMacEmu/main/utils/sql/database_full/quarm_2023-09-18-21_05.tar.gz';
+	'https://raw.githubusercontent.com/SecretsOTheP/EQMacEmu/main/utils/sql/database_full/quarm_2023-10-01-00_19.tar.gz';
 
 const mysqlFilePath = './db/mysql_files/';
 const postgresFilePath = './db/postgres_files/';

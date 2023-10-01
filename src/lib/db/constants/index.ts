@@ -15,37 +15,6 @@ export function getFromMask<T extends MaskType>(search: number, listToSearch: T[
 	return [...list];
 }
 
-export type PlayerClassType = {
-	id: number;
-	long_name: string;
-	short_name: string;
-	mask: number;
-	spellListID?: number;
-};
-
-export const playerClassList: PlayerClassType[] = [
-	{ id: 1, long_name: 'Warrior', short_name: 'WAR', mask: 1 << 0 },
-	{ id: 2, long_name: 'Cleric', short_name: 'CLR', mask: 1 << 1, spellListID: 1 },
-	{ id: 3, long_name: 'Paladin', short_name: 'PAL', mask: 1 << 2, spellListID: 8 },
-	{ id: 4, long_name: 'Ranger', short_name: 'RNG', mask: 1 << 3, spellListID: 10 },
-	{ id: 5, long_name: 'Shadow Knight', short_name: 'SHD', mask: 1 << 4, spellListID: 9 },
-	{ id: 6, long_name: 'Druid', short_name: 'DRU', mask: 1 << 5, spellListID: 7 },
-	{ id: 7, long_name: 'Monk', short_name: 'MNK', mask: 1 << 6 },
-	{ id: 8, long_name: 'Bard', short_name: 'BRD', mask: 1 << 7, spellListID: 11 },
-	{ id: 9, long_name: 'Rogue', short_name: 'ROG', mask: 1 << 8 },
-	{ id: 10, long_name: 'Shaman', short_name: 'SHM', mask: 1 << 9, spellListID: 6 },
-	{ id: 11, long_name: 'Necromancer', short_name: 'NEC', mask: 1 << 10, spellListID: 3 },
-	{ id: 12, long_name: 'Wizard', short_name: 'WIZ', mask: 1 << 11, spellListID: 2 },
-	{ id: 13, long_name: 'Magician', short_name: 'MAG', mask: 1 << 12, spellListID: 4 },
-	{ id: 14, long_name: 'Enchanter', short_name: 'ENC', mask: 1 << 13, spellListID: 5 },
-	{ id: 15, long_name: 'Beastlord', short_name: 'BST', mask: 1 << 14, spellListID: 12 },
-	{ id: 15, long_name: 'Beastlord', short_name: 'BST', mask: 1 << 15 }
-];
-
-export function getUseableClasses(search: number): PlayerClassType[] {
-	return getFromMask<PlayerClassType>(search, playerClassList);
-}
-
 export type PlayerRaceType = {
 	id: number;
 	mask: number;
@@ -234,3 +203,56 @@ export const dieties = [
 export function getDieties(search: number): DietyType[] {
 	return getFromMask<DietyType>(search, dieties);
 }
+
+export const ItemTypes = [
+	{ id: 0, name: '1H Slashing' },
+	{ id: 1, name: '2H Slashing' },
+	{ id: 2, name: '1H Piercing' },
+	{ id: 3, name: '1H Blunt' },
+	{ id: 4, name: '2H Blunt' },
+	{ id: 5, name: 'Archery' },
+	{ id: 7, name: 'Throwing' },
+	{ id: 8, name: 'Shield' },
+	{ id: 10, name: 'Armor' },
+	{ id: 11, name: 'Tradeskill Items' },
+	{ id: 12, name: 'Lockpicking' },
+	{ id: 14, name: 'Food' },
+	{ id: 15, name: 'Drink' },
+	{ id: 16, name: 'Light Source' },
+	{ id: 17, name: 'Common Inventory Item' },
+	{ id: 18, name: 'Bind Wound' },
+	{ id: 19, name: 'Thrown Casting Items' },
+	{ id: 20, name: 'Spells' },
+	{ id: 21, name: 'Potions' },
+	{ id: 22, name: 'Fletched Arrows' },
+	{ id: 23, name: 'Wind Instruments' },
+	{ id: 24, name: 'Stringed Instruments' },
+	{ id: 25, name: 'Brass Instruments' },
+	{ id: 26, name: 'Percussion Instruments' },
+	{ id: 27, name: 'Ammo' },
+	{ id: 29, name: 'Jewelry' },
+	{ id: 31, name: 'Readable Notes and Scrolls' },
+	{ id: 32, name: 'Readable Books' },
+	{ id: 33, name: 'Keys' },
+	{ id: 34, name: 'Odd Items' },
+	{ id: 35, name: '2H Piercing' },
+	{ id: 36, name: 'Fishing Poles' },
+	{ id: 37, name: 'Fishing Bait' },
+	{ id: 38, name: 'Alcoholic Beverages' },
+	{ id: 39, name: 'More Keys' },
+	{ id: 40, name: 'Compasses' },
+	{ id: 42, name: 'Poisons' },
+	{ id: 45, name: 'Hand to Hand' },
+	{ id: 52, name: 'Charms' },
+	{ id: 53, name: 'Dyes' },
+	{ id: 54, name: 'Augments' },
+	{ id: 55, name: 'Augment Solvents' },
+	{ id: 56, name: 'Augment Distillers' },
+	{ id: 58, name: 'Fellowship Banner Materials' },
+	{ id: 60, name: 'Cultural Armor Manuals' },
+	{ id: 63, name: 'New Curencies like Orum' }
+];
+
+export const getItemIdByName = (name: string) => {
+	return ItemTypes.find((value) => value.name.toLowerCase() === name.toLowerCase());
+};
