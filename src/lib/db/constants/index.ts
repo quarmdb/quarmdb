@@ -258,3 +258,9 @@ export const getItemIdByName = (name: string) => {
 	if (item === undefined) return 0;
 	return item.id;
 };
+
+export const getItemTypeById = (id: number) => {
+	let item = ItemTypes.find((value) => id === value.id);
+	if (item === undefined) return { id: -1, name: 'undefined' };
+	return item;
+};
