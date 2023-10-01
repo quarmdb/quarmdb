@@ -254,5 +254,7 @@ export const ItemTypes = [
 ];
 
 export const getItemIdByName = (name: string) => {
-	return ItemTypes.find((value) => value.name.toLowerCase() === name.toLowerCase());
+	let item = ItemTypes.find((value) => value.name.toLowerCase() === name.toLowerCase());
+	if (item === undefined) return 0;
+	return item.id;
 };

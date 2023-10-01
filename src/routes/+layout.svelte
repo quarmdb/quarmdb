@@ -10,6 +10,7 @@
 			<span class="title"> QuarmDB </span>
 			<nav>
 				<ul>
+					<li><a href="/class">Classes</a></li>
 					<li><a href="/items/search">Items</a></li>
 					<li><a href="/npc/all">NPCS</a></li>
 					<li><a href="/zone">Zones</a></li>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Item from '$lib/components/Item.svelte';
+	import { getZoneFromShortName } from '$lib/db/constants/zoneidnumber';
 	import { nameParse } from '$lib/utils';
 	import type { PageData } from './$types';
 	export let data: PageData;
@@ -8,18 +9,26 @@
 <a href="/items/search">Items Search</a>
 <Item item={data.item} />
 <h1>Dropped by:</h1>
-<ul>
-	{#each data.dropnpcs as dropnpc}
-		<li><a href="/npc/{dropnpc.id}">{nameParse(dropnpc.name)}</a></li>
-	{/each}
-</ul>
+{#if data.dropnpcs.length === 0}
+	<h2>Not Dropped</h2>
+{:else}
+	<ul>
+		{#each data.dropnpcs as dropnpc}
+			<li><a href="/npc/{dropnpc.id}">{nameParse(dropnpc.name)}</a></li>
+		{/each}
+	</ul>
+{/if}
 
 <h1>Sold by:</h1>
-<ul>
-	{#each data.merchants as merchants}
-		<h2>{merchants.zone}</h2>
-		{#each merchants.merchants as merchant}
-			<li><a href="/npc/{merchant.npcid}">{nameParse(merchant.name)}</a></li>
+{#if data.merchants.length === 0}
+	<h2>No one</h2>
+{:else}
+	<ul>
+		{#each data.merchants as merchants}
+			<h2>{getZoneFromShortName(merchants.zone).long_name}</h2>
+			{#each merchants.merchants as merchant}
+				<li><a href="/npc/{merchant.npcid}">{nameParse(merchant.name)}</a></li>
+			{/each}
 		{/each}
-	{/each}
-</ul>
+	</ul>
+{/if}

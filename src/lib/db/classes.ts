@@ -30,15 +30,14 @@ export const getAllSpellsByClass = async (className: string, pool: PoolClient) =
 	return spellsParsed.data;
 };
 
-export const getAllSpellsByClassByLevel = async (className: string, pool: PoolClient) => {
+export const getAllSpellsByClassByLevel = async (className: string, client: PoolClient) => {
 	const playerClassId = getIdForClass(className);
 	if (playerClassId === 0) {
 		console.error(className + ' is not a player class');
 		throw error(404);
 	}
 
-	const spellsRes = await pool.query(
-		`
+	const q = `
 	SELECT 
 		s.classes${playerClassId} as level,
 		JSON_AGG(JSON_BUILD_OBJECT(
@@ -54,8 +53,11 @@ export const getAllSpellsByClassByLevel = async (className: string, pool: PoolCl
 	WHERE
     i.itemType = ${getItemIdByName('Spells')} AND s.classes${playerClassId} < 255
 	GROUP BY s.classes${playerClassId}
-`
-	);
+`;
+
+	console.log(q);
+
+	const spellsRes = await client.query(q);
 
 	const SpellsByLevelSchema = z.object({
 		level: z.number(),
