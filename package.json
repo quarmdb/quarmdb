@@ -10,7 +10,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"start": "node build && node build/index.js"
+		"start": "node build && node ./server.js"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.1.0",
@@ -34,6 +34,7 @@
 	"dependencies": {
 		"@supabase/supabase-js": "^2.36.0",
 		"better-sqlite3": "^8.6.0",
+		"express": "^4.18.2",
 		"open-props": "^1.5.16",
 		"pg": "^8.11.3",
 		"svelte-table": "^0.6.1",
