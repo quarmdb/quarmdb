@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { ItemsType } from '$lib/schema';
-	import { ItemTypes, getItemTypeById, getUseableRaces } from '$lib/db/constants';
+	import { getUseableRaces } from '$lib/db/constants';
 	import RawJsonViewer from './RawJSONViewer.svelte';
 	import { getUseableClasses } from '$lib/db/constants/eqclasses';
+	import { getItemTypeById } from '$lib/db/constants/item';
 
 	export let item: ItemsType;
 
@@ -45,7 +46,7 @@
 	<section class="class_race">
 		<span class="classes">Classes:{getClassList(item.classes)}</span>
 		<span class="races">Races:{getRaceList(item.races)}</span>
-		<span>Item Type: {getItemTypeById(item.itemtype).name}</span>
+		<span>Item Type: {getItemTypeById(item.itemtype).type}</span>
 	</section>
 </section>
 

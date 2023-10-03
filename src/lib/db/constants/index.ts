@@ -54,14 +54,6 @@ expansionLookup.set(5, 'The Planes of Power');
 expansionLookup.set(99, 'Special Zones');
 export { expansionLookup };
 
-export const itemSizes = [
-	{ id: 0, name: 'TINY' },
-	{ id: 1, name: 'SMALL' },
-	{ id: 2, name: 'MEDIUM' },
-	{ id: 3, name: 'LARGE' },
-	{ id: 4, name: 'GIANT' }
-];
-
 export const skills: { id: number; name: string }[] = [
 	{ id: 0, name: '1H Blunt' },
 	{ id: 1, name: '1H Slashing' },
@@ -203,64 +195,3 @@ export const dieties = [
 export function getDieties(search: number): DietyType[] {
 	return getFromMask<DietyType>(search, dieties);
 }
-
-export const ItemTypes = [
-	{ id: 0, name: '1H Slashing' },
-	{ id: 1, name: '2H Slashing' },
-	{ id: 2, name: '1H Piercing' },
-	{ id: 3, name: '1H Blunt' },
-	{ id: 4, name: '2H Blunt' },
-	{ id: 5, name: 'Archery' },
-	{ id: 7, name: 'Throwing' },
-	{ id: 8, name: 'Shield' },
-	{ id: 10, name: 'Armor' },
-	{ id: 11, name: 'Tradeskill Items' },
-	{ id: 12, name: 'Lockpicking' },
-	{ id: 14, name: 'Food' },
-	{ id: 15, name: 'Drink' },
-	{ id: 16, name: 'Light Source' },
-	{ id: 17, name: 'Common Inventory Item' },
-	{ id: 18, name: 'Bind Wound' },
-	{ id: 19, name: 'Thrown Casting Items' },
-	{ id: 20, name: 'Spells' },
-	{ id: 21, name: 'Potions' },
-	{ id: 22, name: 'Fletched Arrows' },
-	{ id: 23, name: 'Wind Instruments' },
-	{ id: 24, name: 'Stringed Instruments' },
-	{ id: 25, name: 'Brass Instruments' },
-	{ id: 26, name: 'Percussion Instruments' },
-	{ id: 27, name: 'Ammo' },
-	{ id: 29, name: 'Jewelry' },
-	{ id: 31, name: 'Readable Notes and Scrolls' },
-	{ id: 32, name: 'Readable Books' },
-	{ id: 33, name: 'Keys' },
-	{ id: 34, name: 'Odd Items' },
-	{ id: 35, name: '2H Piercing' },
-	{ id: 36, name: 'Fishing Poles' },
-	{ id: 37, name: 'Fishing Bait' },
-	{ id: 38, name: 'Alcoholic Beverages' },
-	{ id: 39, name: 'More Keys' },
-	{ id: 40, name: 'Compasses' },
-	{ id: 42, name: 'Poisons' },
-	{ id: 45, name: 'Hand to Hand' },
-	{ id: 52, name: 'Charms' },
-	{ id: 53, name: 'Dyes' },
-	{ id: 54, name: 'Augments' },
-	{ id: 55, name: 'Augment Solvents' },
-	{ id: 56, name: 'Augment Distillers' },
-	{ id: 58, name: 'Fellowship Banner Materials' },
-	{ id: 60, name: 'Cultural Armor Manuals' },
-	{ id: 63, name: 'New Curencies like Orum' }
-];
-
-export const getItemIdByName = (name: string) => {
-	let item = ItemTypes.find((value) => value.name.toLowerCase() === name.toLowerCase());
-	if (item === undefined) return 0;
-	return item.id;
-};
-
-export const getItemTypeById = (id: number) => {
-	let item = ItemTypes.find((value) => id === value.id);
-	if (item === undefined) return { id: -1, name: 'undefined' };
-	return item;
-};

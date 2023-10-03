@@ -46,8 +46,4 @@
 		justify-content: center;
 		flex-direction: column;
 	}
-	div.itemWrapper {
-		display: flex;
-		flex-direction: column;
-	}
 </style>
