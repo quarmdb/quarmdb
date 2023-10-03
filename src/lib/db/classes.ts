@@ -3,7 +3,7 @@ import type { PoolClient } from 'pg';
 import { z } from 'zod';
 import { getIdForClass } from './constants/eqclasses';
 import { SpellsNewSchema } from '$lib/schema';
-import { ItemTypes, getItemIdByName } from './constants';
+import { getItemIdByType } from './constants/item';
 
 export const getAllSpellsByClass = async (className: string, pool: PoolClient) => {
 	const playerClassId = getIdForClass(className);
@@ -51,7 +51,7 @@ export const getAllSpellsByClassByLevel = async (className: string, client: Pool
 	INNER JOIN spells_new s
     ON s.id = i.scrolleffect
 	WHERE
-    i.itemType = ${getItemIdByName('Spells')} AND s.classes${playerClassId} < 255
+    i.itemType = ${getItemIdByType('Spells')} AND s.classes${playerClassId} < 255
 	GROUP BY s.classes${playerClassId}
 `;
 
