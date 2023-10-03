@@ -24,7 +24,7 @@ export const ItemTypes: { id: number; type: string }[] = [
 	{ id: 17, type: 'Common Inventory Item' },
 	{ id: 18, type: 'Bind Wound' },
 	{ id: 19, type: 'Thrown Casting Items' },
-	{ id: 20, type: 'Spells / Song Sheets' },
+	{ id: 20, type: 'Spells' },
 	{ id: 21, type: 'Potions' },
 	{ id: 22, type: 'Fletched Arrows' },
 	{ id: 23, type: 'Wind Instruments' },
