@@ -45,7 +45,7 @@ export const getAllSpellsByClassByLevel = async (className: string, client: Pool
 			'item_name', i.name,
 			'spell_id',s.id,
 			'spell_name',s.name
-		)) spells
+		) ORDER BY s.name) spells
 	FROM
     items i
 	INNER JOIN spells_new s
@@ -53,9 +53,10 @@ export const getAllSpellsByClassByLevel = async (className: string, client: Pool
 	WHERE
     i.itemType = ${getItemIdByType('Spells')} AND s.classes${playerClassId} < 255
 	GROUP BY s.classes${playerClassId}
+
 `;
 
-	console.log(q);
+	//console.log(q);
 
 	const spellsRes = await client.query(q);
 
