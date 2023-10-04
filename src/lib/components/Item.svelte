@@ -4,6 +4,7 @@
 	import RawJsonViewer from './RawJSONViewer.svelte';
 	import { getUseableClasses } from '$lib/db/constants/eqclasses';
 	import { getItemTypeById } from '$lib/db/constants/item';
+	import { getClickTypeById } from '$lib/db/constants/clicktypes';
 
 	export let item: ItemsType;
 
@@ -42,7 +43,7 @@
 	</section>
 	<section class="topline">
 		<span>{item.magic === 1 ? 'MAGIC' : 'NON-MAGIC'}</span>
-		<span>{item.nodrop === 1 ? 'NO DROP' : 'TRADABLE'}</span>
+		<span>{item.nodrop === 0 ? 'NO DROP' : 'TRADABLE'}</span>
 		<span>{item.norent === 0 ? 'NO RENT' : ''}</span>
 	</section>
 	<section class="info">
@@ -51,6 +52,12 @@
 		<span class="classes">Classes: {getClassList(item.classes)}</span>
 		<span class="races">Races: {getRaceList(item.races)}</span>
 	</section>
+	{#if item.clicktype !== 0}
+		<section class="click">
+			<span>Clickable</span>
+			<span>{getClickTypeById(item.clicktype).clickType}</span>
+		</section>
+	{/if}
 </div>
 <RawJsonViewer obj={item} />
 
