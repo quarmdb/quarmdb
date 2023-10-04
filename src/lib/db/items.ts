@@ -108,7 +108,9 @@ export const searchItems = async (searchString: string, client: PoolClient) => {
 	const res = await client.query(
 		`
 		SELECT
-			*
+			items.icon,
+			items.id,
+			items.name
 		FROM
 			items
 		WHERE
@@ -116,10 +118,15 @@ export const searchItems = async (searchString: string, client: PoolClient) => {
 	`,
 		[searchString]
 	);
-	const parsedItems = ItemsSchema.array().safeParse(res.rows);
+
+
+	const parsedItems = ItemsSearchSchema.array().safeParse(res.rows);
 	if (!parsedItems.success) {
 		console.error(error);
 		throw error(404);
 	}
 	return parsedItems.data;
 }
+
+export const ItemsSearchSchema = ItemsSchema.pick({icon:true, id: true, name:true});
+export type ItemsSearchType = z.infer<typeof ItemsSearchSchema>;

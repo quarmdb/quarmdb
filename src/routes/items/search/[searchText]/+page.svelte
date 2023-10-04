@@ -4,18 +4,18 @@
 	import ItemSearchForm from '$lib/components/ItemSearchForm.svelte';
 	import SvelteTable from 'svelte-table';
 	import type { PageData } from './$types';
-	import type { ItemsType } from '$lib/schema';
+	import type { ItemsSearchType } from '$lib/db/items';
 	export let data: PageData;
 	let searchText = '';
 
 	const rows = data.items;
 	const cols = [
-		{ key: 'id', title: 'ID', value: (v: ItemsType) => v.id, sortable: true },
-		{ key: 'icon', title: 'icon', value: (v: ItemsType) => v.icon },
+		{ key: 'id', title: 'ID', value: (v: ItemsSearchType) => v.id, sortable: true },
+		{ key: 'icon', title: 'icon', value: (v: ItemsSearchType) => v.icon },
 		{
 			key: 'name',
 			title: 'Name',
-			value: (v: ItemsType) => v.name,
+			value: (v: ItemsSearchType) => v.name,
 			sortable: true
 		}
 	];
@@ -30,11 +30,7 @@
 	<section>
 		<ItemSearchForm />
 	</section>
-	{#if data.items.length === 1}
-		<Item item={data.items[0]} />
-	{:else}
-		<SvelteTable {rows} columns={cols} rowKey="id" on:clickRow={rowClick}></SvelteTable>
-	{/if}
+	<SvelteTable {rows} columns={cols} rowKey="id" on:clickRow={rowClick}></SvelteTable>
 </div>
 
 <style>
