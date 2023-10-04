@@ -8,9 +8,9 @@
 
 <a href="/items/search">Items Search</a>
 <Item item={data.item} />
-<h1>Dropped by:</h1>
+<h1 class:faded={data.dropnpcs.length === 0}>Dropped by:</h1>
 {#if data.dropnpcs.length === 0}
-	<h2>Not Dropped</h2>
+	<h2 class="faded">Not Dropped</h2>
 {:else}
 	<ul>
 		{#each data.dropnpcs as dropnpc}
@@ -19,9 +19,9 @@
 	</ul>
 {/if}
 
-<h1>Sold by:</h1>
+<h1 class:faded={data.merchants.length === 0}>Sold by:</h1>
 {#if data.merchants.length === 0}
-	<h2>No one</h2>
+	<h2 class="faded">No one</h2>
 {:else}
 	<ul>
 		{#each data.merchants as merchants}
@@ -32,3 +32,9 @@
 		{/each}
 	</ul>
 {/if}
+
+<style>
+	.faded {
+		opacity: 0.5;
+	}
+</style>

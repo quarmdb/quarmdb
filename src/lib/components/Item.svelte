@@ -50,8 +50,6 @@
 	</section>
 </section>
 
-<pre>{JSON.stringify(omitZeroEmpty(item), null, 2)}</pre>
-
 <style>
 	section.heading {
 		display: flex;

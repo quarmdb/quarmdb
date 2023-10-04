@@ -38,10 +38,13 @@ export const playerRaceList: PlayerRaceType[] = [
 	{ id: 13, long_name: 'Iksar', short_name: 'IKS', mask: 1 << 12 },
 	{ id: 14, long_name: 'Vah Shir', short_name: 'VAH', mask: 1 << 13 },
 	{ id: 15, long_name: 'Froglok', short_name: 'VAH', mask: 1 << 14 },
-	{ id: 16, long_name: 'Drakkin', short_name: 'VAH', mask: 1 << 15 }
+	//{ id: 16, long_name: 'Drakkin', short_name: 'VAH', mask: 1 << 15 }
 ];
 
 export function getUseableRaces(search: number): PlayerRaceType[] {
+	if(search === (2**(playerRaceList.length-1) - 1)) {
+		return [{id: 0, long_name: 'All Playable Races', short_name: 'ALL', mask: 1<<-1}];
+	}
 	return getFromMask<PlayerRaceType>(search, playerRaceList);
 }
 

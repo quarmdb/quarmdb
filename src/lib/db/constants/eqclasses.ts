@@ -28,6 +28,9 @@ export const playerClassList: PlayerClassType[] = [
 ];
 
 export function getUseableClasses(search: number): PlayerClassType[] {
+	if(search === (2**(playerClassList.length-1) - 1)) {
+		return [{id: 0, long_name: 'All Playable Classes', short_name: 'ALL', mask: 1<<-1}];
+	}
 	return getFromMask<PlayerClassType>(search, playerClassList);
 }
 
