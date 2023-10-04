@@ -42,19 +42,21 @@
 :root[data-theme='dark'] {
 	--brand: var(--blue-4);
 
-	--text-1: var(--neutral-300);
-	--text-2: var(--neutral-500);
+	--text-1: white;
+	--text-2: var(--neutral-300);
 	--text-3: var(--neutral-800);
 
-	--surface-1: var(--neutral-900);
-	--surface-2: var(--neutral-800);
-	--surface-3: var(--neutral-500);
+	--surface-1: var(--neutral-700);
+	--surface-2: var(--neutral-500);
+	--surface-3: var(--neutral-400);
 	--surface-4: var(--neutral-300);
 }
 
 input[type='text'] {
 	padding: 0.5rem;
 	border: 1px solid var(--brand);
+	background-color: var(--surface-4);
+	color: var(--text-3);
 }
 
 input[type='text']:active,

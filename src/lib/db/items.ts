@@ -103,3 +103,23 @@ export const getMerchantsForItem = async (id: number, client: PoolClient) => {
 
 	return merchantsParse.data;
 };
+
+export const searchItems = async (searchString: string, client: PoolClient) => {
+	const res = await client.query(
+		`
+		SELECT
+			*
+		FROM
+			items
+		WHERE
+			to_tsvector(items.name) @@ to_tsquery($1)
+	`,
+		[searchString]
+	);
+	const parsedItems = ItemsSchema.array().safeParse(res.rows);
+	if (!parsedItems.success) {
+		console.error(error);
+		throw error(404);
+	}
+	return parsedItems.data;
+}

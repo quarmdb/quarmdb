@@ -12,8 +12,4 @@
 		align-items: center;
 		justify-content: center;
 	}
-	p {
-		width: 100%;
-		font-size: xx-large;
-	}
 </style>
