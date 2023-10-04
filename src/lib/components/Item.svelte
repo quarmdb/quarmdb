@@ -53,11 +53,11 @@
 			align-items: center;
 			justify-content: center;
 			& img {
-				height: 100%;
+				width: clamp(5vh, 2.5vw, 10rem);
 				aspect-ratio: 1 / 1;
 			}
 			& span.name {
-				font-size: 4rem;
+				font-size: 5vw;
 				width: 100%;
 				padding-left: 1rem;
 			}
