@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ItemsType } from '$lib/schema';
-	import { getUseableRaces } from '$lib/db/constants';
+	import { getUseableRaces, getUseableSlots } from '$lib/db/constants';
 	import RawJsonViewer from './RawJSONViewer.svelte';
 	import { getUseableClasses } from '$lib/db/constants/eqclasses';
 	import { getItemTypeById } from '$lib/db/constants/item';
@@ -24,6 +24,15 @@
 			}, [])
 			.join(',');
 	};
+
+	const getSlotList = (slotMask: number): string => {
+		return getUseableSlots(slotMask)
+			.reduce<string[]>((acc, value, idx) => {
+				acc.push(value.name);
+				return acc;
+			}, [])
+			.join(',');
+	};
 </script>
 
 <div class="wrapper">
@@ -31,12 +40,16 @@
 		<img class="icon" src="/icon/{item.icon}.gif" alt="icon" />
 		<span class="name">{item.name}</span>
 	</section>
+	<section class="topline">
+		<span>{item.magic === 1 ? 'MAGIC ITEM' : ''}</span>
+		<span>{item.nodrop === 1 ? 'NO DROP' : ''}</span>
+		<span>{item.norent === 0 ? 'NO RENT' : ''}</span>
+	</section>
 	<section class="info">
-		<section class="class_race">
-			<span class="classes">Classes:{getClassList(item.classes)}</span>
-			<span class="races">Races:{getRaceList(item.races)}</span>
-			<span>Item Type: {getItemTypeById(item.itemtype).type}</span>
-		</section>
+		<span>Slots: {getSlotList(item.slots)}</span>
+		<span class="classes">Classes: {getClassList(item.classes)}</span>
+		<span class="races">Races: {getRaceList(item.races)}</span>
+		<span>Item Type: {getItemTypeById(item.itemtype).type}</span>
 	</section>
 </div>
 <RawJsonViewer obj={item} />
@@ -61,6 +74,12 @@
 				width: 100%;
 				padding-left: 1rem;
 			}
+		}
+
+		&section.topline {
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
 		}
 	}
 	section.heading {
