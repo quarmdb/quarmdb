@@ -1,9 +1,12 @@
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ resolve, event }) => {
+
+	console.log(`Logging -> ${event.url}`);
+
 	// Apply CORS header for API routes
 	if (event.url.pathname.startsWith('/')) {
-		const validDomains: RegExp[] = [/^localhost$/gi, /^quarmdb\.vercel\.app$/gi];
+		const validDomains: RegExp[] = [/^localhost$/gi, /^www\.quarmdb\.com$/gi];
 		let allowed = false;
 		let corsAllowedDomain = '';
 
