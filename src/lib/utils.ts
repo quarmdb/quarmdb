@@ -75,3 +75,16 @@ export function removeLeadingA(str: string) {
 export function nameCompare(a: string, b: string) {
 	return removeLeadingA(nameParse(a)).localeCompare(removeLeadingA(nameParse(b)));
 }
+
+
+export const omitFalsy = <T extends object>(
+	obj: T
+): {
+	[P in Exclude<
+		keyof T,
+		{
+			[Q in keyof T]: T[Q] extends 0 | '' | null ? Q : never;
+		}[keyof T]
+	>]: T[P];
+} => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== 0 && v !== '' && v !== null)) as any;
+

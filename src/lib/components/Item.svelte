@@ -7,17 +7,6 @@
 
 	export let item: ItemsType;
 
-	const omitZeroEmpty = <T extends object>(
-		obj: T
-	): {
-		[P in Exclude<
-			keyof T,
-			{
-				[Q in keyof T]: T[Q] extends 0 | '' ? Q : never;
-			}[keyof T]
-		>]: T[P];
-	} => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== 0 && v !== '')) as any;
-
 	const getClassList = (classMask: number): string => {
 		return getUseableClasses(classMask)
 			.reduce<string[]>((acc, value, idx) => {
@@ -37,20 +26,43 @@
 	};
 </script>
 
-<section class="heading">
-	<img class="icon" src="/icon/{item.icon}.gif" alt="icon" />
-	<span class="name">{item.name}</span>
-</section>
-<RawJsonViewer obj={item} />
-<section class="info">
-	<section class="class_race">
-		<span class="classes">Classes:{getClassList(item.classes)}</span>
-		<span class="races">Races:{getRaceList(item.races)}</span>
-		<span>Item Type: {getItemTypeById(item.itemtype).type}</span>
+<div class="wrapper">
+	<section class="titleLine">
+		<img class="icon" src="/icon/{item.icon}.gif" alt="icon" />
+		<span class="name">{item.name}</span>
 	</section>
-</section>
+	<section class="info">
+		<section class="class_race">
+			<span class="classes">Classes:{getClassList(item.classes)}</span>
+			<span class="races">Races:{getRaceList(item.races)}</span>
+			<span>Item Type: {getItemTypeById(item.itemtype).type}</span>
+		</section>
+	</section>
+</div>
+<RawJsonViewer obj={item} />
 
 <style>
+	div.wrapper {
+		display: flex;
+		flex-direction: column;
+
+		& section.titleLine {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			& img {
+				height: 100%;
+				aspect-ratio: 1 / 1;
+			}
+			& span.name {
+				font-size: 4rem;
+				width: 100%;
+				padding-left: 1rem;
+			}
+		}
+	}
 	section.heading {
 		display: flex;
 		flex-direction: row;
