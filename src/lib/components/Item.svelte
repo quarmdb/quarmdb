@@ -41,15 +41,15 @@
 		<span class="name">{item.name}</span>
 	</section>
 	<section class="topline">
-		<span>{item.magic === 1 ? 'MAGIC ITEM' : ''}</span>
-		<span>{item.nodrop === 1 ? 'NO DROP' : ''}</span>
+		<span>{item.magic === 1 ? 'MAGIC' : 'NON-MAGIC'}</span>
+		<span>{item.nodrop === 1 ? 'NO DROP' : 'TRADABLE'}</span>
 		<span>{item.norent === 0 ? 'NO RENT' : ''}</span>
 	</section>
 	<section class="info">
-		<span>Slots: {getSlotList(item.slots)}</span>
+		<span>{getItemTypeById(item.itemtype).type}</span>
+		<span>{getSlotList(item.slots)}</span>
 		<span class="classes">Classes: {getClassList(item.classes)}</span>
 		<span class="races">Races: {getRaceList(item.races)}</span>
-		<span>Item Type: {getItemTypeById(item.itemtype).type}</span>
 	</section>
 </div>
 <RawJsonViewer obj={item} />
