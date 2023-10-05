@@ -1,4 +1,5 @@
 <script lang="ts">
+	import NavigationTopBar from '$lib/components/NavigationTopBar.svelte';
 	import ThemeWrapper from '$lib/components/ThemeWrapper.svelte';
 	import '../app.css';
 	import ThemeSwitcher from '../lib/components/ThemeSwitcher.svelte';
@@ -8,16 +9,7 @@
 	<div class="wrapper">
 		<section class="topbar">
 			<span class="title"><a href="/" class="title">QuarmDB</a></span>
-			<nav>
-				<ul>
-					<li><a href="/class">Classes</a></li>
-					<li><a href="/items/search">Items</a></li>
-					<li><a href="/npc/all">NPCS</a></li>
-					<li><a href="/zone">Zones</a></li>
-					<li><a href="/faction/all">Factions</a></li>
-					<li><ThemeSwitcher /></li>
-				</ul>
-			</nav>
+			<NavigationTopBar />
 		</section>
 		<main>
 			<slot />
@@ -87,39 +79,5 @@
 		align-items: center;
 		justify-content: center;
 		padding-top: 1rem;
-	}
-
-	nav {
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		padding: 0;
-		margin: 0;
-
-		& ul {
-			width: 100%;
-			padding: 0;
-			display: flex;
-			flex-direction: row;
-			& li {
-				width: 100%;
-				list-style: none;
-				padding: 0;
-
-				& a {
-					width: 100%;
-					text-decoration: none;
-					display: block;
-					text-align: center;
-					padding: 0.5rem;
-					color: var(--text-2);
-					border-radius: 5rem;
-				}
-				& a:hover {
-					background-color: var(--surface-1);
-					text-decoration: underline;
-				}
-			}
-		}
 	}
 </style>
