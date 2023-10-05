@@ -7,7 +7,7 @@ import { getZoneFromShortName } from '$lib/db/constants/zoneidnumber';
 export async function load({ url }: PageServerLoadEvent) {
 	const client = await pool.connect();
 	try {
-		if (url.searchParams.size === 0) return { npcs: [] };
+		if (url.searchParams.size === 0) return { npcsByZone: [] };
 		let name = url.searchParams.get('name') || '';
 		let zone = url.searchParams.get('zone') || 'all';
 
