@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { ItemsType } from '$lib/schema';
-	import { getUseableRaces, getUseableSlots } from '$lib/db/constants';
+	import { getUseableRaces } from '$lib/db/constants';
 	import RawJsonViewer from './RawJSONViewer.svelte';
 	import { getUseableClasses } from '$lib/db/constants/eqclasses';
-	import { getItemTypeById } from '$lib/db/constants/item';
+	import { getItemTypeById, getUseableSlots } from '$lib/db/constants/item';
 	import { getClickTypeById } from '$lib/db/constants/clicktypes';
 
 	export let item: ItemsType;

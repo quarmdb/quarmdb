@@ -28,7 +28,7 @@ export const searchNpcs = async (whereString: string, client: PoolClient) => {
 
 	const parsedNpcs = NpcTypesSearchSchema.array().safeParse(res.rows);
 	if (!parsedNpcs.success) {
-		//console.error(parsedNpcs.error);
+		console.error(parsedNpcs.error);
 		throw error(404);
 	}
 	return parsedNpcs.data;

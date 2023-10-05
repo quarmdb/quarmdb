@@ -35,38 +35,6 @@
 		background-color: var(--surface-2);
 	}
 
-	header {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		width: 100%;
-		position: sticky;
-		top: 0;
-		height: 3rem;
-		padding-bottom: 1rem;
-	}
-
-	a.title:visited,
-	a.title {
-		color: var(--text-2);
-		text-decoration-color: var(--text-2);
-	}
-
-	a.title:hover {
-		color: var(--brand);
-		text-decoration-color: var(--brand);
-	}
-
-	span.title {
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		padding: 1rem;
-		font-size: 2rem;
-	}
-
 	main {
 		display: flex;
 		flex-direction: row;
