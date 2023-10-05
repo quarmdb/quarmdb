@@ -17,6 +17,10 @@
 			<td>Zem Modifier</td>
 			<td>{data.zone.zone_exp_multiplier}</td>
 		</tr>
+		<tr>
+			<td>Pull Limit</td>
+			<td>{data.zone.pull_limit}</td>
+		</tr>
 	</table>
 	<h2>Connected Zones ({data.connected_zones.length})</h2>
 	{#each data.connected_zones as cz}
