@@ -43,7 +43,7 @@
 	}
 
 	nav.left {
-		width: 400px;
+		width: 16rem;
 	}
 	article {
 		background-color: var(--surface-1);
