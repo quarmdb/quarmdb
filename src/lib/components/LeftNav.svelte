@@ -11,7 +11,7 @@
 	<ThemeSwitcher />
 	<ul>
 		<li><a class="major" href="/items/search" class:selected={subDir === 'items'}>Items</a></li>
-		<li><a class="major" href="/npc/all" class:selected={subDir === 'npc'}>NPCs</a></li>
+		<li><a class="major" href="/npc/search" class:selected={subDir === 'npc'}>NPCs</a></li>
 		<li><a class="major" href="/zone" class:selected={subDir === 'zone'}>Zone</a></li>
 		<ul>
 			<li><a class="minor" href="/zone/zem">Zem Info</a></li>
