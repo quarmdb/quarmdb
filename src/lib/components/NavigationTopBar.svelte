@@ -46,10 +46,11 @@
 					border-radius: 5rem;
 				}
 				& a.selected {
-					background-color: var(--surface-3);
+					border: 1px solid var(--brand);
 				}
 				& a:hover {
 					background-color: var(--surface-1);
+					color: var(--text-2);
 					text-decoration: underline;
 				}
 			}
