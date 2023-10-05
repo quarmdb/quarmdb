@@ -12,14 +12,14 @@ export async function load({ url }: PageServerLoadEvent) {
 		let type = url.searchParams.get('type') || 'all';
 		let slot = url.searchParams.get('slot') || 'all';
 
-		let whereString = [];
+		let whereArray = [];
 		if (name.trim() !== '') {
 			name = (name as string).trim().split(' ').join(' & ');
-			whereString.push(`to_tsvector(items.name) @@ to_tsquery('${name}')`);
+			whereArray.push(`to_tsvector(items.name) @@ to_tsquery('${name}')`);
 		}
 
 		if (type !== 'all') {
-			whereString.push(`items.itemtype = ${parseInt(type)}`);
+			whereArray.push(`items.itemtype = ${parseInt(type)}`);
 		}
 
 		if (slot !== 'all') {
@@ -28,16 +28,17 @@ export async function load({ url }: PageServerLoadEvent) {
 
 				//fix this for multiple slots
 				slotmask = ItemSlots[slotmask].mask;
-				whereString.push(`items.slots = ${slotmask}`);
+				whereArray.push(`items.slots = ${slotmask}`);
 			} catch (e) {
 				console.error(`Someone sent a not good slotmask: ${slot}`);
 			}
 		}
 
-		console.log(whereString.join(' AND '));
+		let whereString = '';
+		if (whereArray.length !== 0) whereString = ' WHERE ' + whereArray.join(' AND ');
 
 		return {
-			items: await searchItems(whereString.join(' AND '), client)
+			items: await searchItems(whereString, client)
 		};
 	} catch (err) {
 		console.error(err);

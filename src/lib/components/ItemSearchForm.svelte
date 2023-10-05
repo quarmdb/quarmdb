@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { ItemSlots, ItemTypes } from '$lib/db/constants/item';
 
-	let name = '';
-	let type = 'all';
-	let slot = 'all';
+	let name = $page.url.searchParams.get('name') || '';
+	let slot = $page.url.searchParams.get('slot') || 'any';
+	let type = $page.url.searchParams.get('type') || 'any';
 
 	const search = async () => {
 		let u = new URL('/items/search');

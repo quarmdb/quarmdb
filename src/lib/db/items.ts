@@ -105,20 +105,19 @@ export const getMerchantsForItem = async (id: number, client: PoolClient) => {
 };
 
 export const searchItems = async (whereString: string, client: PoolClient) => {
-	const res = await client.query(
-		`
-		SELECT
-			items.icon,
-			items.id,
-			items.name,
-			items.itemtype
-		FROM
-			items
-		WHERE
-			${whereString}
-	`,
-		[]
-	);
+	let query = `
+	SELECT
+		items.icon,
+		items.id,
+		items.name,
+		items.itemtype
+	FROM
+		items
+	${whereString}
+	ORDER BY items.name
+`;
+
+	const res = await client.query(query, []);
 
 	const parsedItems = ItemsSearchSchema.array().safeParse(res.rows);
 	if (!parsedItems.success) {
