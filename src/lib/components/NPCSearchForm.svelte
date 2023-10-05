@@ -1,44 +1,32 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { ItemSlots, ItemTypes } from '$lib/db/constants/item';
-
-	let name = '';
-	let type = 'all';
-	let slot = 'all';
+	import { page } from '$app/stores';
+	import { AllZones } from '$lib/db/constants/zoneidnumber';
+	let name = $page.url.searchParams.get('name') || '';
+	let zone = $page.url.searchParams.get('zone') || 'all';
 
 	const search = async () => {
-		let u = new URL('/items/search');
+		let u = new URL('/npc/search');
 		u.searchParams.set('name', name);
-		u.searchParams.set('type', type);
-		u.searchParams.set('slot', slot);
+		u.searchParams.set('zone', zone);
 		await goto(u);
 	};
 </script>
 
-<form method="get" action="/items/search/">
+<form method="get" action="/npc/search/">
 	<section class="input-group">
 		<label for="name">Name</label>
 		<input id="name" name="name" type="text" bind:value={name} />
 	</section>
 	<section class="input-group">
-		<label for="type">Type</label>
-		<select id="type" name="type" bind:value={type}>
+		<label for="zone">Type</label>
+		<select id="zone" name="zone" bind:value={zone}>
 			<option value="all">All</option>
-			{#each ItemTypes as itemtype}
-				<option value={itemtype.id}>{itemtype.type}</option>
+			{#each AllZones as zone}
+				<option value={zone.short_name}>{zone.long_name}</option>
 			{/each}
 		</select>
 	</section>
-	<section class="input-group">
-		<label for="slot">Slot</label>
-		<select id="slot" name="slot" bind:value={slot}>
-			<option value="all">All</option>
-			{#each ItemSlots as itemslot}
-				<option value={itemslot.id}>{itemslot.name}</option>
-			{/each}
-		</select>
-	</section>
-
 	<button type="reset">Reset</button>
 	<button type="submit" on:submit|preventDefault={async () => await search()}>Search</button>
 </form>

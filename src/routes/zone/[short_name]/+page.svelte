@@ -1,33 +1,46 @@
 <script lang="ts">
-	import ItemSmall from '$lib/components/ItemSmall.svelte';
 	import { nameCompare, nameParse } from '$lib/utils';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
 
 <a href="/zone">All Zones</a>
-
-<h1>{data.zone.long_name}</h1>
-<div class="groundSpawnWrapper">
+<article>
+	<h1>{data.zone.long_name}</h1>
+	<h2>Information</h2>
+	<table>
+		<tr>
+			<td>Short Name</td>
+			<td>{data.zone.short_name}</td>
+		</tr>
+		<tr>
+			<td>Zem Modifier</td>
+			<td>{data.zone.zone_exp_multiplier}</td>
+		</tr>
+	</table>
 	<h2>Connected Zones ({data.connected_zones.length})</h2>
 	{#each data.connected_zones as cz}
 		<span><a href="/zone/{cz.short_name}">{cz.long_name}</a></span>
 	{/each}
 	<h2>Ground Spawns ({data.ground_spawns.length})</h2>
 	{#each data.ground_spawns as gs}
-		<span><a href="/items/{gs.id}">{gs.name} ({gs.locs.length})</a></span>
-		<span>
+		<span class="gs"
+			><img src="/icon/{gs.icon}.gif" alt="icon" /><a href="/items/{gs.id}"
+				>{gs.name} ({gs.locs.length})</a
+			></span
+		>
+		<span class="gsGroup">
 			{#each gs.locs as loc, idx}
-				<span>({loc.x},{loc.y},{loc.z})</span>
+				<span>{loc.x}, {loc.y}, {loc.z}</span>
 			{/each}
 		</span>
 	{/each}
-	<h2>Spawns ({data.spawns.length})</h2>
+	<h2>Spawns Groups ({data.spawns.length})</h2>
 	<table>
-		<tr><th>Spawn ID</th><th>X</th><th>Y</th><th>Z</th><th>Spawns</th><th>Respawn Time</th></tr>
+		<tr><th>X</th><th>Y</th><th>Z</th><th>NPCs</th><th>Respawn Time</th></tr>
 		{#each data.spawns as spawn}
 			<tr
-				><td>{spawn.id}</td><td>{spawn.x.toPrecision(5)}</td><td>{spawn.y.toPrecision(5)}</td><td
+				><td>{spawn.x.toPrecision(5)}</td><td>{spawn.y.toPrecision(5)}</td><td
 					>{spawn.z.toPrecision(5)}</td
 				>
 				<td class="spawncell">
@@ -43,16 +56,29 @@
 	{#each data.npcs.sort((a, b) => nameCompare(a.name, b.name)) as npc}
 		<span><a href="/npc/{npc.id}">{nameParse(npc.name)}</a></span>
 	{/each}
-</div>
+</article>
 
 <style>
-	.groundSpawnWrapper {
+	article {
+		display: flex;
+		flex-direction: column;
+	}
+	.spawncell {
 		display: flex;
 		flex-direction: column;
 	}
 
-	.spawncell {
+	span.gs {
+		display: flex;
+		align-items: center;
+	}
+
+	span.gsGroup {
 		display: flex;
 		flex-direction: column;
+	}
+
+	td {
+		padding: 0.5rem;
 	}
 </style>

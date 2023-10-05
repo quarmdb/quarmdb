@@ -1,40 +1,17 @@
 <script lang="ts">
+	import ItemCard from '$lib/components/ItemCard.svelte';
 	import ItemSearchForm from '$lib/components/ItemSearchForm.svelte';
 	import { ItemsSchema, type ItemsType } from '$lib/schema';
-
-	let searchText = '';
-
-	let itemsPromise: Promise<ItemsType[]>;
-
-	async function search(): Promise<ItemsType[]> {
-		try {
-			const response = await fetch('/items/search', {
-				method: 'POST',
-				body: JSON.stringify({ searchText }),
-				headers: {
-					'content-type': 'application/json'
-				}
-			});
-			console.log('before');
-			const res = await response.json();
-			console.log(res);
-			const itemsParse = ItemsSchema.array().safeParse(res);
-			if (!itemsParse.success) return [];
-			return itemsParse.data.sort((a, b) => {
-				if (a.name < b.name) return -1;
-				else if (a.name === b.name) return 0;
-				return 1;
-			});
-		} catch (err) {
-			console.error(err);
-			throw err;
-		}
-	}
+	import type { PageData } from './$types';
+	export let data: PageData;
 </script>
 
 <div class="wrapper">
+	<ItemSearchForm />
 	<section>
-		<ItemSearchForm />
+		{#each data.items as item}
+			<ItemCard {item} />
+		{/each}
 	</section>
 </div>
 
@@ -46,5 +23,12 @@
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
+
+		& section {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
 	}
 </style>

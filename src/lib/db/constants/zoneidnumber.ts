@@ -1,6 +1,6 @@
 export type ZoneIdNumberType = { id: number; long_name: string; short_name: string };
 
-const zoneidnumber: ZoneIdNumberType[] = [
+export const AllZones: ZoneIdNumberType[] = [
 	{ id: 1, long_name: 'South Qeynos ', short_name: 'qeynos' },
 	{ id: 2, long_name: 'North Qeynos ', short_name: 'qeynos2' },
 	{ id: 3, long_name: 'The Surefall Glade ', short_name: 'qrg' },
@@ -499,7 +499,7 @@ const zoneidnumber: ZoneIdNumberType[] = [
 ];
 
 export function getZoneFromNumber(id: number): ZoneIdNumberType {
-	const f = zoneidnumber.find((value, idx) => {
+	const f = AllZones.find((value, idx) => {
 		return value.id === id;
 	});
 	if (f === undefined) {
@@ -508,7 +508,7 @@ export function getZoneFromNumber(id: number): ZoneIdNumberType {
 }
 
 export function getZoneFromShortName(short_name: string): ZoneIdNumberType {
-	const f = zoneidnumber.find((value, idx) => {
+	const f = AllZones.find((value, idx) => {
 		return value.short_name === short_name;
 	});
 	if (f === undefined) {

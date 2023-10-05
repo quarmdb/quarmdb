@@ -1,4 +1,5 @@
 <script lang="ts">
+	import LeftNav from '$lib/components/LeftNav.svelte';
 	import NavigationTopBar from '$lib/components/NavigationTopBar.svelte';
 	import ThemeWrapper from '$lib/components/ThemeWrapper.svelte';
 	import '../app.css';
@@ -7,12 +8,13 @@
 
 <ThemeWrapper>
 	<div class="wrapper">
-		<section class="topbar">
-			<span class="title"><a href="/" class="title">QuarmDB</a></span>
-			<NavigationTopBar />
-		</section>
 		<main>
-			<slot />
+			<nav class="left">
+				<LeftNav />
+			</nav>
+			<article>
+				<slot />
+			</article>
 		</main>
 		<footer>
 			<p>
@@ -33,7 +35,7 @@
 		background-color: var(--surface-2);
 	}
 
-	section.topbar {
+	header {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -66,6 +68,16 @@
 	}
 
 	main {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		flex-grow: 1;
+	}
+
+	nav.left {
+		width: 400px;
+	}
+	article {
 		background-color: var(--surface-1);
 		border-radius: 0.5rem;
 		padding: 1rem;

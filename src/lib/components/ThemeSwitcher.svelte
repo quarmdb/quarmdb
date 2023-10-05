@@ -4,7 +4,7 @@
 </script>
 
 <section>
-	<label for="theme-selector" data-theme="test" id="theme-selector-label"></label>
+	<label for="theme-selector" data-theme="test" id="theme-selector-label">Dark/Light</label>
 	<input type="checkbox" id="theme-selector" bind:checked={$darkModeStore} />
 </section>
 

@@ -1,9 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoadEvent } from './$types';
 import { pool } from '$lib/db';
-import { NpcTypesSchema, ZoneSchema } from '$lib/schema';
-import { z } from 'zod';
-import { getZoneFromNumber, type ZoneIdNumberType } from '$lib/db/constants/zoneidnumber';
 import {
 	getConnectedZones,
 	getGroundSpawns,

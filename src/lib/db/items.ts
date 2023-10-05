@@ -104,21 +104,21 @@ export const getMerchantsForItem = async (id: number, client: PoolClient) => {
 	return merchantsParse.data;
 };
 
-export const searchItems = async (searchString: string, client: PoolClient) => {
+export const searchItems = async (whereString: string, client: PoolClient) => {
 	const res = await client.query(
 		`
 		SELECT
 			items.icon,
 			items.id,
-			items.name
+			items.name,
+			items.itemtype
 		FROM
 			items
 		WHERE
-			to_tsvector(items.name) @@ to_tsquery($1)
+			${whereString}
 	`,
-		[searchString]
+		[]
 	);
-
 
 	const parsedItems = ItemsSearchSchema.array().safeParse(res.rows);
 	if (!parsedItems.success) {
@@ -126,7 +126,12 @@ export const searchItems = async (searchString: string, client: PoolClient) => {
 		throw error(404);
 	}
 	return parsedItems.data;
-}
+};
 
-export const ItemsSearchSchema = ItemsSchema.pick({icon:true, id: true, name:true});
+export const ItemsSearchSchema = ItemsSchema.pick({
+	icon: true,
+	id: true,
+	name: true,
+	itemtype: true
+});
 export type ItemsSearchType = z.infer<typeof ItemsSearchSchema>;

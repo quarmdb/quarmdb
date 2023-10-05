@@ -5,32 +5,17 @@
 	import SvelteTable from 'svelte-table';
 	import type { PageData } from './$types';
 	import type { ItemsSearchType } from '$lib/db/items';
+	import ItemCard from '$lib/components/ItemCard.svelte';
 	export let data: PageData;
-	let searchText = '';
-
-	const rows = data.items;
-	const cols = [
-		{ key: 'id', title: 'ID', value: (v: ItemsSearchType) => v.id, sortable: true },
-		{ key: 'icon', title: 'icon', value: (v: ItemsSearchType) => v.icon },
-		{
-			key: 'name',
-			title: 'Name',
-			value: (v: ItemsSearchType) => v.name,
-			sortable: true
-		}
-	];
-
-	function rowClick(value: CustomEvent) {
-		console.log(value.detail);
-		goto('/items/' + value.detail.row.id);
-	}
 </script>
 
 <div class="wrapper">
-	<section>
-		<ItemSearchForm />
+	<ItemSearchForm />
+	<section class="items">
+		{#each data.items as item}
+			<ItemCard {item} />
+		{/each}
 	</section>
-	<SvelteTable {rows} columns={cols} rowKey="id" on:clickRow={rowClick}></SvelteTable>
 </div>
 
 <style>

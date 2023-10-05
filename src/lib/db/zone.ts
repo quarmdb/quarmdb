@@ -116,7 +116,7 @@ export const getGroundSpawns = async (short_name: string, client: PoolClient) =>
 	const groundSpawnRes = await client.query(
 		`
 		SELECT 
-			i.name, i.id,
+			i.name, i.id, i.icon,
 			JSON_AGG(JSON_BUILD_OBJECT(
 				'x', gs.max_x,
 				'y', gs.max_y,
@@ -131,7 +131,7 @@ export const getGroundSpawns = async (short_name: string, client: PoolClient) =>
 		WHERE
 			z.short_name = $1
 		GROUP BY
-			i.name, i.id
+			i.name, i.id, i.icon
 	`,
 		[short_name]
 	);
@@ -144,6 +144,7 @@ export const getGroundSpawns = async (short_name: string, client: PoolClient) =>
 		.object({
 			name: z.string(),
 			id: z.number(),
+			icon: z.number(),
 			locs: z
 				.object({
 					x: z.number(),
@@ -173,4 +174,16 @@ export const getZone = async (short_name: string, client: PoolClient) => {
 	}
 
 	return parsedZones.data[0];
+};
+
+export const getAllZones = async (client: PoolClient) => {
+	const zoneRes = await client.query(`SELECT * FROM ZONE`);
+	if (zoneRes.rowCount === 0) throw error(404);
+	const parsedZones = ZoneSchema.array().safeParse(zoneRes.rows);
+	if (!parsedZones.success) {
+		console.error(parsedZones.error);
+		throw error(404);
+	}
+
+	return parsedZones.data;
 };
