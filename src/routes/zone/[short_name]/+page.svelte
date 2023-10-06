@@ -18,8 +18,16 @@
 			<td>{data.zone.zone_exp_multiplier}</td>
 		</tr>
 		<tr>
-			<td>Pull Limit</td>
+			<td>Normal Pull Limit</td>
 			<td>{data.zone.pull_limit}</td>
+		</tr>
+		<tr>
+			<td>Reduced Pull Limit</td>
+			<td
+				>{data.zone.reducedspawntimers
+					? data.zone.newbie_pull_limit
+					: data.zone.reduced_pull_limit}</td
+			>
 		</tr>
 	</table>
 	<h2>Connected Zones ({data.connected_zones.length})</h2>

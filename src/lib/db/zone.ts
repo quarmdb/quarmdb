@@ -165,9 +165,22 @@ export const getGroundSpawns = async (short_name: string, client: PoolClient) =>
 };
 
 export const getZone = async (short_name: string, client: PoolClient) => {
-	const zoneRes = await client.query(`SELECT * from zone where zone.short_name = $1`, [short_name]);
+	const zoneRes = await client.query(
+		`
+		SELECT 
+			zone.*,
+			(SELECT rv.rule_value FROM rule_values rv WHERE rv.rule_name = 'Quarm:RespawnReductionNewbiePullLimit' ) as newbie_pull_limit,
+			(SELECT rv.rule_value FROM rule_values rv WHERE rv.rule_name = 'Quarm:RespawnReductionStandardPullLimit' ) as reduced_pull_limit
+		from zone where zone.short_name = $1`,
+		[short_name]
+	);
 	if (zoneRes.rowCount === 0) throw error(404);
-	const parsedZones = ZoneSchema.array().safeParse(zoneRes.rows);
+	const parsedZones = ZoneSchema.extend({
+		newbie_pull_limit: z.string(),
+		reduced_pull_limit: z.string()
+	})
+		.array()
+		.safeParse(zoneRes.rows);
 	if (!parsedZones.success) {
 		console.error(parsedZones.error);
 		throw error(404);
@@ -186,4 +199,32 @@ export const getAllZones = async (client: PoolClient) => {
 	}
 
 	return parsedZones.data;
+};
+
+export const getAllZonesWithPullInfo = async (client: PoolClient) => {
+	const result = await client.query(
+		`
+		SELECT
+			z.*,
+			( SELECT rv.rule_value FROM rule_values rv WHERE rv.rule_name = 'Quarm:RespawnReductionNewbiePullLimit' ) as newbie_pull_limit,
+			( SELECT rv.rule_value FROM rule_values rv WHERE rv.rule_name = 'Quarm:RespawnReductionStandardPullLimit' ) as reduced_pull_limit
+		FROM
+			zone z
+		`
+	);
+
+	if (result.rowCount === 0) throw error(404);
+	const parsed = ZoneSchema.extend({
+		newbie_pull_limit: z.string(),
+		reduced_pull_limit: z.string()
+	})
+		.array()
+		.safeParse(result.rows);
+
+	if (!parsed.success) {
+		console.error(parsed.error);
+		throw error(404);
+	}
+
+	return parsed.data;
 };

@@ -10,7 +10,10 @@ export const getAllRules = async (client: PoolClient) => {
 		rv.rule_value, 
 		rv.notes,
 		rs.ruleset_id,
-		JSON_AGG(z.short_name) as zones
+		JSON_AGG(JSON_BUILD_OBJECT(
+			'short_name', z.short_name, 
+			'reducedspawntimer', z.reducedspawntimers
+		)) as zones
 	FROM rule_values rv
 	INNER JOIN rule_sets rs
 		ON rs.ruleset_id = rv.ruleset_id
@@ -19,7 +22,14 @@ export const getAllRules = async (client: PoolClient) => {
 	GROUP BY rv.rule_name, 	rv.rule_value, 	rv.notes,	rs.ruleset_id
 	ORDER BY rv.rule_name
 	`);
-	const parsed = RuleValuesSchema.extend({ zones: z.string().array() })
+	const parsed = RuleValuesSchema.extend({
+		zones: z
+			.object({
+				short_name: z.string(),
+				reducedspawntimer: z.number()
+			})
+			.array()
+	})
 		.array()
 		.safeParse(result.rows);
 	if (!parsed.success) {
