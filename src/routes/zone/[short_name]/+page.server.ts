@@ -8,6 +8,7 @@ import {
 	getUniqueNpcsByZone,
 	getZone
 } from '$lib/db/zone';
+import { getRule } from '$lib/db/rules';
 
 export async function load({ params }: PageServerLoadEvent) {
 	const client = await pool.connect();
@@ -20,6 +21,7 @@ export async function load({ params }: PageServerLoadEvent) {
 
 		return {
 			zone: await getZone(short_name, client),
+			respawn_reduction_rule: await getRule('Quarm:EnableRespawnReductionSystem', client),
 			ground_spawns: await getGroundSpawns(short_name, client),
 			connected_zones: await getConnectedZones(short_name, client),
 			npcs: await getUniqueNpcsByZone(short_name, client),

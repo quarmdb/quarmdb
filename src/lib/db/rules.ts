@@ -39,3 +39,31 @@ export const getAllRules = async (client: PoolClient) => {
 
 	return parsed.data;
 };
+
+export const getRule = async (rule_name: string, client: PoolClient) => {
+	const result = await client.query(
+		`
+		SELECT
+			*
+		FROM
+			rule_values
+		WHERE
+			rule_values.rule_name = $1
+	`,
+		[rule_name]
+	);
+
+	if (result.rowCount !== 1) {
+		console.error(`getRule() => rowCount !== 1`);
+		throw error(404);
+	}
+
+	const parsed = RuleValuesSchema.array().safeParse(result.rows);
+
+	if (!parsed.success) {
+		console.error(parsed.error);
+		throw error(404);
+	}
+
+	return parsed.data[0];
+};
