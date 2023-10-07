@@ -2,37 +2,48 @@
 	import { ItemTypes } from '$lib/db/constants/item';
 	import type { ItemsType } from '$lib/schema';
 
-	export let item: Pick<ItemsType, 'icon' | 'id' | 'name' | 'itemtype'>;
+	export let item: ItemsType;
 </script>
 
-<div class="item">
+<article class="item">
 	<header>
-		<img src="/icon/{item.icon}.gif" alt="icon" />
 		<a href="/items/{item.id}">{item.name}</a>
 	</header>
 	<main>
-		{ItemTypes[item.itemtype].type}
+		<section>
+			{ItemTypes[item.itemtype].type}
+		</section>
+		<img src="/icon/{item.icon}.gif" alt="icon" />
 	</main>
-</div>
+</article>
 
 <style>
 	.item {
 		display: flex;
 		flex-direction: column;
-		margin: 1rem;
 		align-items: center;
 		justify-content: center;
 		font-size: 1rem;
+		border: var(--surface-3) 1px solid;
+		padding: 1rem;
 
-		& img {
-			width: 2rem;
-			aspect-ratio: 1/1;
+		& header {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
-	}
 
-	header {
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		& main {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+
+			& img {
+				align-self: end;
+				justify-self: end;
+				width: 2rem;
+				aspect-ratio: 1/1;
+			}
+		}
 	}
 </style>
