@@ -5,25 +5,19 @@
 	export let data: PageData;
 </script>
 
-<div class="table">
+<table>
+	<tr><th>Zone Long Name</th><th>Zone Short name</th><th>Zone Zem</th></tr>
 	{#each data.zones as row}
-		<div class="cell">{row.long_name}</div>
-		<div class="cell">{row.short_name}</div>
-		<div class="cell">{row.zone_exp_multiplier}</div>
+		<tr>
+			<td class="cell">{row.long_name}</td>
+			<td class="cell">{row.short_name}</td>
+			<td class="cell">{row.zone_exp_multiplier}</td>
+		</tr>
 	{/each}
-</div>
+</table>
 
 <style>
-	div.table {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-	}
-
-	div.cell {
-		margin: auto;
-		padding: 0;
+	table {
 		width: 100%;
-		height: 100%;
-		border: 1px solid black;
 	}
 </style>
