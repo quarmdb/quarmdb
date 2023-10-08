@@ -30,7 +30,7 @@
 		{#each loot as loot}
 			<section class="loot">
 				<img src="/icon/{loot.icon}.gif" alt="icon" />
-				<span>{loot.chance}% - <a href="/items/{loot.id}">{loot.name}</a></span>
+				<span><a href="/items/{loot.id}">{loot.name}</a>({loot.chance}%)</span>
 			</section>
 		{/each}
 	{:else}
@@ -71,8 +71,9 @@
 		width: 100%;
 	}
 	section.lootWrapper {
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
 	}
 	section.loot {
 		display: flex;
