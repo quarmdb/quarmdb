@@ -76,7 +76,7 @@ export const Skills = [
 	{ id: 74, name: 'Frenzy', isTrade: false },
 	{ id: 75, name: 'Remove Trap', isTrade: true },
 	{ id: 76, name: 'Triple Attack', isTrade: false },
-	{ id: 77, name: '2H Piercing, isTrade:false' }
+	{ id: 77, name: '2H Piercing', isTrade: false }
 ];
 
 export const getAllTradeSkills = () => {
