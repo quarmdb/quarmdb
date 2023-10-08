@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { FactionListType, NpcTypesType, Spawn2Type } from '$lib/schema';
-	import { groupSpawnTable, nameParse } from '$lib/utils';
+	import { groupSpawnTable, nameParse, urlBlob } from '$lib/utils';
 	import { quintIn } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
 	import RawJsonViewer from './RawJSONViewer.svelte';
@@ -30,7 +30,7 @@
 		{#each loot as loot}
 			<section class="loot">
 				<img src="/icon/{loot.icon}.gif" alt="icon" />
-				<span><a href="/items/{loot.id}">{loot.name}</a>({loot.chance}%)</span>
+				<span><a href="/items/{loot.id}/{urlBlob(loot.name)}">{loot.name}</a>({loot.chance}%)</span>
 			</section>
 		{/each}
 	{:else}

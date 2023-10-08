@@ -91,5 +91,5 @@ export const omitFalsy = <T extends object>(
 	) as any;
 
 export const urlBlob = (str: string) => {
-	return str.replace(/\s+/gi, '-').replace(/_/gi, '-').toLowerCase();
+	return str.replace(/\s+/gi, '-').replace(/_/gi, '-').replace(/#/gi, '').toLowerCase();
 };
