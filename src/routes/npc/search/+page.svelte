@@ -8,14 +8,16 @@
 
 <div class="wrapper">
 	<NpcSearchForm />
-	<section>
-		{#each data.npcsByZone as zone}
+	{#each data.npcsByZone as zone}
+		<section class="zone">
 			<h2>{getZoneFromShortName(zone.zone).long_name}</h2>
-			{#each zone.npcs as npc}
-				<a href="/npc/{npc.id}">{nameParse(npc.name)}</a>
-			{/each}
-		{/each}
-	</section>
+			<section class="npcs">
+				{#each zone.npcs as npc}
+					<a href="/npc/{npc.id}">{nameParse(npc.name)}</a>
+				{/each}
+			</section>
+		</section>
+	{/each}
 </div>
 
 <style>
@@ -27,11 +29,18 @@
 		justify-content: center;
 		flex-direction: column;
 
-		& section {
-			flex-grow: 1;
+		& section.zone {
+			width: 100%;
 			display: flex;
+			justify-content: left;
+			align-items: start;
 			flex-direction: column;
-			flex-wrap: wrap;
+			& section.npcs {
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
+				padding-left: 1rem;
+			}
 		}
 	}
 </style>
