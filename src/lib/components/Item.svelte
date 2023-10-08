@@ -2,56 +2,35 @@
 	import type { ItemsType } from '$lib/schema';
 	import { getUseableRaces } from '$lib/db/constants';
 	import RawJsonViewer from './RawJSONViewer.svelte';
-	import { getUseableClasses } from '$lib/db/constants/eqclasses';
-	import { getItemTypeById, getUseableSlots } from '$lib/db/constants/item';
+	import { getClassList, getUseableClasses } from '$lib/db/constants/eqclasses';
+	import { ItemTypes, getItemTypeById, getSlotList, getUseableSlots } from '$lib/db/constants/item';
 	import { getClickTypeById } from '$lib/db/constants/clicktypes';
+	import { getRaceList } from '$lib/db/constants/races';
 
 	export let item: ItemsType;
-
-	const getClassList = (classMask: number): string => {
-		return getUseableClasses(classMask)
-			.reduce<string[]>((acc, value, idx) => {
-				acc.push(value.short_name);
-				return acc;
-			}, [])
-			.join(',');
-	};
-
-	const getRaceList = (raceMask: number): string => {
-		return getUseableRaces(raceMask)
-			.reduce<string[]>((acc, value, idx) => {
-				acc.push(value.short_name);
-				return acc;
-			}, [])
-			.join(',');
-	};
-
-	const getSlotList = (slotMask: number): string => {
-		return getUseableSlots(slotMask)
-			.reduce<string[]>((acc, value, idx) => {
-				acc.push(value.name);
-				return acc;
-			}, [])
-			.join(',');
-	};
 </script>
 
-<div class="wrapper">
-	<section class="titleLine">
-		<img class="icon" src="/icon/{item.icon}.gif" alt="icon" />
-		<span class="name">{item.name}</span>
-	</section>
-	<section class="topline">
-		<span>{item.magic === 1 ? 'MAGIC' : 'NON-MAGIC'}</span>
-		<span>{item.nodrop === 0 ? 'NO DROP' : 'TRADABLE'}</span>
-		<span>{item.norent === 0 ? 'NO RENT' : ''}</span>
-	</section>
-	<section class="info">
-		<span>{getItemTypeById(item.itemtype).type}</span>
-		<span>{getSlotList(item.slots)}</span>
-		<span class="classes">Classes: {getClassList(item.classes)}</span>
-		<span class="races">Races: {getRaceList(item.races)}</span>
-	</section>
+<article class="item">
+	<header>{item.name}</header>
+	<main>
+		<section class="stats">
+			<span>{ItemTypes[item.itemtype].type}</span>
+			<span>{getSlotList(item.slots)}</span>
+			<span
+				>{item.magic === 1 ? 'MAGIC' : 'NON-MAGIC'}
+				{item.nodrop === 0 ? 'NO DROP' : 'TRADABLE'}{item.norent === 0 ? 'NO RENT' : ''}</span
+			>
+			{#if item.damage !== 0}<span>DMG: {item.damage}</span>{/if}
+			{#if item.delay !== 0}<span>DELAY: {item.delay}</span>{/if}
+			<span class="classes">Classes: {getClassList(item.classes)}</span>
+			<span class="races">Races: {getRaceList(item.races)}</span>
+		</section>
+		<section class="icon">
+			<img src="/icon/{item.icon}.gif" alt="icon" />
+		</section>
+	</main>
+</article>
+<div>
 	{#if item.clicktype !== 0}
 		<section class="click">
 			<span>Clickable</span>
@@ -62,57 +41,45 @@
 <RawJsonViewer obj={item} />
 
 <style>
-	div.wrapper {
+	article.item {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		font-size: 1rem;
+		border: var(--surface-3) 1px solid;
+		border-radius: 0.5rem;
+		padding: 1rem;
 
-		& section.titleLine {
-			width: 100%;
+		& header {
 			display: flex;
-			flex-direction: row;
 			align-items: center;
 			justify-content: center;
-			& img {
-				width: clamp(5vh, 2.5vw, 10rem);
-				aspect-ratio: 1 / 1;
-			}
-			& span.name {
-				font-size: 5vw;
-				width: 100%;
-				padding-left: 1rem;
-			}
+			font-size: 2rem;
 		}
 
-		&section.topline {
+		& main {
 			display: flex;
 			flex-direction: row;
-			justify-content: flex-start;
-		}
-	}
-	section.heading {
-		display: flex;
-		flex-direction: row;
-		width: 100%;
+			width: 100%;
+			height: 100%;
 
-		& span {
-			font-size: 3.5rem;
-			padding-left: 1rem;
-		}
+			& section.stats {
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
+				width: 100%;
+			}
 
-		& img {
-			align-self: center;
-			height: 5rem;
-			aspect-ratio: 1/1;
-		}
-	}
-
-	section.info {
-		display: flex;
-		flex-direction: column;
-
-		& section.class_race {
-			display: flex;
-			flex-direction: column;
+			& section.icon {
+				display: flex;
+				height: 100%;
+				justify-content: end;
+				& img {
+					width: 7rem;
+					aspect-ratio: 1/1;
+				}
+			}
 		}
 	}
 </style>

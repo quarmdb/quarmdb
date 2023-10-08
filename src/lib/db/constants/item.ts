@@ -103,3 +103,12 @@ export const ItemSlots = [
 export function getUseableSlots(search: number): ItemSlotType[] {
 	return getFromMask<ItemSlotType>(search, ItemSlots);
 }
+
+export const getSlotList = (slotMask: number): string => {
+	return getUseableSlots(slotMask)
+		.reduce<string[]>((acc, value, idx) => {
+			acc.push(value.name);
+			return acc;
+		}, [])
+		.join(' ');
+};

@@ -8,7 +8,7 @@
 
 <div class="wrapper">
 	<ItemSearchForm />
-	<section>
+	<section class="cards">
 		{#each data.items as item}
 			<ItemCard {item} />
 		{/each}
@@ -24,10 +24,10 @@
 		justify-content: center;
 		flex-direction: column;
 
-		& section {
+		& section.cards {
 			flex-grow: 1;
 			display: flex;
-			flex-direction: row;
+			flex-direction: column;
 			flex-wrap: wrap;
 		}
 	}
