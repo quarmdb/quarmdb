@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { Skills } from '$lib/db/constants/skills';
-	import { QsPlayerQglobalUpdatesLogSchema } from '$lib/schema';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
@@ -18,20 +16,29 @@
 			<td>{recipe.name}</td>
 			<td>{recipe.trivial}</td>
 			<td class="ingredients">
-				{#each recipe.ingredients as ingredient}
-					<span
-						><a href="/items/{ingredient.item_id}">{ingredient.item_name}</a
-						>({ingredient.componentcount})</span
+				<table>
+					<tr>
+						<th>item_name</th><th>componentcount</th><th>successcount</th><th>failcount</th><th
+							>isContainer</th
+						></tr
 					>
-				{/each}
+					{#each recipe.ingredients as ingredient}
+						<tr>
+							<td><a href="/items/{ingredient.item_id}">{ingredient.item_name}</a></td>
+							<td>{ingredient.componentcount}</td>
+							<td>{ingredient.successcount}</td>
+							<td>{ingredient.failcount}</td>
+							<td>{ingredient.iscontainer}</td>
+						</tr>
+					{/each}
+				</table>
 			</td>
 		</tr>
 	{/each}
 </table>
 
 <style>
-	td.ingredients {
-		display: flex;
-		flex-direction: column;
+	table {
+		width: 100%;
 	}
 </style>

@@ -11,6 +11,9 @@ export const getRecipes = async (skillId: number, client: PoolClient) => {
       JSON_AGG(JSON_BUILD_OBJECT(
         'item_id', i.id,
         'item_name', i.name, 
+				'successcount', entry.successcount,
+				'failcount', entry.failcount,
+				'iscontainer', entry.iscontainer,
         'componentcount', entry.componentcount)) AS ingredients
     FROM
       tradeskill_recipe recipe
@@ -41,6 +44,9 @@ export const getRecipes = async (skillId: number, client: PoolClient) => {
 				.object({
 					item_id: z.number(),
 					item_name: z.string(),
+					failcount: z.number(),
+					successcount: z.number(),
+					iscontainer: z.number(),
 					componentcount: z.number()
 				})
 				.array()
