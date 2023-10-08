@@ -76,7 +76,6 @@ export function nameCompare(a: string, b: string) {
 	return removeLeadingA(nameParse(a)).localeCompare(removeLeadingA(nameParse(b)));
 }
 
-
 export const omitFalsy = <T extends object>(
 	obj: T
 ): {
@@ -86,5 +85,11 @@ export const omitFalsy = <T extends object>(
 			[Q in keyof T]: T[Q] extends 0 | '' | null ? Q : never;
 		}[keyof T]
 	>]: T[P];
-} => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== 0 && v !== '' && v !== null)) as any;
+} =>
+	Object.fromEntries(
+		Object.entries(obj).filter(([_, v]) => v !== 0 && v !== '' && v !== null)
+	) as any;
 
+export const urlBlob = (str: string) => {
+	return str.replace(/\s+/gi, '-').replace(/\//gi, '-').toLowerCase();
+};

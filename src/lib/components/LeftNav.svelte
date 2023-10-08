@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { getAllTradeSkills } from '$lib/db/constants/skills';
+	import { urlBlob } from '$lib/utils';
 	import ThemeSwitcher from './ThemeSwitcher.svelte';
 
 	let subDir = '';
@@ -18,6 +20,16 @@
 		</ul>
 		<li><a class="major" href="/faction/all" class:selected={subDir === 'faction'}>Factions</a></li>
 		<!-- <li><a class="major" href="/merchant">Merchant</a></li> -->
+		<li><a class="major" href="/skills" class:selected={subDir === 'skills'}>Skills</a></li>
+		<ul>
+			{#each getAllTradeSkills() as tradeSkill}
+				<li>
+					<a class="minor" href="/skills/{tradeSkill.id}/{urlBlob(tradeSkill.name)}"
+						>{tradeSkill.name}</a
+					>
+				</li>
+			{/each}
+		</ul>
 	</ul>
 </nav>
 
