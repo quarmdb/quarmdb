@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { urlBlob } from '$lib/utils';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
@@ -24,7 +25,11 @@
 					>
 					{#each recipe.ingredients as ingredient}
 						<tr>
-							<td><a href="/items/{ingredient.item_id}">{ingredient.item_name}</a></td>
+							<td
+								><a href="/items/{ingredient.item_id}/{urlBlob(ingredient.item_name)}"
+									>{ingredient.item_name}</a
+								></td
+							>
 							<td>{ingredient.componentcount}</td>
 							<td>{ingredient.successcount}</td>
 							<td>{ingredient.failcount}</td>
