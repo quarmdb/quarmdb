@@ -17,7 +17,7 @@ export async function load({ params }: PageServerLoadEvent) {
 
 		const item = await getItem(id, client);
 
-		url = '/npc/' + id + '/' + urlBlob(item.name);
+		url = '/items/' + id + '/' + urlBlob(item.name);
 		console.log(`throwing to new ${url}`);
 	} catch (err) {
 		console.error(err);
