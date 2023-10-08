@@ -27,14 +27,14 @@
 
 :root,
 :root[data-theme='light'] {
-	--brand: var(--blue-7);
+	--brand: var(--blue-9);
 
 	--text-1: var(--neutral-900);
 	--text-2: var(--neutral-500);
 	--text-3: var(--neutral-300);
 
-	--surface-1: var(--neutral-100);
-	--surface-2: var(--neutral-300);
+	--surface-1: var(--neutral-300);
+	--surface-2: var(--neutral-400);
 	--surface-3: var(--neutral-500);
 	--surface-4: var(--neutral-700);
 }
@@ -78,4 +78,8 @@ button:active {
 	background-color: var(--surface-1);
 	color: var(--text-1);
 	outline: 5px solid var(--brand);
+}
+
+table {
+	border-radius: 0;
 }

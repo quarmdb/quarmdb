@@ -32,7 +32,7 @@
 		padding: 1rem;
 		display: flex;
 		flex-direction: column;
-		background-color: var(--surface-2);
+		background-color: var(--surface-1);
 	}
 
 	main {
@@ -44,10 +44,9 @@
 
 	nav.left {
 		width: 16rem;
+		border-right: 1px solid var(--surface-3);
 	}
 	article {
-		background-color: var(--surface-1);
-		border-radius: 0.5rem;
 		padding: 1rem;
 		position: relative;
 		width: 100%;
