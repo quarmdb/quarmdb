@@ -8,7 +8,7 @@
 	let subDir = '';
 	$: subDir = $page.url.pathname.slice(1).split('/')[0];
 
-	let skillsOpen = true;
+	let skillsOpen = false;
 </script>
 
 <nav>
