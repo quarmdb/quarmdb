@@ -2,10 +2,13 @@
 	import { page } from '$app/stores';
 	import { getAllTradeSkills } from '$lib/db/constants/skills';
 	import { urlBlob } from '$lib/utils';
+	import { slide } from 'svelte/transition';
 	import ThemeSwitcher from './ThemeSwitcher.svelte';
 
 	let subDir = '';
 	$: subDir = $page.url.pathname.slice(1).split('/')[0];
+
+	let skillsOpen = true;
 </script>
 
 <nav>
@@ -20,16 +23,28 @@
 		</ul>
 		<li><a class="major" href="/faction/all" class:selected={subDir === 'faction'}>Factions</a></li>
 		<!-- <li><a class="major" href="/merchant">Merchant</a></li> -->
-		<li><a class="major" href="/skills" class:selected={subDir === 'skills'}>Skills</a></li>
-		<ul>
-			{#each getAllTradeSkills() as tradeSkill}
-				<li>
-					<a class="minor" href="/skills/{tradeSkill.id}/{urlBlob(tradeSkill.name)}"
-						>{tradeSkill.name}</a
-					>
-				</li>
-			{/each}
-		</ul>
+		<li>
+			<a
+				class="major"
+				href={'#'}
+				on:click|preventDefault={() => {
+					skillsOpen = !skillsOpen;
+				}}
+				class:selected={subDir === 'skills'}
+				>Skills {#if skillsOpen}-{:else}+{/if}</a
+			>
+		</li>
+		{#if skillsOpen}
+			<ul transition:slide>
+				{#each getAllTradeSkills() as tradeSkill}
+					<li>
+						<a class="minor" href="/skills/{tradeSkill.id}/{urlBlob(tradeSkill.name)}"
+							>{tradeSkill.name}</a
+						>
+					</li>
+				{/each}
+			</ul>
+		{/if}
 	</ul>
 </nav>
 
