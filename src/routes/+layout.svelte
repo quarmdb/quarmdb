@@ -29,7 +29,7 @@
 	.wrapper {
 		width: 100%;
 		min-height: 100dvh;
-		padding: 1rem;
+		padding: 0 1rem 1rem 1rem;
 		display: flex;
 		flex-direction: column;
 		background-color: var(--surface-1);
@@ -44,6 +44,7 @@
 	}
 
 	nav.left {
+		padding-top: 1rem;
 		width: 16rem;
 		position: sticky;
 		top: 0;
