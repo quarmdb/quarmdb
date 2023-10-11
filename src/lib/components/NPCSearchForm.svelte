@@ -1,16 +1,21 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { BodyTypes } from '$lib/db/constants/bodytype';
 	import { AllZones } from '$lib/db/constants/zoneidnumber';
 	let name = $page.url.searchParams.get('name') || '';
 	let zone = $page.url.searchParams.get('zone') || 'all';
-	let min_level = $page.url.searchParams.get('min_level') || 0;
-	let max_level = $page.url.searchParams.get('max_level') || 99;
+	let min_level = $page.url.searchParams.get('min_level') || 1;
+	let max_level = $page.url.searchParams.get('max_level') || 100;
+	let bodytype = $page.url.searchParams.get('bodytype') || 0;
 
 	const search = async () => {
 		let u = new URL('/npc/search');
 		u.searchParams.set('name', name);
 		u.searchParams.set('zone', zone);
+		u.searchParams.set('min_level', min_level + '');
+		u.searchParams.set('max_level', max_level + '');
+		u.searchParams.set('bodytype', bodytype + '');
 		await goto(u);
 	};
 </script>
@@ -21,12 +26,37 @@
 		<input id="name" name="name" type="text" bind:value={name} />
 	</section>
 	<section class="input-group">
-		<label for="name">Min Level</label>
-		<input id="name" name="name" type="text" bind:value={min_level} />
+		<label for="min_level">Min Level</label>
+		<input
+			id="min_level"
+			name="min_level"
+			min="0"
+			max="100"
+			step="1"
+			type="number"
+			bind:value={min_level}
+		/>
 	</section>
 	<section class="input-group">
-		<label for="name">Max Level</label>
-		<input id="name" name="name" type="text" bind:value={max_level} />
+		<label for="max_level">Max Level</label>
+		<input
+			id="max_level"
+			name="max_level"
+			min="0"
+			max="100"
+			step="1"
+			type="number"
+			bind:value={max_level}
+		/>
+	</section>
+	<section class="input-group">
+		<label for="bodytype">Body Type</label>
+		<select id="bodytype" name="bodytype" bind:value={bodytype}>
+			<option value="all">All</option>
+			{#each BodyTypes as bodytype}
+				<option value={bodytype.id}>{bodytype.type}</option>
+			{/each}
+		</select>
 	</section>
 	<section class="input-group">
 		<label for="zone">Zone</label>
@@ -45,15 +75,14 @@
 	form {
 		display: flex;
 		gap: 1rem;
-
 		width: 100%;
 	}
-	@media only screen and (max-width: 1080px) {
+	<<<<<<< HEAD @media only screen and (max-width: 1080px) {
 		form {
 			flex-direction: column;
 		}
 	}
-	section.input-group {
+	=======>>>>>>>1d39a669546ac860cdc333f575610df212baeadc section.input-group {
 		width: 100%;
 		display: flex;
 		position: relative;

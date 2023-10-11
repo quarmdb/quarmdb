@@ -29,7 +29,7 @@
 	.wrapper {
 		width: 100%;
 		min-height: 100dvh;
-		padding: 1rem;
+		padding: 0 1rem 1rem 1rem;
 		display: flex;
 		flex-direction: column;
 		background-color: var(--surface-1);
@@ -44,14 +44,15 @@
 	}
 
 	nav.left {
+		padding-top: 1rem;
 		width: 16rem;
-		border-right: 1px solid var(--surface-3);
 		position: sticky;
 		top: 0;
 		align-self: flex-start;
 	}
 	article {
 		padding: 1rem;
+		border-left: 1px solid var(--surface-3);
 		position: relative;
 		width: 100%;
 		flex-grow: 1;

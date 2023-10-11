@@ -1,15 +1,56 @@
 import { NpcTypesSchema } from '$lib/schema';
 import { error } from '@sveltejs/kit';
 import type { PoolClient } from 'pg';
-import { number, z } from 'zod';
+import { z } from 'zod';
+import { getZoneFromShortName } from './constants/zoneidnumber';
+
+type WhereStringOptionsType = {
+	name: string,
+	zone: string,
+	min_level: number,
+	max_level: number,
+	bodytype: number
+}
+
+export const createNpcWhereString = (opts: WhereStringOptionsType) => {
+
+	let whereArray = [];
+	if (opts.name.trim() !== '') {
+		let name = (opts.name as string).trim().split(' ').join(' & ');
+		whereArray.push(`to_tsvector(npc.name) @@ to_tsquery('${name}')`);
+	}
+
+	if (opts.zone !== 'all') {
+		console.log(`getZoneFromShortName(zone).id = ${getZoneFromShortName(opts.zone).id}`);
+		if (getZoneFromShortName(opts.zone).id !== 0) whereArray.push(`s2.zone = '${opts.zone}'`);
+		else console.log(`SOMEONE TRIED TO SQL INJECT IN ZONE: ${opts.zone}`);
+	}
+
+	if(opts.bodytype !== 0) {
+		whereArray.push(`npc.bodytype = ${opts.bodytype}`)
+
+	}
+
+	let levelStr = `(
+		(npc.maxlevel = 0 AND (npc.level <@ int8range(${opts.min_level},${opts.max_level})))
+			OR 
+		(npc.maxlevel != 0 AND (int8range(${opts.min_level},${opts.max_level}) && int8range(npc.level, npc.maxlevel)))
+	)`
+
+	whereArray.push(levelStr);
+
+	let whereString = '';
+	if (whereArray.length !== 0) whereString = ' WHERE ' + whereArray.join(' AND ');
+
+	return whereString;
+}
 
 export const searchNpcs = async (whereString: string, client: PoolClient) => {
 	let query = `
-  SELECT zone, JSON_AGG(JSON_BUILD_OBJECT('id',id,'name',name)) as npcs FROM
+  SELECT zone, JSON_AGG(JSON_BUILD_OBJECT('id',id,'name',name,'level', level, 'maxlevel', maxlevel, 'bodytype', bodytype)) as npcs FROM
   (SELECT DISTINCT
     s2.zone,
-    npc.id,
-    npc.name
+    npc.*
   FROM
     npc_types npc
   INNER JOIN spawnentry se
@@ -39,7 +80,10 @@ export const NpcTypesSearchSchema = z.object({
 	npcs: z
 		.object({
 			id: z.number(),
-			name: z.string()
+			name: z.string(),
+			level: z.number(),
+			maxlevel: z.number(),
+			bodytype: z.number()
 		})
 		.array()
 });
