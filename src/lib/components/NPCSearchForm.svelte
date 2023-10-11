@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { BodyTypes } from '$lib/db/constants/bodytype';
 	import { AllZones } from '$lib/db/constants/zoneidnumber';
 	let name = $page.url.searchParams.get('name') || '';
 	let zone = $page.url.searchParams.get('zone') || 'all';
 	let min_level = $page.url.searchParams.get('min_level') || 1;
 	let max_level = $page.url.searchParams.get('max_level') || 100;
+	let bodytype = $page.url.searchParams.get('bodytype') || 0;
 
 	const search = async () => {
 		let u = new URL('/npc/search');
@@ -13,6 +15,7 @@
 		u.searchParams.set('zone', zone);
 		u.searchParams.set('min_level', min_level + '');
 		u.searchParams.set('max_level', max_level + '');
+		u.searchParams.set('bodytype', bodytype + '');
 		await goto(u);
 	};
 </script>
@@ -45,6 +48,15 @@
 			type="number"
 			bind:value={max_level}
 		/>
+	</section>
+	<section class="input-group">
+		<label for="bodytype">Body Type</label>
+		<select id="bodytype" name="bodytype" bind:value={bodytype}>
+			<option value="all">All</option>
+			{#each BodyTypes as bodytype}
+				<option value={bodytype.id}>{bodytype.type}</option>
+			{/each}
+		</select>
 	</section>
 	<section class="input-group">
 		<label for="zone">Zone</label>

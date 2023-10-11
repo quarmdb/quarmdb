@@ -8,7 +8,8 @@ type WhereStringOptionsType = {
 	name: string,
 	zone: string,
 	min_level: number,
-	max_level: number
+	max_level: number,
+	bodytype: number
 }
 
 export const createNpcWhereString = (opts: WhereStringOptionsType) => {
@@ -23,6 +24,11 @@ export const createNpcWhereString = (opts: WhereStringOptionsType) => {
 		console.log(`getZoneFromShortName(zone).id = ${getZoneFromShortName(opts.zone).id}`);
 		if (getZoneFromShortName(opts.zone).id !== 0) whereArray.push(`s2.zone = '${opts.zone}'`);
 		else console.log(`SOMEONE TRIED TO SQL INJECT IN ZONE: ${opts.zone}`);
+	}
+
+	if(opts.bodytype !== 0) {
+		whereArray.push(`npc.bodytype = ${opts.bodytype}`)
+
 	}
 
 	let levelStr = `(

@@ -1,4 +1,5 @@
 export const BodyTypes = [
+{id:0, type:'All'},
 {id:1, type:'Normal'},
 {id:2, type:'Lycanthrope'},
 {id:3, type:'Undead'},
