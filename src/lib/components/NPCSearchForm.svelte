@@ -77,12 +77,12 @@
 		gap: 1rem;
 		width: 100%;
 	}
-	<<<<<<< HEAD @media only screen and (max-width: 1080px) {
+	@media only screen and (max-width: 1080px) {
 		form {
 			flex-direction: column;
 		}
 	}
-	=======>>>>>>>1d39a669546ac860cdc333f575610df212baeadc section.input-group {
+	section.input-group {
 		width: 100%;
 		display: flex;
 		position: relative;
