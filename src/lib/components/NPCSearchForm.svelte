@@ -91,6 +91,8 @@
 
 		& label {
 			padding-left: 0.5rem;
+			display: flex;
+			width: 100%;
 		}
 		& input {
 			background-color: var(--surface-2);
