@@ -6,41 +6,44 @@
 	export let data: PageData;
 </script>
 
-<div class="wrapper">
+<section class="search">
 	<NpcSearchForm />
-	<section class="zone">
+</section>
+<section class="results">
+	<table>
+		<tr><th>Name</th><th>Min Level</th><th>Max Level</th></tr>
 		{#each data.npcsByZone as zone}
-			<h2>{getZoneFromShortName(zone.zone).long_name}</h2>
-			<section class="npcs">
-				{#each zone.npcs as npc}
-					<a href="/npc/{npc.id}/{urlBlob(npc.name)}">{nameParse(npc.name)}</a>
-				{/each}
-			</section>
+			<tr><td colspan="3" class="zone">{getZoneFromShortName(zone.zone).long_name}</td></tr>
+			{#each zone.npcs as npc}
+				<tr
+					><td><a href="/npc/{npc.id}/{urlBlob(npc.name)}">{nameParse(npc.name)}</a></td><td
+						>{npc.level}</td
+					><td>{npc.maxlevel === 0 ? npc.level : npc.maxlevel}</td></tr
+				>
+			{/each}
 		{/each}
-	</section>
-</div>
+	</table>
+</section>
 
 <style>
-	.wrapper {
+	section.search {
 		width: 100%;
-		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
+	}
 
-		& section.zone {
-			width: 100%;
-			display: flex;
-			justify-content: left;
-			align-items: start;
-			flex-direction: column;
-			flex-grow: 1;
-			& section.npcs {
-				display: flex;
-				flex-direction: column;
-				flex-grow: 1;
-				padding-left: 1rem;
+	section.results {
+		width: 100%;
+		display: flex;
+
+		& table {
+			& th {
+				padding: 0 1rem;
+			}
+			& td.zone {
+				font-size: 1.5rem;
 			}
 		}
 	}

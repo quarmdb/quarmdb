@@ -4,11 +4,15 @@
 	import { AllZones } from '$lib/db/constants/zoneidnumber';
 	let name = $page.url.searchParams.get('name') || '';
 	let zone = $page.url.searchParams.get('zone') || 'all';
+	let min_level = $page.url.searchParams.get('min_level') || 1;
+	let max_level = $page.url.searchParams.get('max_level') || 100;
 
 	const search = async () => {
 		let u = new URL('/npc/search');
 		u.searchParams.set('name', name);
 		u.searchParams.set('zone', zone);
+		u.searchParams.set('min_level', min_level + '');
+		u.searchParams.set('max_level', max_level + '');
 		await goto(u);
 	};
 </script>
@@ -19,7 +23,31 @@
 		<input id="name" name="name" type="text" bind:value={name} />
 	</section>
 	<section class="input-group">
-		<label for="zone">Type</label>
+		<label for="min_level">Min Level</label>
+		<input
+			id="min_level"
+			name="min_level"
+			min="0"
+			max="100"
+			step="1"
+			type="number"
+			bind:value={min_level}
+		/>
+	</section>
+	<section class="input-group">
+		<label for="max_level">Max Level</label>
+		<input
+			id="max_level"
+			name="max_level"
+			min="0"
+			max="100"
+			step="1"
+			type="number"
+			bind:value={max_level}
+		/>
+	</section>
+	<section class="input-group">
+		<label for="zone">Zone</label>
 		<select id="zone" name="zone" bind:value={zone}>
 			<option value="all">All</option>
 			{#each AllZones as zone}
@@ -35,9 +63,9 @@
 	form {
 		display: flex;
 		gap: 1rem;
-
 		width: 100%;
 	}
+
 	section.input-group {
 		width: 100%;
 		display: flex;
