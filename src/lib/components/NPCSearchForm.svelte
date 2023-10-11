@@ -141,6 +141,10 @@
 			color: red;
 		}
 	}
+	optgroup {
+		background-color: var(--surface-3);
+		color: var(--text-3);
+	}
 
 	button {
 		padding: 1rem;
