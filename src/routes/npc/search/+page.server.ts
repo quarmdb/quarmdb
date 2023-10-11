@@ -10,6 +10,8 @@ export async function load({ url }: PageServerLoadEvent) {
 		if (url.searchParams.size === 0) return { npcsByZone: [] };
 		let name = url.searchParams.get('name') || '';
 		let zone = url.searchParams.get('zone') || 'all';
+		let min_level = url.searchParams.get('min_level') || 0;
+		let max_level = url.searchParams.get('max_level') || 99;
 
 		let whereArray = [];
 		if (name.trim() !== '') {
