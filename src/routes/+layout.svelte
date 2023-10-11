@@ -45,13 +45,13 @@
 
 	nav.left {
 		width: 16rem;
-		border-right: 1px solid var(--surface-3);
 		position: sticky;
 		top: 0;
 		align-self: flex-start;
 	}
 	article {
 		padding: 1rem;
+		border-left: 1px solid var(--surface-3);
 		position: relative;
 		width: 100%;
 		flex-grow: 1;
