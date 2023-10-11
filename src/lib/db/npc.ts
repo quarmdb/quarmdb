@@ -1,7 +1,7 @@
 import { NpcTypesSchema } from '$lib/schema';
 import { error } from '@sveltejs/kit';
 import type { PoolClient } from 'pg';
-import { number, string, z } from 'zod';
+import { z } from 'zod';
 import { getZoneFromShortName } from './constants/zoneidnumber';
 
 type WhereStringOptionsType = {
