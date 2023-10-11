@@ -41,13 +41,10 @@ export const createNpcWhereString = (opts: WhereStringOptionsType) => {
 
 export const searchNpcs = async (whereString: string, client: PoolClient) => {
 	let query = `
-  SELECT zone, JSON_AGG(JSON_BUILD_OBJECT('id',id,'name',name,'level', level, 'maxlevel', maxlevel)) as npcs FROM
+  SELECT zone, JSON_AGG(JSON_BUILD_OBJECT('id',id,'name',name,'level', level, 'maxlevel', maxlevel, 'bodytype', bodytype)) as npcs FROM
   (SELECT DISTINCT
     s2.zone,
-    npc.id,
-    npc.name,
-		npc.maxlevel,
-		npc.level
+    npc.*
   FROM
     npc_types npc
   INNER JOIN spawnentry se
@@ -79,7 +76,8 @@ export const NpcTypesSearchSchema = z.object({
 			id: z.number(),
 			name: z.string(),
 			level: z.number(),
-			maxlevel: z.number()
+			maxlevel: z.number(),
+			bodytype: z.number()
 		})
 		.array()
 });
