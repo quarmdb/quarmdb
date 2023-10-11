@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 import type { Pool, PoolClient } from 'pg';
 import { z } from 'zod';
 import { getZoneFromNumber, type ZoneIdNumberType } from './constants/zoneidnumber';
+import { ZoneShortInfoSchema } from './constants/zone';
 
 export const getSpawnsByZone = async (short_name: string, client: PoolClient) => {
 	const spawnRes = await client.query(
@@ -187,6 +188,32 @@ export const getZone = async (short_name: string, client: PoolClient) => {
 	}
 
 	return parsedZones.data[0];
+};
+
+export const getAllZonesShortInfo = async (expansion: number, client: PoolClient) => {
+	const result = await client.query(
+		`
+		SELECT
+			id, short_name, long_name, expansion
+		FROM
+			zone
+		WHERE
+			expansion <= $1
+		ORDER BY
+			expansion, short_name
+	`,
+		[expansion]
+	);
+
+	console.log(result);
+	let parsed = ZoneShortInfoSchema.array().safeParse(result.rows);
+
+	if (!parsed.success) {
+		console.error(parsed.error);
+		return [];
+	}
+
+	return parsed.data;
 };
 
 export const getAllZones = async (client: PoolClient) => {

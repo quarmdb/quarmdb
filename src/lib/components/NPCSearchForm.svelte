@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { expansionLookup } from '$lib/db/constants';
 	import { BodyTypes } from '$lib/db/constants/bodytype';
+	import { groupByExpansionShortInfo, type ZoneShortInfoType } from '$lib/db/constants/zone';
 	import { AllZones } from '$lib/db/constants/zoneidnumber';
 	import { SearchNameSchema } from '$lib/inputSchemas';
+
+	export let zones: ZoneShortInfoType[] = [];
 
 	let name = $page.url.searchParams.get('name') || '';
 	let zone = $page.url.searchParams.get('zone') || 'all';
@@ -69,10 +73,12 @@
 		<label for="zone">Zone</label>
 		<select id="zone" name="zone" bind:value={zone}>
 			<option value="all">All</option>
-			{#each AllZones.sort((a, b) => {
-				return a.short_name.localeCompare(b.short_name);
-			}) as zone}
-				<option value={zone.short_name}>{zone.long_name}</option>
+			{#each groupByExpansionShortInfo(zones) as data}
+				<optgroup label={expansionLookup.get(data[0])}>
+					{#each data[1] || [] as zone}
+						<option value={zone.short_name}>{zone.long_name}</option>
+					{/each}
+				</optgroup>
 			{/each}
 		</select>
 	</section>

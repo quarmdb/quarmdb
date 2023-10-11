@@ -9,7 +9,7 @@
 
 <div class="wrapper">
 	<section class="search">
-		<NpcSearchForm />
+		<NpcSearchForm zones={data.zones} />
 	</section>
 	<section class="results">
 		<table>
