@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { ItemSlots, ItemTypes } from '$lib/db/constants/item';
+	import { SearchNameSchema } from '$lib/inputSchemas';
 
 	let name = $page.url.searchParams.get('name') || '';
 	let slot = $page.url.searchParams.get('slot') || 'any';
@@ -14,12 +15,16 @@
 		u.searchParams.set('slot', slot);
 		await goto(u);
 	};
+
+	let nameParse = SearchNameSchema.safeParse(name);
+	$: nameParse = SearchNameSchema.safeParse(name);
 </script>
 
 <form method="get" action="/items/search/">
 	<section class="input-group">
 		<label for="name">Name</label>
 		<input id="name" name="name" type="text" bind:value={name} />
+		{#if !nameParse.success}<span class="error">{nameParse.error.issues[0].message}</span>{/if}
 	</section>
 	<section class="input-group">
 		<label for="type">Type</label>
@@ -68,6 +73,12 @@
 			border-radius: 0.25em;
 			padding: 1rem;
 			cursor: text;
+		}
+
+		& span.error {
+			padding-top: 0.5rem;
+			font-size: 0.7rem;
+			color: red;
 		}
 
 		& select {

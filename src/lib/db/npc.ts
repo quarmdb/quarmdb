@@ -32,9 +32,9 @@ export const createNpcWhereString = (opts: WhereStringOptionsType) => {
 	}
 
 	let levelStr = `(
-		(npc.maxlevel = 0 AND (npc.level <@ int8range(${opts.min_level},${opts.max_level})))
+		(npc.maxlevel = 0 AND (npc.level <@ int8range(${opts.min_level},${opts.max_level}, '[]')))
 			OR 
-		(npc.maxlevel != 0 AND (int8range(${opts.min_level},${opts.max_level}) && int8range(npc.level, npc.maxlevel)))
+		(npc.maxlevel != 0 AND (int8range(${opts.min_level},${opts.max_level}, '[]') && int8range(npc.level, npc.maxlevel, '[]')))
 	)`
 
 	whereArray.push(levelStr);

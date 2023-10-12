@@ -3,6 +3,8 @@
 	import { page } from '$app/stores';
 	import { BodyTypes } from '$lib/db/constants/bodytype';
 	import { AllZones } from '$lib/db/constants/zoneidnumber';
+	import { SearchNameSchema } from '$lib/inputSchemas';
+
 	let name = $page.url.searchParams.get('name') || '';
 	let zone = $page.url.searchParams.get('zone') || 'all';
 	let min_level = $page.url.searchParams.get('min_level') || 1;
@@ -18,12 +20,16 @@
 		u.searchParams.set('bodytype', bodytype + '');
 		await goto(u);
 	};
+
+	let nameParse = SearchNameSchema.safeParse(name);
+	$: nameParse = SearchNameSchema.safeParse(name);
 </script>
 
 <form method="get" action="/npc/search/">
 	<section class="input-group">
 		<label for="name">Name</label>
-		<input id="name" name="name" type="text" bind:value={name} />
+		<input id="name" name="name" type="text" bind:value={name} class:error={!nameParse.success} />
+		{#if !nameParse.success}<span class="error">{nameParse.error.issues[0].message}</span>{/if}
 	</section>
 	<section class="input-group">
 		<label for="min_level">Min Level</label>
@@ -52,7 +58,6 @@
 	<section class="input-group">
 		<label for="bodytype">Body Type</label>
 		<select id="bodytype" name="bodytype" bind:value={bodytype}>
-			<option value="all">All</option>
 			{#each BodyTypes as bodytype}
 				<option value={bodytype.id}>{bodytype.type}</option>
 			{/each}
@@ -103,6 +108,10 @@
 			cursor: text;
 		}
 
+		& input.error {
+			border: red;
+		}
+
 		& select {
 			background-color: var(--surface-2);
 			border-bottom: 1px solid black;
@@ -111,6 +120,12 @@
 			padding: 1rem;
 			font-size: 1.25rem;
 			cursor: pointer;
+		}
+
+		& span.error {
+			padding-top: 0.5rem;
+			font-size: 0.7rem;
+			color: red;
 		}
 	}
 

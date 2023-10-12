@@ -3,6 +3,7 @@ import type { PageServerLoadEvent } from './$types';
 import { pool } from '$lib/db';
 import { searchItems } from '$lib/db/items';
 import { ItemSlots } from '$lib/db/constants/item';
+import { SearchNameSchema } from '$lib/inputSchemas';
 
 export async function load({ url }: PageServerLoadEvent) {
 	const client = await pool.connect();
@@ -11,6 +12,13 @@ export async function load({ url }: PageServerLoadEvent) {
 		let name = url.searchParams.get('name') || '';
 		let type = url.searchParams.get('type') || 'all';
 		let slot = url.searchParams.get('slot') || 'all';
+
+		const nameParse = SearchNameSchema.safeParse(name);
+
+		if(!nameParse.success) {
+			console.error(`Name doesnt have letters/numbers`);
+			throw error(404);
+		}
 
 		let whereArray = [];
 		if (name.trim() !== '') {
