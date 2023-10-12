@@ -31,29 +31,31 @@
 		<input id="name" name="name" type="text" bind:value={name} class:error={!nameParse.success} />
 		{#if !nameParse.success}<span class="error">{nameParse.error.issues[0].message}</span>{/if}
 	</section>
-	<section class="input-group">
-		<label for="min_level">Min Level</label>
-		<input
-			id="min_level"
-			name="min_level"
-			min="0"
-			max="100"
-			step="1"
-			type="number"
-			bind:value={min_level}
-		/>
-	</section>
-	<section class="input-group">
-		<label for="max_level">Max Level</label>
-		<input
-			id="max_level"
-			name="max_level"
-			min="0"
-			max="100"
-			step="1"
-			type="number"
-			bind:value={max_level}
-		/>
+	<section class="sidebyside-group">
+		<section class="input-group">
+			<label for="min_level">Min Level</label>
+			<input
+				id="min_level"
+				name="min_level"
+				min="0"
+				max="100"
+				step="1"
+				type="number"
+				bind:value={min_level}
+			/>
+		</section>
+		<section class="input-group">
+			<label for="max_level">Max Level</label>
+			<input
+				id="max_level"
+				name="max_level"
+				min="0"
+				max="100"
+				step="1"
+				type="number"
+				bind:value={max_level}
+			/>
+		</section>
 	</section>
 	<section class="input-group">
 		<label for="bodytype">Body Type</label>
@@ -67,7 +69,9 @@
 		<label for="zone">Zone</label>
 		<select id="zone" name="zone" bind:value={zone}>
 			<option value="all">All</option>
-			{#each AllZones as zone}
+			{#each AllZones.sort((a, b) => {
+				return a.short_name.localeCompare(b.short_name);
+			}) as zone}
 				<option value={zone.short_name}>{zone.long_name}</option>
 			{/each}
 		</select>
@@ -81,12 +85,15 @@
 		display: flex;
 		gap: 1rem;
 		width: 100%;
+		flex-direction: column;
 	}
-	@media only screen and (max-width: 1080px) {
-		form {
-			flex-direction: column;
-		}
+
+	section.sidebyside-group {
+		width: 100%;
+		display: flex;
+		gap: 1rem;
 	}
+
 	section.input-group {
 		width: 100%;
 		display: flex;
@@ -104,7 +111,7 @@
 			border-bottom: 1px solid black;
 			width: 100%;
 			border-radius: 0.25em;
-			padding: 1rem;
+			padding: 0.5rem;
 			cursor: text;
 		}
 
@@ -130,7 +137,7 @@
 	}
 
 	button {
-		margin-top: 1rem;
+		padding: 1rem;
 		min-width: 10rem;
 	}
 </style>

@@ -7,30 +7,34 @@
 	export let data: PageData;
 </script>
 
-<section class="search">
-	<NpcSearchForm />
-</section>
-<section class="results">
-	<table>
-		<tr><th>Name</th><th>Min Level</th><th>Max Level</th><th>Body Type</th></tr>
-		{#each data.npcsByZone as zone}
-			<tr><td colspan="4" class="zone">{getZoneFromShortName(zone.zone).long_name}</td></tr>
-			{#each zone.npcs as npc}
-				<tr
-					><td><a href="/npc/{npc.id}/{urlBlob(npc.name)}">{nameParse(npc.name)}</a></td><td
-						>{npc.level}</td
-					><td>{npc.maxlevel === 0 ? npc.level : npc.maxlevel}</td><td
-						>{getBodyTypeById(npc.bodytype).type}</td
-					></tr
-				>
+<div class="wrapper">
+	<section class="search">
+		<NpcSearchForm />
+	</section>
+	<section class="results">
+		<table>
+			<tr><th>Name</th><th>Min Level</th><th>Max Level</th><th>Body Type</th></tr>
+			{#each data.npcsByZone as zone}
+				<tr><td colspan="4" class="zone">{getZoneFromShortName(zone.zone).long_name}</td></tr>
+				{#each zone.npcs as npc}
+					<tr
+						><td><a href="/npc/{npc.id}/{urlBlob(npc.name)}">{nameParse(npc.name)}</a></td><td
+							>{npc.level}</td
+						><td>{npc.maxlevel === 0 ? npc.level : npc.maxlevel}</td><td
+							>{getBodyTypeById(npc.bodytype).type}</td
+						></tr
+					>
+				{/each}
 			{/each}
-		{/each}
-	</table>
-</section>
+		</table>
+	</section>
+</div>
 
 <style>
+	.wrapper {
+		max-width: 700px;
+	}
 	section.search {
-		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -38,10 +42,12 @@
 	}
 
 	section.results {
+		padding-top: 1rem;
 		width: 100%;
 		display: flex;
 
 		& table {
+			width: 100%;
 			& th {
 				padding: 0 1rem;
 			}
