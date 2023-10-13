@@ -9,10 +9,8 @@ import { parse } from 'path';
 import type { Pool, PoolClient } from 'pg';
 import { z } from 'zod';
 
-export const getItem = async (
-	id: number,
-	client: PoolClient
-) => {
+export const getItem = async (id: number, client: PoolClient) => {
+	/*
 	let result = await client.query(
 		`
   SELECT
@@ -29,14 +27,12 @@ export const getItem = async (
 		console.error(itemParse.error);
 		throw error(404);
 	}
+	*/
 
-	return itemParse.data;
+	return (await searchItemCardData(`WHERE i.id = ${id} `, 1, client))[0];
 };
 
-export const getDropsForItem = async (
-	id: number,
-	client: PoolClient
-) => {
+export const getDropsForItem = async (id: number, client: PoolClient) => {
 	const dropnpcs = await client.query(
 		`
   SELECT
@@ -67,10 +63,7 @@ export const getDropsForItem = async (
 	return dropnpcsParsed.data;
 };
 
-export const getMerchantsForItem = async (
-	id: number,
-	client: PoolClient
-) => {
+export const getMerchantsForItem = async (id: number, client: PoolClient) => {
 	const merchantsRes = await client.query(
 		`
   SELECT
@@ -108,15 +101,11 @@ export const getMerchantsForItem = async (
 	});
 
 	if (merchantsRes.rowCount === 0) {
-		console.error(
-			`getMerchantsForItem() : merchantsRes.rowCount === 0`
-		);
+		console.error(`getMerchantsForItem() : merchantsRes.rowCount === 0`);
 		//throw error(404);
 	}
 
-	const merchantsParse = MerchantsSchema.array().safeParse(
-		merchantsRes.rows
-	);
+	const merchantsParse = MerchantsSchema.array().safeParse(merchantsRes.rows);
 
 	if (!merchantsParse.success) {
 		console.error(merchantsParse.error);
@@ -177,8 +166,7 @@ export const searchItemCardData = async (
 		JSON_AGG(proc.*) as proc,
 		JSON_AGG(worn.*) as worn,
 		JSON_AGG(click.*) as click,
-		JSON_AGG(scroll.*) as scroll,
-		JSON_AGG(bard.*) as bard
+		JSON_AGG(scroll.*) as scroll
 	FROM
 		items i
 	LEFT JOIN spells_new proc		 	
@@ -189,8 +177,6 @@ export const searchItemCardData = async (
 		ON i.clickeffect = click.id
 	LEFT JOIN spells_new scroll
 		ON i.scrolleffect = scroll.id
-	LEFT JOIN spells_new bard
-		ON i.bardeffect = bard.id
 	${whereString} 
 	GROUP BY i.id, i.name
 `;
@@ -200,9 +186,7 @@ export const searchItemCardData = async (
 	const result = await client.query(query);
 	console.log(`results = ${result.rowCount}`);
 
-	const parsed = ItemsCardPreprocessedSchema.array().safeParse(
-		result.rows
-	);
+	const parsed = ItemsCardPreprocessedSchema.array().safeParse(result.rows);
 	if (!parsed.success) {
 		console.error(parsed.error.message);
 		throw error(404);
@@ -218,8 +202,7 @@ export const searchItemCardData = async (
 			proc: row.proc === null ? null : row.proc[0],
 			worn: row.worn === null ? null : row.worn[0],
 			click: row.click === null ? null : row.click[0],
-			scroll: row.scroll === null ? null : row.scroll[0],
-			bard: row.bard === null ? null : row.bard[0]
+			scroll: row.scroll === null ? null : row.scroll[0]
 		});
 	});
 
@@ -233,8 +216,7 @@ const ItemsCardPreprocessedSchema = z.object({
 	proc: SpellsNewSchema.nullable().array(),
 	worn: SpellsNewSchema.nullable().array(),
 	click: SpellsNewSchema.nullable().array(),
-	scroll: SpellsNewSchema.nullable().array(),
-	bard: SpellsNewSchema.nullable().array()
+	scroll: SpellsNewSchema.nullable().array()
 });
 
 export const ItemsCardSchema = z.object({
@@ -244,8 +226,7 @@ export const ItemsCardSchema = z.object({
 	proc: SpellsNewSchema.nullable(),
 	worn: SpellsNewSchema.nullable(),
 	click: SpellsNewSchema.nullable(),
-	scroll: SpellsNewSchema.nullable(),
-	bard: SpellsNewSchema.nullable()
+	scroll: SpellsNewSchema.nullable()
 });
 
 export type ItemsCardType = z.infer<typeof ItemsCardSchema>;

@@ -24,7 +24,9 @@
 	<section class="input-group">
 		<label for="name">Name</label>
 		<input id="name" name="name" type="text" bind:value={name} />
-		{#if !nameParse.success}<span class="error">{nameParse.error.issues[0].message}</span>{/if}
+		{#if !nameParse.success}<span class="error"
+				>{nameParse.error.issues[0].message}</span
+			>{/if}
 	</section>
 	<section class="input-group">
 		<label for="type">Type {type}</label>
@@ -46,7 +48,8 @@
 	</section>
 
 	<button type="reset">Reset</button>
-	<button type="submit" on:submit|preventDefault={async () => await search()}>Search</button>
+	<button type="submit" on:submit|preventDefault={async () => await search()}
+		>Search</button>
 </form>
 
 <style>
@@ -95,5 +98,6 @@
 	button {
 		margin-top: 1rem;
 		min-width: 10rem;
+		padding: 1rem;
 	}
 </style>

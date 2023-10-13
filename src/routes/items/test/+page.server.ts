@@ -2,10 +2,7 @@ import { error } from '@sveltejs/kit';
 import type { PageServerLoadEvent } from './$types';
 import { pool } from '$lib/db';
 import type { z } from 'zod';
-import {
-	searchItemCardData,
-	type ItemsCardSchema
-} from '$lib/db/items';
+import { searchItemCardData, type ItemsCardSchema } from '$lib/db/items';
 import { getRandomInt } from '$lib/utils';
 
 export async function load({ params }: PageServerLoadEvent) {
@@ -23,14 +20,8 @@ export async function load({ params }: PageServerLoadEvent) {
 		for (let i = 0; i < wheres.length; i++) {
 			const where = wheres[i];
 			try {
-				let searchedItems = await searchItemCardData(
-					where,
-					3,
-					client
-				);
-				const item = searchedItems.at(
-					getRandomInt(searchedItems.length)
-				);
+				let searchedItems = await searchItemCardData(where, 15, client);
+				const item = searchedItems.at(getRandomInt(searchedItems.length));
 				if (item !== undefined) items.push(item);
 			} catch (err) {
 				console.error(err);

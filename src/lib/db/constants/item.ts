@@ -1,3 +1,4 @@
+import type { ItemsType } from '$lib/schema';
 import { getFromMask } from '.';
 
 export const itemSizes = [
@@ -58,7 +59,9 @@ export const ItemTypes: { id: number; type: string }[] = [
 ];
 
 export const getItemIdByType = (type: string) => {
-	let item = ItemTypes.find((value) => value.type.toLowerCase() === type.toLowerCase());
+	let item = ItemTypes.find(
+		(value) => value.type.toLowerCase() === type.toLowerCase()
+	);
 	if (item === undefined) return 0;
 	return item.id;
 };
@@ -111,4 +114,11 @@ export const getSlotList = (slotMask: number): string => {
 			return acc;
 		}, [])
 		.join(' ');
+};
+
+export const getBardLine = (item: ItemsType) => {
+	if (item.bardtype === 0) return '';
+	return `Bard Skill: ${getItemTypeById(item.bardtype).type} (${
+		(item.bardvalue - 10) * 10
+	}%)`;
 };

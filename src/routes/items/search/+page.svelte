@@ -34,7 +34,7 @@
 
 <style>
 	.wrapper {
-		width: 100%;
+		max-width: 700px;
 		height: 100%;
 		display: flex;
 		align-items: center;
@@ -46,12 +46,17 @@
 			display: flex;
 			flex-direction: column;
 			flex-wrap: wrap;
+			padding-top: 1rem;
 		}
 
 		& td.name {
 			display: flex;
 			align-items: center;
 			justify-content: center;
+		}
+
+		& th {
+			padding: 0.5rem;
 		}
 	}
 </style>
