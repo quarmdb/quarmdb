@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Item from '$lib/components/Item.svelte';
 	import ItemCard from '$lib/components/ItemCard.svelte';
+	import RawJsonViewer from '$lib/components/RawJSONViewer.svelte';
 	import { getZoneFromShortName } from '$lib/db/constants/zoneidnumber';
 	import { nameParse, urlBlob } from '$lib/utils';
 	import type { PageData } from './$types';
@@ -9,6 +10,7 @@
 
 <a href="/items/search">Items Search</a>
 <ItemCard item={data.item} />
+<RawJsonViewer obj={data.item.details} />
 <h1 class:faded={data.dropnpcs.length === 0}>Dropped by:</h1>
 {#if data.dropnpcs.length === 0}
 	<h2 class="faded">Not Dropped</h2>

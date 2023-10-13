@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getExpansionByNumber, getUseableRaces } from '$lib/db/constants';
+	import { getBagLine } from '$lib/db/constants/bags';
 	import { clickTypes, getClickTypeById } from '$lib/db/constants/clicktypes';
 	import { getClassList, getUseableClasses } from '$lib/db/constants/eqclasses';
 	import {
@@ -32,21 +33,26 @@
 		<section class="details">
 			<span>
 				{item.details.magic === 1 ? 'MAGIC' : ''}
-				{item.details.nodrop === 0 ? 'NO DROP' : ''}
+				{item.details.nodrop === 1 ? 'NO DROP' : ''}
 				{item.details.norent === 0 ? 'NO RENT' : ''}
+				{item.details.lore.at(0) === '*' ? 'LORE' : ''}
+				{item.details.lore.at(0) === '&' ? 'ARTIFACT' : ''}
 			</span>
 			<span>{getSlotList(item.details.slots)}</span>
-			<span
-				>{getItemTypeById(item.details.itemtype).type}
-				{item.details.ac !== 0 ? 'AC: ' + item.details.ac : ''}</span>
-			<span class="atkdly">
-				{#if item.details.damage !== 0}
-					DMG: {item.details.damage}
-				{/if}
-				{#if item.details.delay !== 0}
-					DELAY: {item.details.delay}
-				{/if}
-			</span>
+			{#if item.details.bagtype === 0}
+				<span
+					>{getItemTypeById(item.details.itemtype).type}
+					{item.details.ac !== 0 ? 'AC: ' + item.details.ac : ''}</span>
+				<span class="atkdly">
+					{#if item.details.damage !== 0}
+						DMG: {item.details.damage}
+					{/if}
+					{#if item.details.delay !== 0}
+						DELAY: {item.details.delay}
+					{/if}
+				</span>
+			{/if}
+			<span>{getBagLine(item.details)}</span>
 			<span class="stats">{getStatsLine(item.details)}</span>
 			<span class="resists">{getResistsLine(item.details)}</span>
 			{#if item.proc && item.details.proceffect}
@@ -74,8 +80,11 @@
 			{/if}
 			<span class="weight"
 				>Weight: {(item.details.weight / 10.0).toFixed(1)}</span>
-			<span class="classes">Classes: {getClassList(item.details.classes)}</span>
-			<span class="races">Races: {getRaceList(item.details.races)}</span>
+			{#if item.details.bagtype === 0}
+				<span class="classes"
+					>Classes: {getClassList(item.details.classes)}</span>
+				<span class="races">Races: {getRaceList(item.details.races)}</span>
+			{/if}
 		</section>
 	</main>
 </article>

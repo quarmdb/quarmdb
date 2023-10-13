@@ -1,12 +1,7 @@
-import {
-	ItemsSchema,
-	NpcTypesSchema,
-	SpellsNewSchema,
-	TblWorldServerRegistrationSchema
-} from '$lib/schema';
+import { ItemsSchema, NpcTypesSchema, SpellsNewSchema } from '$lib/schema';
 import { error } from '@sveltejs/kit';
-import { parse } from 'path';
-import type { Pool, PoolClient } from 'pg';
+
+import type { PoolClient } from 'pg';
 import { z } from 'zod';
 
 export const getItem = async (id: number, client: PoolClient) => {
