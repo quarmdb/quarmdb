@@ -29,6 +29,11 @@
 				class:selected={subDir === 'items'}
 				on:click={navClicked}>Items</a>
 		</li>
+		<ul>
+			<li>
+				<a class="minor" href="/items/bags" on:click={navClicked}>Bags</a>
+			</li>
+		</ul>
 		<li>
 			<a
 				class="major"

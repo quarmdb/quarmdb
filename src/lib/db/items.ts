@@ -174,6 +174,7 @@ export const searchItemCardData = async (
 		ON i.scrolleffect = scroll.id
 	${whereString} 
 	GROUP BY i.id, i.name
+	ORDER BY i.name
 `;
 	if (limit > 0) query += ` LIMIT ${limit}`;
 	//console.log(query);

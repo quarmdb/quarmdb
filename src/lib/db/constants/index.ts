@@ -114,6 +114,7 @@ export function getUseableRaces(search: number): PlayerRaceType[] {
 }
 
 const expansionLookup: Map<number, string> = new Map();
+expansionLookup.set(0, 'Vanilla Everquest');
 expansionLookup.set(1, 'Vanilla Everquest');
 expansionLookup.set(2, 'Ruins of Kunark');
 expansionLookup.set(3, 'Scars of Velious');
