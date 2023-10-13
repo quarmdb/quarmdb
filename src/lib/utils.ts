@@ -93,3 +93,7 @@ export const omitFalsy = <T extends object>(
 export const urlBlob = (str: string) => {
 	return str.replace(/\s+/gi, '-').replace(/_/gi, '-').replace(/#/gi, '').toLowerCase();
 };
+
+export const getRandomInt = (max: number) => {
+	return Math.floor(Math.random() * max);
+};

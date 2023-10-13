@@ -1,9 +1,18 @@
-import { ItemsSchema, NpcTypesSchema } from '$lib/schema';
+import {
+	ItemsSchema,
+	NpcTypesSchema,
+	SpellsNewSchema,
+	TblWorldServerRegistrationSchema
+} from '$lib/schema';
 import { error } from '@sveltejs/kit';
+import { parse } from 'path';
 import type { Pool, PoolClient } from 'pg';
 import { z } from 'zod';
 
-export const getItem = async (id: number, client: PoolClient) => {
+export const getItem = async (
+	id: number,
+	client: PoolClient
+) => {
 	let result = await client.query(
 		`
   SELECT
@@ -24,7 +33,10 @@ export const getItem = async (id: number, client: PoolClient) => {
 	return itemParse.data;
 };
 
-export const getDropsForItem = async (id: number, client: PoolClient) => {
+export const getDropsForItem = async (
+	id: number,
+	client: PoolClient
+) => {
 	const dropnpcs = await client.query(
 		`
   SELECT
@@ -40,7 +52,10 @@ export const getDropsForItem = async (id: number, client: PoolClient) => {
   `
 	);
 
-	const dropnpcsParsed = NpcTypesSchema.pick({ name: true, id: true })
+	const dropnpcsParsed = NpcTypesSchema.pick({
+		name: true,
+		id: true
+	})
 		.array()
 		.safeParse(dropnpcs.rows);
 
@@ -52,7 +67,10 @@ export const getDropsForItem = async (id: number, client: PoolClient) => {
 	return dropnpcsParsed.data;
 };
 
-export const getMerchantsForItem = async (id: number, client: PoolClient) => {
+export const getMerchantsForItem = async (
+	id: number,
+	client: PoolClient
+) => {
 	const merchantsRes = await client.query(
 		`
   SELECT
@@ -90,11 +108,15 @@ export const getMerchantsForItem = async (id: number, client: PoolClient) => {
 	});
 
 	if (merchantsRes.rowCount === 0) {
-		console.error(`getMerchantsForItem() : merchantsRes.rowCount === 0`);
+		console.error(
+			`getMerchantsForItem() : merchantsRes.rowCount === 0`
+		);
 		//throw error(404);
 	}
 
-	const merchantsParse = MerchantsSchema.array().safeParse(merchantsRes.rows);
+	const merchantsParse = MerchantsSchema.array().safeParse(
+		merchantsRes.rows
+	);
 
 	if (!merchantsParse.success) {
 		console.error(merchantsParse.error);
@@ -104,10 +126,13 @@ export const getMerchantsForItem = async (id: number, client: PoolClient) => {
 	return merchantsParse.data;
 };
 
-export const searchItems = async (whereString: string, client: PoolClient) => {
+export const searchItemsLowData = async (
+	whereString: string,
+	client: PoolClient
+) => {
 	let query = `
 	SELECT
-		items.*
+		id, name, icon, min_expansion, max_expansion
 	FROM
 		items
 	${whereString}
@@ -116,7 +141,15 @@ export const searchItems = async (whereString: string, client: PoolClient) => {
 
 	const res = await client.query(query, []);
 
-	const parsedItems = ItemsSchema.array().safeParse(res.rows);
+	const parsedItems = ItemsSchema.pick({
+		id: true,
+		name: true,
+		icon: true,
+		min_expansion: true,
+		max_expansion: true
+	})
+		.array()
+		.safeParse(res.rows);
 	if (!parsedItems.success) {
 		console.error(error);
 		throw error(404);
@@ -131,3 +164,88 @@ export const ItemsSearchSchema = ItemsSchema.pick({
 	itemtype: true
 });
 export type ItemsSearchType = z.infer<typeof ItemsSearchSchema>;
+
+export const searchItemCardData = async (
+	whereString: string,
+	limit: number,
+	client: PoolClient
+) => {
+	let query = `
+	SELECT
+		i.id, i.name,
+		JSON_AGG(i.*) as details,
+		JSON_AGG(proc.*) as proc,
+		JSON_AGG(worn.*) as worn,
+		JSON_AGG(click.*) as click,
+		JSON_AGG(scroll.*) as scroll,
+		JSON_AGG(bard.*) as bard
+	FROM
+		items i
+	LEFT JOIN spells_new proc		 	
+		ON i.proceffect = proc.id
+	LEFT JOIN spells_new worn
+		ON i.worneffect = worn.id
+	LEFT JOIN spells_new click
+		ON i.clickeffect = click.id
+	LEFT JOIN spells_new scroll
+		ON i.scrolleffect = scroll.id
+	LEFT JOIN spells_new bard
+		ON i.bardeffect = bard.id
+	${whereString} 
+	GROUP BY i.id, i.name
+`;
+	if (limit > 0) query += ` LIMIT ${limit}`;
+	//console.log(query);
+
+	const result = await client.query(query);
+	console.log(`results = ${result.rowCount}`);
+
+	const parsed = ItemsCardPreprocessedSchema.array().safeParse(
+		result.rows
+	);
+	if (!parsed.success) {
+		console.error(parsed.error.message);
+		throw error(404);
+	}
+
+	let processed: ItemsCardType[] = [];
+
+	parsed.data.forEach((row) => {
+		processed.push({
+			id: row.id,
+			name: row.name,
+			details: row.details[0],
+			proc: row.proc === null ? null : row.proc[0],
+			worn: row.worn === null ? null : row.worn[0],
+			click: row.click === null ? null : row.click[0],
+			scroll: row.scroll === null ? null : row.scroll[0],
+			bard: row.bard === null ? null : row.bard[0]
+		});
+	});
+
+	return processed;
+};
+
+const ItemsCardPreprocessedSchema = z.object({
+	id: z.number(),
+	name: z.string(),
+	details: ItemsSchema.array(),
+	proc: SpellsNewSchema.nullable().array(),
+	worn: SpellsNewSchema.nullable().array(),
+	click: SpellsNewSchema.nullable().array(),
+	scroll: SpellsNewSchema.nullable().array(),
+	bard: SpellsNewSchema.nullable().array()
+});
+
+export const ItemsCardSchema = z.object({
+	id: z.number(),
+	name: z.string(),
+	details: ItemsSchema,
+	proc: SpellsNewSchema.nullable(),
+	worn: SpellsNewSchema.nullable(),
+	click: SpellsNewSchema.nullable(),
+	scroll: SpellsNewSchema.nullable(),
+	bard: SpellsNewSchema.nullable()
+});
+
+export type ItemsCardType = z.infer<typeof ItemsCardSchema>;

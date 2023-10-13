@@ -205,7 +205,7 @@ export const getAllZonesShortInfo = async (expansion: number, client: PoolClient
 		[expansion]
 	);
 
-	console.log(result);
+	//console.log(result);
 	let parsed = ZoneShortInfoSchema.array().safeParse(result.rows);
 
 	if (!parsed.success) {

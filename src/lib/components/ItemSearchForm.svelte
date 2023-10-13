@@ -5,8 +5,8 @@
 	import { SearchNameSchema } from '$lib/inputSchemas';
 
 	let name = $page.url.searchParams.get('name') || '';
-	let slot = $page.url.searchParams.get('slot') || 'any';
-	let type = $page.url.searchParams.get('type') || 'any';
+	let slot = $page.url.searchParams.get('slot') || 'all';
+	let type = $page.url.searchParams.get('type') || 'all';
 
 	const search = async () => {
 		let u = new URL('/items/search');
@@ -27,7 +27,7 @@
 		{#if !nameParse.success}<span class="error">{nameParse.error.issues[0].message}</span>{/if}
 	</section>
 	<section class="input-group">
-		<label for="type">Type</label>
+		<label for="type">Type {type}</label>
 		<select id="type" name="type" bind:value={type}>
 			<option value="all">All</option>
 			{#each ItemTypes as itemtype}
@@ -36,7 +36,7 @@
 		</select>
 	</section>
 	<section class="input-group">
-		<label for="slot">Slot</label>
+		<label for="slot">Slot {slot}</label>
 		<select id="slot" name="slot" bind:value={slot}>
 			<option value="all">All</option>
 			{#each ItemSlots as itemslot}
@@ -53,7 +53,7 @@
 	form {
 		display: flex;
 		gap: 1rem;
-
+		flex-direction: column;
 		width: 100%;
 	}
 	section.input-group {

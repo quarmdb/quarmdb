@@ -4,7 +4,10 @@ type MaskType = {
 	mask: number;
 };
 
-export function getFromMask<T extends MaskType>(search: number, listToSearch: T[]): T[] {
+export function getFromMask<T extends MaskType>(
+	search: number,
+	listToSearch: T[]
+): T[] {
 	let list = new Set<T>();
 
 	for (let i = 0; i < listToSearch.length; i++) {
@@ -24,26 +27,88 @@ export type PlayerRaceType = {
 
 export const playerRaceList: PlayerRaceType[] = [
 	{ id: 1, long_name: 'Human', short_name: 'HUM', mask: 1 << 0 },
-	{ id: 2, long_name: 'Barbarian', short_name: 'BAR', mask: 1 << 1 },
-	{ id: 3, long_name: 'Erudite', short_name: 'ERU', mask: 1 << 2 },
-	{ id: 4, long_name: 'Wood Elf', short_name: 'ELF', mask: 1 << 3 },
-	{ id: 5, long_name: 'High Elf', short_name: 'HIE', mask: 1 << 4 },
-	{ id: 6, long_name: 'Dark_Elf', short_name: 'DEF', mask: 1 << 5 },
-	{ id: 7, long_name: 'Half Elf', short_name: 'HEF', mask: 1 << 6 },
+	{
+		id: 2,
+		long_name: 'Barbarian',
+		short_name: 'BAR',
+		mask: 1 << 1
+	},
+	{
+		id: 3,
+		long_name: 'Erudite',
+		short_name: 'ERU',
+		mask: 1 << 2
+	},
+	{
+		id: 4,
+		long_name: 'Wood Elf',
+		short_name: 'ELF',
+		mask: 1 << 3
+	},
+	{
+		id: 5,
+		long_name: 'High Elf',
+		short_name: 'HIE',
+		mask: 1 << 4
+	},
+	{
+		id: 6,
+		long_name: 'Dark_Elf',
+		short_name: 'DEF',
+		mask: 1 << 5
+	},
+	{
+		id: 7,
+		long_name: 'Half Elf',
+		short_name: 'HEF',
+		mask: 1 << 6
+	},
 	{ id: 8, long_name: 'Dwarf', short_name: 'DWF', mask: 1 << 7 },
 	{ id: 9, long_name: 'Troll', short_name: 'TRL', mask: 1 << 8 },
 	{ id: 10, long_name: 'Ogre', short_name: 'OGR', mask: 1 << 9 },
-	{ id: 11, long_name: 'Halfling', short_name: 'HFL', mask: 1 << 10 },
-	{ id: 12, long_name: 'Gnome', short_name: 'GNM', mask: 1 << 11 },
-	{ id: 13, long_name: 'Iksar', short_name: 'IKS', mask: 1 << 12 },
-	{ id: 14, long_name: 'Vah Shir', short_name: 'VAH', mask: 1 << 13 },
-	{ id: 15, long_name: 'Froglok', short_name: 'VAH', mask: 1 << 14 }
+	{
+		id: 11,
+		long_name: 'Halfling',
+		short_name: 'HFL',
+		mask: 1 << 10
+	},
+	{
+		id: 12,
+		long_name: 'Gnome',
+		short_name: 'GNM',
+		mask: 1 << 11
+	},
+	{
+		id: 13,
+		long_name: 'Iksar',
+		short_name: 'IKS',
+		mask: 1 << 12
+	},
+	{
+		id: 14,
+		long_name: 'Vah Shir',
+		short_name: 'VAH',
+		mask: 1 << 13
+	},
+	{
+		id: 15,
+		long_name: 'Froglok',
+		short_name: 'VAH',
+		mask: 1 << 14
+	}
 	//{ id: 16, long_name: 'Drakkin', short_name: 'VAH', mask: 1 << 15 }
 ];
 
 export function getUseableRaces(search: number): PlayerRaceType[] {
 	if (search === 2 ** (playerRaceList.length - 1) - 1) {
-		return [{ id: 0, long_name: 'All Playable Races', short_name: 'ALL', mask: 1 << -1 }];
+		return [
+			{
+				id: 0,
+				long_name: 'All Playable Races',
+				short_name: 'ALL',
+				mask: 1 << -1
+			}
+		];
 	}
 	return getFromMask<PlayerRaceType>(search, playerRaceList);
 }
@@ -56,6 +121,11 @@ expansionLookup.set(4, 'The Shadows of Luclin');
 expansionLookup.set(5, 'The Planes of Power');
 expansionLookup.set(99, 'Special Zones');
 export { expansionLookup };
+
+export const getExpansionByNumber = (number: number) => {
+	let exp = expansionLookup.get(number);
+	return exp;
+};
 
 export const skills: { id: number; name: string }[] = [
 	{ id: 0, name: '1H Blunt' },
