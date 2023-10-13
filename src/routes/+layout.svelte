@@ -15,9 +15,12 @@
 					class="menu"
 					class:closed={mobileNavClosed}
 					on:click={() => (mobileNavClosed = !mobileNavClosed)}
-					><Hamburger bind:open={mobileNavClosed} /></button
-				>
-				<LeftNav />
+					><Hamburger bind:open={mobileNavClosed} /></button>
+				<LeftNav
+					on:navClicked={() => {
+						console.log('recieve nav click');
+						mobileNavClosed = true;
+					}} />
 			</nav>
 			<article>
 				<slot />
@@ -25,8 +28,9 @@
 		</main>
 		<footer>
 			<p>
-				This is not affiliated with <a href="https://www.projectquarm.com">Project Quarm</a>. Just a
-				labor of love.
+				This is not affiliated with <a href="https://www.projectquarm.com"
+					>Project Quarm</a
+				>. Just a labor of love.
 			</p>
 		</footer>
 	</div>

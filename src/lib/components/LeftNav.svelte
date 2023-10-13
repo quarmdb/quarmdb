@@ -4,24 +4,57 @@
 	import { urlBlob } from '$lib/utils';
 	import { slide } from 'svelte/transition';
 	import ThemeSwitcher from './ThemeSwitcher.svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	let subDir = '';
 	$: subDir = $page.url.pathname.slice(1).split('/')[0];
+
+	let dispatch = createEventDispatcher();
+	const navClicked = () => {
+		dispatch('navClicked');
+	};
 
 	let skillsOpen = false;
 </script>
 
 <nav>
-	<span class="title"><a href="/" class="title">QuarmDB</a></span>
+	<span class="title"
+		><a href="/" class="title" on:click={navClicked}>QuarmDB</a></span>
 	<ThemeSwitcher />
 	<ul>
-		<li><a class="major" href="/items/search" class:selected={subDir === 'items'}>Items</a></li>
-		<li><a class="major" href="/npc/search" class:selected={subDir === 'npc'}>NPCs</a></li>
-		<li><a class="major" href="/zone" class:selected={subDir === 'zone'}>Zone</a></li>
+		<li>
+			<a
+				class="major"
+				href="/items/search"
+				class:selected={subDir === 'items'}
+				on:click={navClicked}>Items</a>
+		</li>
+		<li>
+			<a
+				class="major"
+				href="/npc/search"
+				class:selected={subDir === 'npc'}
+				on:click={navClicked}>NPCs</a>
+		</li>
+		<li>
+			<a
+				class="major"
+				href="/zone"
+				class:selected={subDir === 'zone'}
+				on:click={navClicked}>Zone</a>
+		</li>
 		<ul>
-			<li><a class="minor" href="/zone/zem">Zem Info</a></li>
+			<li>
+				<a class="minor" href="/zone/zem" on:click={navClicked}>Zem Info</a>
+			</li>
 		</ul>
-		<li><a class="major" href="/faction/all" class:selected={subDir === 'faction'}>Factions</a></li>
+		<li>
+			<a
+				class="major"
+				href="/faction/all"
+				class:selected={subDir === 'faction'}
+				on:click={navClicked}>Factions</a>
+		</li>
 		<!-- <li><a class="major" href="/merchant">Merchant</a></li> -->
 		<li>
 			<a
@@ -31,16 +64,16 @@
 					skillsOpen = !skillsOpen;
 				}}
 				class:selected={subDir === 'skills'}
-				>Skills {#if skillsOpen}-{:else}+{/if}</a
-			>
+				>Skills {#if skillsOpen}-{:else}+{/if}</a>
 		</li>
 		{#if skillsOpen}
 			<ul transition:slide>
 				{#each getAllTradeSkills() as tradeSkill}
 					<li>
-						<a class="minor" href="/skills/{tradeSkill.id}/{urlBlob(tradeSkill.name)}"
-							>{tradeSkill.name}</a
-						>
+						<a
+							class="minor"
+							href="/skills/{tradeSkill.id}/{urlBlob(tradeSkill.name)}"
+							on:click={navClicked}>{tradeSkill.name}</a>
 					</li>
 				{/each}
 			</ul>
@@ -85,12 +118,13 @@
 
 	a.major {
 		display: block;
-		font-size: 1.5rem;
+		font-size: 2.5rem;
 		border-radius: 1rem;
 	}
 
 	a.minor {
 		padding-left: 1rem;
+		font-size: 1.75rem;
 	}
 
 	a:visited,
