@@ -69,8 +69,7 @@
 	}
 	nav {
 		width: 100%;
-		padding-right: 1rem;
-		padding-left: 1rem;
+		padding: 0 1rem;
 	}
 
 	ul {
