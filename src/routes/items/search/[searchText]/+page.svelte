@@ -1,11 +1,6 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import Item from '$lib/components/Item.svelte';
 	import ItemSearchForm from '$lib/components/ItemSearchForm.svelte';
-
 	import type { PageData } from './$types';
-	import type { ItemsSearchType } from '$lib/db/items';
-	import ItemCard from '$lib/components/ItemCard.svelte';
 	import { urlBlob } from '$lib/utils';
 	import { expansionLookup, getExpansionByNumber } from '$lib/db/constants';
 	export let data: PageData;
