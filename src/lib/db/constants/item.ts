@@ -122,3 +122,24 @@ export const getBardLine = (item: ItemsType) => {
 		(item.bardvalue - 10) * 10
 	}%)`;
 };
+
+export const getStatsLine = (item: ItemsType) => {
+	let stats = '';
+	if (item.astr !== 0) stats += `STR: ${item.astr} `;
+	if (item.adex !== 0) stats += `DEX: ${item.adex} `;
+	if (item.asta !== 0) stats += `STA: ${item.asta} `;
+	if (item.aint !== 0) stats += `INT: ${item.aint} `;
+	if (item.aagi !== 0) stats += `AGI: ${item.aagi} `;
+	if (item.awis !== 0) stats += `WIS: ${item.awis} `;
+	return stats;
+};
+
+export const getResistsLine = (item: ItemsType) => {
+	let resist = '';
+	if (item.mr !== 0) resist += `MR: ${item.mr} `;
+	if (item.cr !== 0) resist += `CR: ${item.cr} `;
+	if (item.pr !== 0) resist += `PR: ${item.pr} `;
+	if (item.fr !== 0) resist += `FR: ${item.fr} `;
+	if (item.dr !== 0) resist += `DR: ${item.dr} `;
+	return resist;
+};

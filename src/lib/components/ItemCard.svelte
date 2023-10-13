@@ -1,12 +1,14 @@
 <script lang="ts">
-	import { getUseableRaces } from '$lib/db/constants';
+	import { getExpansionByNumber, getUseableRaces } from '$lib/db/constants';
 	import { clickTypes, getClickTypeById } from '$lib/db/constants/clicktypes';
 	import { getClassList, getUseableClasses } from '$lib/db/constants/eqclasses';
 	import {
 		ItemTypes,
 		getBardLine,
 		getItemTypeById,
+		getResistsLine,
 		getSlotList,
+		getStatsLine,
 		getUseableSlots
 	} from '$lib/db/constants/item';
 	import { getRaceList } from '$lib/db/constants/races';
@@ -18,19 +20,26 @@
 
 <article class="item">
 	<header>
-		<img src="/icon/{item.details.icon}.gif" alt="icon" />
-		<span>{item.name}</span>
+		<section class="title">
+			<img src="/icon/{item.details.icon}.gif" alt="icon" />
+			<span>{item.name}</span>
+		</section>
+		<section class="expansion">
+			{getExpansionByNumber(item.details.min_expansion) || 'Vanilla'}
+		</section>
 	</header>
 	<main>
-		<section class="stats">
+		<section class="details">
 			<span>
 				{item.details.magic === 1 ? 'MAGIC' : ''}
 				{item.details.nodrop === 0 ? 'NO DROP' : ''}
 				{item.details.norent === 0 ? 'NO RENT' : ''}
 			</span>
-			<span>{getItemTypeById(item.details.itemtype).type}</span>
 			<span>{getSlotList(item.details.slots)}</span>
-			<span>
+			<span
+				>{getItemTypeById(item.details.itemtype).type}
+				{item.details.ac !== 0 ? 'AC: ' + item.details.ac : ''}</span>
+			<span class="atkdly">
 				{#if item.details.damage !== 0}
 					DMG: {item.details.damage}
 				{/if}
@@ -38,6 +47,8 @@
 					DELAY: {item.details.delay}
 				{/if}
 			</span>
+			<span class="stats">{getStatsLine(item.details)}</span>
+			<span class="resists">{getResistsLine(item.details)}</span>
 			{#if item.proc && item.details.proceffect}
 				<span
 					>Proc: <a href="/spells/{item.proc.id}/{urlBlob(item.proc.name)}"
@@ -82,12 +93,22 @@
 		& header {
 			width: 100%;
 			display: flex;
-			justify-content: start;
+			justify-content: space-between;
 			align-items: start;
 			background-color: var(--surface-3);
 			padding: 0.5rem;
 			font-size: 1.5rem;
 			text-align: center;
+
+			& section.title {
+				display: flex;
+			}
+
+			& section.expansion {
+				font-size: 1rem;
+				display: flex;
+				align-self: center;
+			}
 		}
 
 		& main {
@@ -96,7 +117,7 @@
 			width: 100%;
 			padding: 1rem;
 
-			& section.stats {
+			& section.details {
 				display: flex;
 				flex-direction: column;
 			}
