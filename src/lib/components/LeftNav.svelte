@@ -78,6 +78,13 @@
 				{/each}
 			</ul>
 		{/if}
+		<li>
+			<a
+				class="major"
+				href="/info"
+				class:selected={subDir === 'info'}
+				on:click={navClicked}>Info</a>
+		</li>
 	</ul>
 </nav>
 
