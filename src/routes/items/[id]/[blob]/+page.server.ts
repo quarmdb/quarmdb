@@ -1,4 +1,3 @@
-import { ItemsSchema, NpcTypesSchema } from '$lib/schema';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoadEvent } from './$types';
 import { pool } from '$lib/db';
