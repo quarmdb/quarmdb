@@ -9,6 +9,7 @@ export async function load({ params }: PageServerLoadEvent) {
 	const client = await pool.connect();
 	try {
 		let wheres = [];
+		wheres.push(` WHERE i.`);
 		wheres.push(` WHERE i.clickeffect > 0 `);
 		wheres.push(` WHERE i.worneffect > 0  `);
 		wheres.push(` WHERE i.proceffect > 0  `);

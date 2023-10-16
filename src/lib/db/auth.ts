@@ -2,6 +2,7 @@ import { SecretsSchema } from '$lib/schema/Users';
 import { error } from '@sveltejs/kit';
 import type { PoolClient } from 'pg';
 import crypto from 'crypto';
+import { MailtrapClient } from 'mailtrap';
 
 export const register = async (
 	email: string,
@@ -50,4 +51,30 @@ export const register = async (
 	const result = await client.query(query);
 
 	console.log(result);
+
+	//Send Email Verification
+	const mailtrapClient = new MailtrapClient({
+		endpoint: mailtrap_endpoint,
+		token: mailtrap_token
+	});
+
+	const sender = {
+		email: 'noreply@quarmdb.com',
+		name: 'Mailtrap Test'
+	};
+	const recipients = [
+		{
+			email
+		}
+	];
+
+	mailtrapClient
+		.send({
+			from: sender,
+			to: recipients,
+			subject: 'QuarmDB Email Verification',
+			text: `Your email verification is ${email_validation_code}`,
+			category: 'Email Verification '
+		})
+		.then(console.log, console.error);
 };
