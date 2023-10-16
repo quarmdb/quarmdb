@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { ZodAny, z } from 'zod';
 
 export const UsersSchema = z.object({
 	id: z.number(),
@@ -13,3 +13,11 @@ export const UsersSchema = z.object({
 });
 
 export type UsersType = z.infer<typeof UsersSchema>;
+
+export const SecretsSchema = z.object({
+	id: z.number(),
+	name: z.string(),
+	secret: z.string()
+});
+
+export type SecretsType = z.infer<typeof SecretsSchema>;
