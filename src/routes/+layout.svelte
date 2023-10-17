@@ -4,7 +4,7 @@
 	import Hamburger from '$lib/svg/Hamburger.svelte';
 	import '../app.css';
 
-	let mobileNavClosed = false;
+	let mobileNavClosed = true;
 </script>
 
 <ThemeWrapper>
@@ -54,7 +54,7 @@
 		width: 100%;
 		flex-grow: 1;
 		position: relative;
-		padding: 0;
+		padding-top: 4rem;
 		margin: 0;
 	}
 
@@ -99,6 +99,9 @@
 	}
 
 	@media (min-width: 768px) {
+		main {
+			padding: 0;
+		}
 		nav.left {
 			position: sticky;
 			padding-top: 1rem;

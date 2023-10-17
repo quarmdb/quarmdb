@@ -1,20 +1,25 @@
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ resolve, event }) => {
-
 	console.log(`Logging -> ${event.url}`);
 
 	// Apply CORS header for API routes
 	if (event.url.pathname.startsWith('/')) {
-		const validDomains: RegExp[] = [/^localhost$/gi, /^www\.quarmdb\.com$/gi];
+		const validDomains: RegExp[] = [
+			/^localhost$/gi,
+			/^www\.quarmdb\.com$/gi,
+			/^[a-zA-Z0-9\-\.]+gitpod.io$/gi
+		];
 		let allowed = false;
 		let corsAllowedDomain = '';
 
 		let originDomain: string = '';
 		try {
 			//console.log(event.request.headers);
-			if (event.request.headers.get('origin') === null) return await resolve(event);
-			originDomain = new URL(event.request.headers.get('origin') || '').hostname;
+			if (event.request.headers.get('origin') === null)
+				return await resolve(event);
+			originDomain = new URL(event.request.headers.get('origin') || '')
+				.hostname;
 			validDomains.forEach((domainRegEx) => {
 				if (domainRegEx.test(originDomain)) {
 					allowed = true;
@@ -29,7 +34,8 @@ export const handle: Handle = async ({ resolve, event }) => {
 		if (event.request.method === 'OPTIONS' && allowed) {
 			return new Response(null, {
 				headers: {
-					'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+					'Access-Control-Allow-Methods':
+						'GET, POST, PUT, DELETE, PATCH, OPTIONS',
 					'Access-Control-Allow-Origin': corsAllowedDomain,
 					'Access-Control-Allow-Headers': '*'
 				}

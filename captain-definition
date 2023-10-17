@@ -14,3 +14,5 @@
 		"CMD [ \"npm\", \"start\" ]"
 	]
 }
+
+//ORIGIN=http://www.quarmdb.com node build
