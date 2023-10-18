@@ -11,10 +11,7 @@ const config = {
 		env: {
 			dir: './'
 		},
-		adapter: adapter(),
-		csrf: {
-			checkOrigin: false
-		}
+		adapter: adapter()
 	}
 };
 

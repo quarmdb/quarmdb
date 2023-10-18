@@ -10,7 +10,7 @@ export const register = async (
 	client: PoolClient
 ) => {
 	const secretsResult = await client.query(
-		`SELECT * FROM secrets WHERE name = 'mailtrap_token`
+		`SELECT * FROM secrets WHERE name = 'mailtrap_token'`
 	);
 	if (secretsResult.rowCount !== 1) {
 		console.error('secretsResult.rowCount !== 1');
@@ -68,12 +68,14 @@ export const register = async (
 		}
 	];
 
+	const text = `Welcome to QuarmDB, go to https://www.quarmdb.com/auth/verify/${email_validation_code} to validate your email`;
+
 	mailtrapClient
 		.send({
 			from: sender,
 			to: recipients,
 			subject: 'QuarmDB Email Verification',
-			text: `Your email verification is ${email_validation_code}`,
+			text,
 			category: 'Email Verification '
 		})
 		.then(console.log, console.error);
