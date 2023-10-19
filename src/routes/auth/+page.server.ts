@@ -2,7 +2,7 @@ import { z } from 'zod';
 import type { Actions } from './$types';
 import { error, fail } from '@sveltejs/kit';
 import { pool } from '$lib/db';
-import { register } from '$lib/db/auth';
+import { isEmailRegistered, register } from '$lib/db/auth';
 import type { PageServerLoadEvent } from './$types';
 
 export async function load({ params }: PageServerLoadEvent) {
@@ -33,7 +33,21 @@ export const actions = {
 		}
 		const client = await pool.connect();
 		try {
-			await register(email, password1, client);
+			if (await isEmailRegistered(email, client)) {
+				return fail(400, {
+					email,
+					password1,
+					password2,
+					emailIsRegistered: true
+				});
+			}
+
+			await register(
+				email,
+				password1,
+				request.headers.get('origin') || 'https://www.quarmdb.com/',
+				client
+			);
 			return { register: true };
 		} catch (err) {
 			console.error(err);

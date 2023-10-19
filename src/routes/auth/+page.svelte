@@ -40,12 +40,18 @@
 				class:none={!displayRegister}>
 				<h2>Register for QuarmDB</h2>
 				<section class="input-group">
-					<label for="Email" class:error={form?.badEmail}>Email</label>
+					<label
+						for="Email"
+						class:error={form?.badEmail || form?.emailIsRegistered}
+						>Email</label>
 					<input
 						type="text"
 						name="email"
 						value={form?.email ?? ''}
-						class:error={form?.badEmail} />
+						class:error={form?.badEmail || form?.emailIsRegistered} />
+					{#if form?.emailIsRegistered}
+						<span class="error">Email Already Registered</span>
+					{/if}
 				</section>
 				{#if form?.passwordMismatch}
 					<span class="error">Passwords do not match</span>

@@ -1,16 +1,17 @@
-import { SecretsSchema } from '$lib/schema/Users';
+import { SecretsSchema, UsersSchema } from '$lib/schema/Users';
 import { error } from '@sveltejs/kit';
-import type { PoolClient } from 'pg';
+import type { Pool, PoolClient } from 'pg';
 import crypto from 'crypto';
-import { MailtrapClient } from 'mailtrap';
+import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend';
 
 export const register = async (
 	email: string,
 	password: string,
+	hostname: string,
 	client: PoolClient
 ) => {
 	const secretsResult = await client.query(
-		`SELECT * FROM secrets WHERE name = 'mailtrap_token'`
+		`SELECT * FROM secrets WHERE name = 'mailsend_token'`
 	);
 	if (secretsResult.rowCount !== 1) {
 		console.error('secretsResult.rowCount !== 1');
@@ -21,8 +22,6 @@ export const register = async (
 		console.error(secretsParsed.error.message);
 		throw error(404);
 	}
-	const mailtrap_token = secretsParsed.data.secret;
-	const mailtrap_endpoint = 'https://send.api.mailtrap.io/';
 
 	const salt = crypto.randomUUID();
 	const hash = crypto.pbkdf2(
@@ -46,37 +45,78 @@ export const register = async (
   VALUES
   ('${email}','${email_validation_code}',false,'${hash}', '${salt}', '', false)`;
 
-	console.log(query);
-
 	const result = await client.query(query);
-
-	console.log(result);
-
 	//Send Email Verification
-	const mailtrapClient = new MailtrapClient({
-		endpoint: mailtrap_endpoint,
-		token: mailtrap_token
-	});
 
-	const sender = {
-		email: 'noreply@quarmdb.com',
-		name: 'Mailtrap Test'
-	};
-	const recipients = [
-		{
-			email
-		}
-	];
+	const apiKey = secretsParsed.data.secret;
+	const mailerSend = new MailerSend({ apiKey });
 
-	const text = `Welcome to QuarmDB, go to https://www.quarmdb.com/auth/verify/${email_validation_code} to validate your email`;
+	const sentFrom = new Sender(
+		'noreply@quarmdb.com',
+		'QuarmDB Email Verification'
+	);
+	const recipients = [new Recipient(email)];
 
-	const response = await mailtrapClient.send({
-		from: sender,
-		to: recipients,
-		subject: 'QuarmDB Email Verification',
-		text,
-		category: 'Email Verification '
-	});
+	const url = hostname + '/auth/verify/' + email_validation_code;
 
-	console.log(response);
+	const text = `Welcome to QuarmDB, go to ${url} to validate your email`;
+	const html = `<h1>Welcome to QuarmDB</h1><br />
+	go to <a href="${url}">${url}</a> to validate your email`;
+	const subject = 'QuarmDB Email Verification';
+
+	const emailParams = new EmailParams()
+		.setFrom(sentFrom)
+		.setTo(recipients)
+		.setReplyTo(sentFrom)
+		.setSubject(subject)
+		.setText(text)
+		.setHtml(html);
+
+	const emailResponse = await mailerSend.email.send(emailParams);
+
+	console.log(emailResponse);
+};
+
+export const verifyEmailByToken = async (token: string, client: PoolClient) => {
+	let result = await client.query(
+		`SELECT * FROM users WHERE email_validation_code = $1 AND email_validated = false`,
+		[token]
+	);
+	if (result.rowCount !== 1) {
+		console.error(`/auth/verify/[token] -> did not find token`);
+		return false;
+	}
+	let parsed = UsersSchema.safeParse(result.rows[0]);
+	if (!parsed.success) {
+		console.error(parsed.error.message);
+		throw error(404);
+	}
+	let user = parsed.data;
+
+	result = await client.query(
+		`
+		UPDATE 
+			users 
+		SET 
+			email_validated = true,
+			allowed_to_login = true
+		WHERE
+			id = $1
+	`,
+		[user.id]
+	);
+
+	if (result.rowCount !== 1) {
+		console.error(`/auth/verify/[token] -> did not find id`);
+		return false;
+	}
+
+	return true;
+};
+
+export const isEmailRegistered = async (email: string, client: PoolClient) => {
+	return (
+		(await client.query(`SELECT email FROM users WHERE email = $1`, [email]))
+			.rowCount !== 0
+	);
 };
