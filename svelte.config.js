@@ -1,6 +1,7 @@
 import adapter from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
@@ -11,7 +12,10 @@ const config = {
 		env: {
 			dir: './'
 		},
-		adapter: adapter()
+		adapter: adapter(),
+		csrf: {
+			checkOrigin: process.env.NODE_ENV === 'production'
+		}
 	}
 };
 

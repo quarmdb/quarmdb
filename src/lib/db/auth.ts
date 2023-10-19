@@ -70,13 +70,13 @@ export const register = async (
 
 	const text = `Welcome to QuarmDB, go to https://www.quarmdb.com/auth/verify/${email_validation_code} to validate your email`;
 
-	mailtrapClient
-		.send({
-			from: sender,
-			to: recipients,
-			subject: 'QuarmDB Email Verification',
-			text,
-			category: 'Email Verification '
-		})
-		.then(console.log, console.error);
+	const response = await mailtrapClient.send({
+		from: sender,
+		to: recipients,
+		subject: 'QuarmDB Email Verification',
+		text,
+		category: 'Email Verification '
+	});
+
+	console.log(response);
 };

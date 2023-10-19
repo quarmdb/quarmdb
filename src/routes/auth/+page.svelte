@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { register } from 'module';
 	import type { PageData, ActionData } from './$types';
 
 	export let data: PageData;

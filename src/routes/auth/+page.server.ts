@@ -3,12 +3,17 @@ import type { Actions } from './$types';
 import { error, fail } from '@sveltejs/kit';
 import { pool } from '$lib/db';
 import { register } from '$lib/db/auth';
+import type { PageServerLoadEvent } from './$types';
+
+export async function load({ params }: PageServerLoadEvent) {
+	return {};
+}
 
 export const actions = {
 	login: async (event) => {
 		// TODO log the user in
 
-		return { success: true };
+		return { login: true };
 	},
 	register: async ({ request, cookies }) => {
 		console.log(`register`);
