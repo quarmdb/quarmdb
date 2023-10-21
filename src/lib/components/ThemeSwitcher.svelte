@@ -4,13 +4,19 @@
 </script>
 
 <section>
-	<label for="theme-selector" data-theme="test" id="theme-selector-label">Dark/Light</label>
+	<label for="theme-selector" data-theme="test" id="theme-selector-label"
+		>Dark/Light</label>
 	<input type="checkbox" id="theme-selector" bind:checked={$darkModeStore} />
 </section>
 
 <style>
 	section {
 		position: relative;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: end;
+		padding-right: 1rem;
 	}
 
 	label {

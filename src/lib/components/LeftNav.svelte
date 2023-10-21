@@ -19,8 +19,9 @@
 
 <nav>
 	<span class="title"
-		><a href="/" class="title" on:click={navClicked}>QuarmDB</a></span>
-	<ThemeSwitcher />
+		><a href="/" class="title" on:click={navClicked}>QuarmDB</a>
+		<ThemeSwitcher />
+	</span>
 	<ul>
 		<li>
 			<a
@@ -97,12 +98,16 @@
 	span.title {
 		width: 100%;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		justify-content: space-between;
-		font-size: 2rem;
+		align-items: center;
 
 		& a.title:visited,
 		& a.title {
+			font-size: 3rem;
+			display: block;
+			padding-right: 1rem;
+			text-align: right;
 			color: var(--text-2);
 			text-decoration-color: var(--text-2);
 		}
@@ -114,7 +119,6 @@
 	}
 	nav {
 		width: 100%;
-		padding: 0 1rem;
 	}
 
 	ul {
@@ -128,15 +132,23 @@
 		display: block;
 	}
 
-	a.major {
+	a.major,
+	a.minor {
 		display: block;
+		text-align: right;
+		padding-right: 1rem;
+	}
+	a.major {
 		font-size: 2.5rem;
-		border-radius: 1rem;
 	}
 
 	a.minor {
-		padding-left: 1rem;
 		font-size: 1.75rem;
+	}
+
+	a.major:hover,
+	a.minor:hover {
+		border-right: 2px solid var(--brand);
 	}
 
 	a:visited,
@@ -147,5 +159,6 @@
 
 	a.selected {
 		text-decoration: underline;
+		border-right: 2px solid var(--brand);
 	}
 </style>
