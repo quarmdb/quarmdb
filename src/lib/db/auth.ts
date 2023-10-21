@@ -41,7 +41,7 @@ export const register = async (
 	const email_validation_code = crypto.randomUUID();
 
 	const query = `INSERT INTO users
-  (email, email_validation_code, email_validated, password_hash, salt, refresh, allowed_to_login)
+  (email, email_validation_code, email_validated, password_hash, salt, refresh_secret, allowed_to_login)
   VALUES
   ('${email}','${email_validation_code}',false,'${hash}', '${salt}', '', false)`;
 
@@ -120,3 +120,10 @@ export const isEmailRegistered = async (email: string, client: PoolClient) => {
 			.rowCount !== 0
 	);
 };
+
+export const createAuthToken = async (email: string, client: PoolClient) => {};
+
+export const createRefreshToken = async (
+	email: string,
+	client: PoolClient
+) => {};
