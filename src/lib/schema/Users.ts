@@ -7,7 +7,6 @@ export const UsersSchema = z.object({
 	email_validated: z.boolean(),
 	password_hash: z.string(),
 	salt: z.string(),
-	refresh_secret: z.string(),
 	allowed_to_login: z.boolean(),
 	created_at: z.string()
 });

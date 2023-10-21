@@ -1,11 +1,7 @@
 <script lang="ts">
-	import type { PageData, ActionData } from './$types';
-
-	export let data: PageData;
+	import type { ActionData } from './$types';
 
 	export let form: ActionData;
-
-	let displayRegister = true;
 </script>
 
 <div class="wrapper">
@@ -16,28 +12,7 @@
 		</h2>
 	{:else}
 		<div class="forms">
-			<form action="/auth?/login" method="POST" class:none={displayRegister}>
-				<h2>Login to QuarmDB</h2>
-				<section class="input-group">
-					<label for="Email">Email</label>
-					<input type="text" name="email" value={form?.email ?? ''} />
-				</section>
-				<section class="input-group">
-					<label for="password">Password</label>
-					<input type="password" name="password" />
-				</section>
-				<section class="submit">
-					<button type="submit">Login</button>
-					<span>or</span><a
-						href={'#'}
-						on:click|preventDefault={() => (displayRegister = true)}
-						>Register</a>
-				</section>
-			</form>
-			<form
-				action="/auth?/register"
-				method="POST"
-				class:none={!displayRegister}>
+			<form action="/auth/register" method="POST">
 				<h2>Register for QuarmDB</h2>
 				<section class="input-group">
 					<label
@@ -76,9 +51,7 @@
 				</section>
 				<section class="submit">
 					<button type="submit">Register</button>
-					<span>or</span><a
-						href={'#'}
-						on:click|preventDefault={() => (displayRegister = false)}>Login</a>
+					<span>or</span><a href="/auth/login">Login</a>
 				</section>
 			</form>
 		</div>
@@ -86,9 +59,6 @@
 </div>
 
 <style>
-	.none {
-		display: none;
-	}
 	div.wrapper {
 		height: 100%;
 		width: 100%;

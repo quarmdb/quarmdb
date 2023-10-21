@@ -4,18 +4,14 @@ import { error, fail } from '@sveltejs/kit';
 import { pool } from '$lib/db';
 import { isEmailRegistered, register } from '$lib/db/auth';
 import type { PageServerLoadEvent } from './$types';
+import { FactionListModSchema } from '$lib/schema';
 
 export async function load({ params }: PageServerLoadEvent) {
 	return {};
 }
 
 export const actions = {
-	login: async (event) => {
-		// TODO log the user in
-
-		return { login: true };
-	},
-	register: async ({ request, cookies }) => {
+	default: async ({ request, cookies }) => {
 		console.log(`register`);
 		const formData = await request.formData();
 		const email = formData.get('email')?.toString() || '';
