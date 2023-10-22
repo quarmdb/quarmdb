@@ -57,9 +57,9 @@ export const searchNpcs = async (whereString: string, client: PoolClient) => {
     npc.*
   FROM
     npc_types npc
-  INNER JOIN spawnentry se
+  LEFT JOIN spawnentry se
     ON se.npcID = npc.id
-  INNER JOIN spawn2 s2
+  LEFT JOIN spawn2 s2
     ON s2.spawngroupId = se.spawngroupID
   ${whereString}
   )
@@ -73,14 +73,14 @@ export const searchNpcs = async (whereString: string, client: PoolClient) => {
 
 	const parsedNpcs = NpcTypesSearchSchema.array().safeParse(res.rows);
 	if (!parsedNpcs.success) {
-		console.error(parsedNpcs.error);
+		console.error(parsedNpcs.error.message);
 		throw error(404);
 	}
 	return parsedNpcs.data;
 };
 
 export const NpcTypesSearchSchema = z.object({
-	zone: z.string(),
+	zone: z.string().nullable(),
 	npcs: z
 		.object({
 			id: z.number(),

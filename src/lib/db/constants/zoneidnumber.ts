@@ -1,4 +1,8 @@
-export type ZoneIdNumberType = { id: number; long_name: string; short_name: string };
+export type ZoneIdNumberType = {
+	id: number;
+	long_name: string;
+	short_name: string;
+};
 
 export const AllZones: ZoneIdNumberType[] = [
 	{ id: 1, long_name: 'South Qeynos ', short_name: 'qeynos' },
@@ -10,10 +14,22 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 8, long_name: 'North Freeport ', short_name: 'freportn' },
 	{ id: 9, long_name: 'West Freeport ', short_name: 'freportw' },
 	{ id: 10, long_name: 'East Freeport ', short_name: 'freporte' },
-	{ id: 11, long_name: 'The Liberated Citadel of Runnyeye ', short_name: 'runnyeye' },
+	{
+		id: 11,
+		long_name: 'The Liberated Citadel of Runnyeye ',
+		short_name: 'runnyeye'
+	},
 	{ id: 12, long_name: 'The Western Plains of Karana ', short_name: 'qey2hh1' },
-	{ id: 13, long_name: 'The Northern Plains of Karana ', short_name: 'northkarana' },
-	{ id: 14, long_name: 'The Southern Plains of Karana ', short_name: 'southkarana' },
+	{
+		id: 13,
+		long_name: 'The Northern Plains of Karana ',
+		short_name: 'northkarana'
+	},
+	{
+		id: 14,
+		long_name: 'The Southern Plains of Karana ',
+		short_name: 'southkarana'
+	},
 	{ id: 15, long_name: 'Eastern Plains of Karana ', short_name: 'eastkarana' },
 	{ id: 16, long_name: 'Gorge of King Xorbb ', short_name: 'beholder' },
 	{ id: 17, long_name: 'Blackburrow ', short_name: 'blackburrow' },
@@ -48,7 +64,11 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 45, long_name: 'The Qeynos Aqueduct System ', short_name: 'qcat' },
 	{ id: 46, long_name: 'Innothule Swamp ', short_name: 'innothule' },
 	{ id: 47, long_name: 'The Feerrott ', short_name: 'feerrott' },
-	{ id: 48, long_name: 'Accursed Temple of CazicThule ', short_name: 'cazicthule' },
+	{
+		id: 48,
+		long_name: 'Accursed Temple of CazicThule ',
+		short_name: 'cazicthule'
+	},
 	{ id: 49, long_name: 'Oggok ', short_name: 'oggok' },
 	{ id: 50, long_name: 'The Rathe Mountains ', short_name: 'rathemtn' },
 	{ id: 51, long_name: 'Lake Rathetear ', short_name: 'lakerathe' },
@@ -110,7 +130,11 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 108, long_name: "Veeshan's Peak ", short_name: 'veeshan' },
 	{ id: 109, long_name: 'Veksar ', short_name: 'veksar' },
 	{ id: 110, long_name: 'The Iceclad Ocean ', short_name: 'iceclad' },
-	{ id: 111, long_name: 'The Tower of Frozen Shadow ', short_name: 'frozenshadow' },
+	{
+		id: 111,
+		long_name: 'The Tower of Frozen Shadow ',
+		short_name: 'frozenshadow'
+	},
 	{ id: 112, long_name: "Velketor's Labyrinth ", short_name: 'velketor' },
 	{ id: 113, long_name: 'Kael Drakkel ', short_name: 'kael' },
 	{ id: 114, long_name: 'Skyshrine ', short_name: 'skyshrine' },
@@ -172,18 +196,34 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 200, long_name: 'The Crypt of Decay ', short_name: 'codecay' },
 	{ id: 201, long_name: 'The Plane of Justice ', short_name: 'pojustice' },
 	{ id: 202, long_name: 'The Plane of Knowledge ', short_name: 'poknowledge' },
-	{ id: 203, long_name: 'The Plane of Tranquility ', short_name: 'potranquility' },
+	{
+		id: 203,
+		long_name: 'The Plane of Tranquility ',
+		short_name: 'potranquility'
+	},
 	{ id: 204, long_name: 'The Plane of Nightmares ', short_name: 'ponightmare' },
 	{ id: 205, long_name: 'The Plane of Disease ', short_name: 'podisease' },
-	{ id: 206, long_name: 'The Plane of Innovation ', short_name: 'poinnovation' },
-	{ id: 207, long_name: 'Torment, the Plane of Pain ', short_name: 'potorment' },
+	{
+		id: 206,
+		long_name: 'The Plane of Innovation ',
+		short_name: 'poinnovation'
+	},
+	{
+		id: 207,
+		long_name: 'Torment, the Plane of Pain ',
+		short_name: 'potorment'
+	},
 	{ id: 208, long_name: 'The Plane of Valor ', short_name: 'povalor' },
 	{ id: 209, long_name: 'Bastion of Thunder ', short_name: 'bothunder' },
 	{ id: 210, long_name: 'The Plane of Storms ', short_name: 'postorms' },
 	{ id: 211, long_name: 'The Halls of Honor ', short_name: 'hohonora' },
 	{ id: 212, long_name: 'The Tower of Solusek Ro ', short_name: 'solrotower' },
 	{ id: 213, long_name: 'Plane of War ', short_name: 'powar' },
-	{ id: 214, long_name: 'Drunder, the Fortress of Zek ', short_name: 'potactics' },
+	{
+		id: 214,
+		long_name: 'Drunder, the Fortress of Zek ',
+		short_name: 'potactics'
+	},
 	{ id: 215, long_name: 'The Plane of Air ', short_name: 'poair' },
 	{ id: 216, long_name: 'The Plane of Water ', short_name: 'powater' },
 	{ id: 217, long_name: 'The Plane of Fire ', short_name: 'pofire' },
@@ -198,18 +238,50 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 226, long_name: 'The Torgiran Mines ', short_name: 'torgiran' },
 	{ id: 227, long_name: 'The Crypt of Nadox ', short_name: 'nadox' },
 	{ id: 228, long_name: "Hate's Fury ", short_name: 'hatesfury' },
-	{ id: 229, long_name: 'Deepest Guk: Cauldron of Lost Souls ', short_name: 'guka' },
-	{ id: 230, long_name: 'The Rujarkian Hills: Bloodied Quarries ', short_name: 'ruja' },
+	{
+		id: 229,
+		long_name: 'Deepest Guk: Cauldron of Lost Souls ',
+		short_name: 'guka'
+	},
+	{
+		id: 230,
+		long_name: 'The Rujarkian Hills: Bloodied Quarries ',
+		short_name: 'ruja'
+	},
 	{ id: 231, long_name: 'Takish-Hiz: Sunken Library ', short_name: 'taka' },
-	{ id: 232, long_name: "Miragul's Menagerie: Silent Gallery ", short_name: 'mira' },
-	{ id: 233, long_name: "Mistmoore's Catacombs: Forlorn Caverns ", short_name: 'mmca' },
+	{
+		id: 232,
+		long_name: "Miragul's Menagerie: Silent Gallery ",
+		short_name: 'mira'
+	},
+	{
+		id: 233,
+		long_name: "Mistmoore's Catacombs: Forlorn Caverns ",
+		short_name: 'mmca'
+	},
 	{ id: 234, long_name: 'The Drowning Crypt ', short_name: 'gukb' },
-	{ id: 235, long_name: 'The Rujarkian Hills: Halls of War ', short_name: 'rujb' },
+	{
+		id: 235,
+		long_name: 'The Rujarkian Hills: Halls of War ',
+		short_name: 'rujb'
+	},
 	{ id: 236, long_name: 'Takish-Hiz: Shifting Tower ', short_name: 'takb' },
-	{ id: 237, long_name: "Miragul's Menagerie: Frozen Nightmare ", short_name: 'mirb' },
-	{ id: 238, long_name: "Mistmoore's Catacombs: Dreary Grotto ", short_name: 'mmcb' },
+	{
+		id: 237,
+		long_name: "Miragul's Menagerie: Frozen Nightmare ",
+		short_name: 'mirb'
+	},
+	{
+		id: 238,
+		long_name: "Mistmoore's Catacombs: Dreary Grotto ",
+		short_name: 'mmcb'
+	},
 	{ id: 239, long_name: 'Deepest Guk: Ancient Aqueducts ', short_name: 'gukc' },
-	{ id: 240, long_name: 'The Rujarkian Hills: Wind Bridges ', short_name: 'rujc' },
+	{
+		id: 240,
+		long_name: 'The Rujarkian Hills: Wind Bridges ',
+		short_name: 'rujc'
+	},
 	{ id: 241, long_name: 'Takish-Hiz: Fading Temple ', short_name: 'takc' },
 	{ id: 242, long_name: 'The Spider Den ', short_name: 'mirc' },
 	{
@@ -218,20 +290,44 @@ export const AllZones: ZoneIdNumberType[] = [
 		short_name: 'mmcc'
 	},
 	{ id: 244, long_name: 'The Mushroom Grove ', short_name: 'gukd' },
-	{ id: 245, long_name: 'The Rujarkian Hills: Prison Break ', short_name: 'rujd' },
+	{
+		id: 245,
+		long_name: 'The Rujarkian Hills: Prison Break ',
+		short_name: 'rujd'
+	},
 	{ id: 246, long_name: 'Takish-Hiz: Royal Observatory ', short_name: 'takd' },
-	{ id: 247, long_name: "Miragul's Menagerie: Hushed Banquet ", short_name: 'mird' },
+	{
+		id: 247,
+		long_name: "Miragul's Menagerie: Hushed Banquet ",
+		short_name: 'mird'
+	},
 	{
 		id: 248,
 		long_name: "Mistmoore's Catacombs: Chambers of Eternal Affliction ",
 		short_name: 'mmcd'
 	},
 	{ id: 249, long_name: 'Deepest Guk: The Curse Reborn ', short_name: 'guke' },
-	{ id: 250, long_name: 'The Rujarkian Hills: Drudge Hollows ', short_name: 'ruje' },
-	{ id: 251, long_name: 'Takish-Hiz: River of Recollection ', short_name: 'take' },
+	{
+		id: 250,
+		long_name: 'The Rujarkian Hills: Drudge Hollows ',
+		short_name: 'ruje'
+	},
+	{
+		id: 251,
+		long_name: 'Takish-Hiz: River of Recollection ',
+		short_name: 'take'
+	},
 	{ id: 252, long_name: 'The Frosted Halls ', short_name: 'mire' },
-	{ id: 253, long_name: "Mistmoore's Catacombs: Sepulcher of the Damned ", short_name: 'mmce' },
-	{ id: 254, long_name: 'Deepest Guk: Chapel of the Witnesses ', short_name: 'gukf' },
+	{
+		id: 253,
+		long_name: "Mistmoore's Catacombs: Sepulcher of the Damned ",
+		short_name: 'mmce'
+	},
+	{
+		id: 254,
+		long_name: 'Deepest Guk: Chapel of the Witnesses ',
+		short_name: 'gukf'
+	},
 	{
 		id: 255,
 		long_name: 'The Rujarkian Hills: Fortified Lair of the Taskmasters ',
@@ -239,45 +335,141 @@ export const AllZones: ZoneIdNumberType[] = [
 	},
 	{ id: 256, long_name: 'Takish-Hiz: Sandfall Corridors ', short_name: 'takf' },
 	{ id: 257, long_name: 'The Forgotten Wastes ', short_name: 'mirf' },
-	{ id: 258, long_name: "Mistmoore's Catacombs: Scion Lair of Fury ", short_name: 'mmcf' },
+	{
+		id: 258,
+		long_name: "Mistmoore's Catacombs: Scion Lair of Fury ",
+		short_name: 'mmcf'
+	},
 	{ id: 259, long_name: 'The Root Garden ', short_name: 'gukg' },
-	{ id: 260, long_name: 'The Rujarkian Hills: Hidden Vale of Deceit ', short_name: 'rujg' },
+	{
+		id: 260,
+		long_name: 'The Rujarkian Hills: Hidden Vale of Deceit ',
+		short_name: 'rujg'
+	},
 	{ id: 261, long_name: 'Takish-Hiz: Balancing Chamber ', short_name: 'takg' },
-	{ id: 262, long_name: "Miragul's Menagerie: Heart of the Menagerie ", short_name: 'mirg' },
-	{ id: 263, long_name: "Mistmoore's Catacombs: Cesspits of Putrescence ", short_name: 'mmcg' },
-	{ id: 264, long_name: 'Deepest Guk: Accursed Sanctuary ', short_name: 'gukh' },
-	{ id: 265, long_name: 'The Rujarkian Hills: Blazing Forge ', short_name: 'rujh' },
+	{
+		id: 262,
+		long_name: "Miragul's Menagerie: Heart of the Menagerie ",
+		short_name: 'mirg'
+	},
+	{
+		id: 263,
+		long_name: "Mistmoore's Catacombs: Cesspits of Putrescence ",
+		short_name: 'mmcg'
+	},
+	{
+		id: 264,
+		long_name: 'Deepest Guk: Accursed Sanctuary ',
+		short_name: 'gukh'
+	},
+	{
+		id: 265,
+		long_name: 'The Rujarkian Hills: Blazing Forge ',
+		short_name: 'rujh'
+	},
 	{ id: 266, long_name: 'Takish-Hiz: Sweeping Tides ', short_name: 'takh' },
 	{ id: 267, long_name: 'The Morbid Laboratory ', short_name: 'mirh' },
-	{ id: 268, long_name: "Mistmoore's Catacombs: Aisles of Blood ", short_name: 'mmch' },
-	{ id: 269, long_name: 'The Rujarkian Hills: Arena of Chance ', short_name: 'ruji' },
+	{
+		id: 268,
+		long_name: "Mistmoore's Catacombs: Aisles of Blood ",
+		short_name: 'mmch'
+	},
+	{
+		id: 269,
+		long_name: 'The Rujarkian Hills: Arena of Chance ',
+		short_name: 'ruji'
+	},
 	{ id: 270, long_name: 'Takish-Hiz: Antiquated Palace ', short_name: 'taki' },
-	{ id: 271, long_name: 'The Theater of Imprisoned Horror ', short_name: 'miri' },
-	{ id: 272, long_name: "Mistmoore's Catacombs: Halls of Sanguinary Rites ", short_name: 'mmci' },
-	{ id: 273, long_name: 'The Rujarkian Hills: Barracks of War ', short_name: 'rujj' },
-	{ id: 274, long_name: 'Takish-Hiz: Prismatic Corridors ', short_name: 'takj' },
-	{ id: 275, long_name: "Miragul's Menagerie: Grand Library ", short_name: 'mirj' },
-	{ id: 276, long_name: "Mistmoore's Catacombs: Infernal Sanctuary ", short_name: 'mmcj' },
-	{ id: 277, long_name: 'Chardok: The Halls of Betrayal ', short_name: 'chardokb' },
+	{
+		id: 271,
+		long_name: 'The Theater of Imprisoned Horror ',
+		short_name: 'miri'
+	},
+	{
+		id: 272,
+		long_name: "Mistmoore's Catacombs: Halls of Sanguinary Rites ",
+		short_name: 'mmci'
+	},
+	{
+		id: 273,
+		long_name: 'The Rujarkian Hills: Barracks of War ',
+		short_name: 'rujj'
+	},
+	{
+		id: 274,
+		long_name: 'Takish-Hiz: Prismatic Corridors ',
+		short_name: 'takj'
+	},
+	{
+		id: 275,
+		long_name: "Miragul's Menagerie: Grand Library ",
+		short_name: 'mirj'
+	},
+	{
+		id: 276,
+		long_name: "Mistmoore's Catacombs: Infernal Sanctuary ",
+		short_name: 'mmcj'
+	},
+	{
+		id: 277,
+		long_name: 'Chardok: The Halls of Betrayal ',
+		short_name: 'chardokb'
+	},
 	{ id: 278, long_name: 'The Caverns of Exile ', short_name: 'soldungc' },
 	{ id: 279, long_name: 'The Abysmal Sea ', short_name: 'abysmal' },
 	{ id: 280, long_name: 'Natimbi, the Broken Shores ', short_name: 'natimbi' },
 	{ id: 281, long_name: 'Qinimi, Court of Nihilia ', short_name: 'qinimi' },
 	{ id: 282, long_name: 'Riwwi, Coliseum of Games ', short_name: 'riwwi' },
 	{ id: 283, long_name: 'Barindu, Hanging Gardens ', short_name: 'barindu' },
-	{ id: 284, long_name: 'Ferubi, Forgotten Temple of Taelosia ', short_name: 'ferubi' },
-	{ id: 285, long_name: 'Sewers of Nihilia, Pool of Sludg ', short_name: 'snpool' },
-	{ id: 286, long_name: 'Sewers of Nihilia, Lair of Trapp ', short_name: 'snlair' },
-	{ id: 287, long_name: 'Sewers of Nihilia, Purifying Pla ', short_name: 'snplant' },
-	{ id: 288, long_name: 'Sewers of Nihilia, Emanating Cre ', short_name: 'sncrematory' },
+	{
+		id: 284,
+		long_name: 'Ferubi, Forgotten Temple of Taelosia ',
+		short_name: 'ferubi'
+	},
+	{
+		id: 285,
+		long_name: 'Sewers of Nihilia, Pool of Sludg ',
+		short_name: 'snpool'
+	},
+	{
+		id: 286,
+		long_name: 'Sewers of Nihilia, Lair of Trapp ',
+		short_name: 'snlair'
+	},
+	{
+		id: 287,
+		long_name: 'Sewers of Nihilia, Purifying Pla ',
+		short_name: 'snplant'
+	},
+	{
+		id: 288,
+		long_name: 'Sewers of Nihilia, Emanating Cre ',
+		short_name: 'sncrematory'
+	},
 	{ id: 289, long_name: 'Tipt, Treacherous Crags ', short_name: 'tipt' },
 	{ id: 290, long_name: 'Vxed, the Crumbling Caverns ', short_name: 'vxed' },
 	{ id: 291, long_name: 'Yxtta, Pulpit of Exiles ', short_name: 'yxtta' },
 	{ id: 292, long_name: 'Uqua, the Ocean God Chantry ', short_name: 'uqua' },
-	{ id: 293, long_name: "Kod'Taz, Broken Trial Grounds ", short_name: 'kodtaz' },
-	{ id: 294, long_name: 'Ikkinz, Chambers of Transcendence ', short_name: 'ikkinz' },
-	{ id: 295, long_name: 'Qvic, Prayer Grounds of Calling ', short_name: 'qvic' },
-	{ id: 296, long_name: "Inktu'Ta, the Unmasked Chapel ", short_name: 'inktuta' },
+	{
+		id: 293,
+		long_name: "Kod'Taz, Broken Trial Grounds ",
+		short_name: 'kodtaz'
+	},
+	{
+		id: 294,
+		long_name: 'Ikkinz, Chambers of Transcendence ',
+		short_name: 'ikkinz'
+	},
+	{
+		id: 295,
+		long_name: 'Qvic, Prayer Grounds of Calling ',
+		short_name: 'qvic'
+	},
+	{
+		id: 296,
+		long_name: "Inktu'Ta, the Unmasked Chapel ",
+		short_name: 'inktuta'
+	},
 	{ id: 297, long_name: 'Txevu, Lair of the Elite ', short_name: 'txevu' },
 	{ id: 298, long_name: 'Tacvi, The Broken Temple ', short_name: 'tacvi' },
 	{ id: 299, long_name: 'Qvic, the Hidden Vault ', short_name: 'qvicb' },
@@ -285,20 +477,60 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 301, long_name: 'The Bloodfields ', short_name: 'bloodfields' },
 	{ id: 302, long_name: "Dranik's Scar ", short_name: 'draniksscar' },
 	{ id: 303, long_name: "Nobles' Causeway ", short_name: 'causeway' },
-	{ id: 304, long_name: 'Muramite Proving Grounds A ', short_name: 'chambersa' },
-	{ id: 305, long_name: 'Muramite Proving Grounds B ', short_name: 'chambersb' },
-	{ id: 306, long_name: 'Muramite Proving Grounds C ', short_name: 'chambersc' },
-	{ id: 307, long_name: 'Muramite Proving Grounds D ', short_name: 'chambersd' },
-	{ id: 308, long_name: 'Muramite Proving Grounds E ', short_name: 'chamberse' },
-	{ id: 309, long_name: 'Muramite Proving Grounds F ', short_name: 'chambersf' },
-	{ id: 316, long_name: 'Muramite Proving Grounds G ', short_name: 'provinggrounds' },
+	{
+		id: 304,
+		long_name: 'Muramite Proving Grounds A ',
+		short_name: 'chambersa'
+	},
+	{
+		id: 305,
+		long_name: 'Muramite Proving Grounds B ',
+		short_name: 'chambersb'
+	},
+	{
+		id: 306,
+		long_name: 'Muramite Proving Grounds C ',
+		short_name: 'chambersc'
+	},
+	{
+		id: 307,
+		long_name: 'Muramite Proving Grounds D ',
+		short_name: 'chambersd'
+	},
+	{
+		id: 308,
+		long_name: 'Muramite Proving Grounds E ',
+		short_name: 'chamberse'
+	},
+	{
+		id: 309,
+		long_name: 'Muramite Proving Grounds F ',
+		short_name: 'chambersf'
+	},
+	{
+		id: 316,
+		long_name: 'Muramite Proving Grounds G ',
+		short_name: 'provinggrounds'
+	},
 	{ id: 317, long_name: 'Anguish, the Fallen Palace ', short_name: 'anguish' },
 	{ id: 318, long_name: "Dranik's Hollows A ", short_name: 'dranikhollowsa' },
 	{ id: 319, long_name: "Dranik's Hollows B ", short_name: 'dranikhollowsb' },
 	{ id: 320, long_name: "Dranik's Hollows C ", short_name: 'dranikhollowsc' },
-	{ id: 328, long_name: 'Catacombs of Dranik A ', short_name: 'dranikcatacombsa' },
-	{ id: 329, long_name: 'Catacombs of Dranik B ', short_name: 'dranikcatacombsb' },
-	{ id: 330, long_name: 'Catacombs of Dranik C ', short_name: 'dranikcatacombsc' },
+	{
+		id: 328,
+		long_name: 'Catacombs of Dranik A ',
+		short_name: 'dranikcatacombsa'
+	},
+	{
+		id: 329,
+		long_name: 'Catacombs of Dranik B ',
+		short_name: 'dranikcatacombsb'
+	},
+	{
+		id: 330,
+		long_name: 'Catacombs of Dranik C ',
+		short_name: 'dranikcatacombsc'
+	},
 	{ id: 331, long_name: 'Sewers of Dranik A ', short_name: 'draniksewersa' },
 	{ id: 332, long_name: 'Sewers of Dranik B ', short_name: 'draniksewersb' },
 	{ id: 333, long_name: 'Sewers of Dranik C ', short_name: 'draniksewersc' },
@@ -341,22 +573,42 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 372, long_name: 'The Devastation ', short_name: 'devastation' },
 	{ id: 373, long_name: 'The Seething Wall ', short_name: 'devastationa' },
 	{ id: 374, long_name: 'Sverag, Stronghold of Rage ', short_name: 'rage' },
-	{ id: 375, long_name: 'Razorthorn, Tower of Sullon Zek ', short_name: 'ragea' },
+	{
+		id: 375,
+		long_name: 'Razorthorn, Tower of Sullon Zek ',
+		short_name: 'ragea'
+	},
 	{ id: 376, long_name: 'Ruins of Takish-Hiz ', short_name: 'takishruins' },
 	{ id: 377, long_name: 'The Root of Ro ', short_name: 'takishruinsa' },
 	{ id: 378, long_name: 'The Elddar Forest ', short_name: 'elddar' },
 	{ id: 379, long_name: "Tunare's Shrine ", short_name: 'elddara' },
 	{ id: 380, long_name: 'Theater of Blood ', short_name: 'theater' },
-	{ id: 381, long_name: 'Deathknell, Tower of Dissonance ', short_name: 'theatera' },
+	{
+		id: 381,
+		long_name: 'Deathknell, Tower of Dissonance ',
+		short_name: 'theatera'
+	},
 	{ id: 382, long_name: 'East Freeport ', short_name: 'freeporteast' },
 	{ id: 383, long_name: 'West Freeport ', short_name: 'freeportwest' },
 	{ id: 384, long_name: 'Freeport Sewers ', short_name: 'freeportsewers' },
-	{ id: 385, long_name: 'Academy of Arcane Sciences ', short_name: 'freeportacademy' },
+	{
+		id: 385,
+		long_name: 'Academy of Arcane Sciences ',
+		short_name: 'freeportacademy'
+	},
 	{ id: 386, long_name: 'Temple of Marr ', short_name: 'freeporttemple' },
-	{ id: 387, long_name: 'Freeport Militia House: My Precious ', short_name: 'freeportmilitia' },
+	{
+		id: 387,
+		long_name: 'Freeport Militia House: My Precious ',
+		short_name: 'freeportmilitia'
+	},
 	{ id: 388, long_name: 'Arena ', short_name: 'freeportarena' },
 	{ id: 389, long_name: 'City Hall ', short_name: 'freeportcityhall' },
-	{ id: 390, long_name: 'Theater of the Tranquil ', short_name: 'freeporttheater' },
+	{
+		id: 390,
+		long_name: 'Theater of the Tranquil ',
+		short_name: 'freeporttheater'
+	},
 	{ id: 391, long_name: 'Hall of Truth: Bounty ', short_name: 'freeporthall' },
 	{ id: 392, long_name: 'North Desert of Ro ', short_name: 'northro' },
 	{ id: 393, long_name: 'South Desert of Ro ', short_name: 'southro' },
@@ -368,11 +620,19 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 399, long_name: 'The Steppes ', short_name: 'steppes' },
 	{ id: 400, long_name: 'Icefall Glacier ', short_name: 'icefall' },
 	{ id: 401, long_name: 'Valdeholm ', short_name: 'valdeholm' },
-	{ id: 402, long_name: 'Frostcrypt, Throne of the Shade King ', short_name: 'frostcrypt' },
+	{
+		id: 402,
+		long_name: 'Frostcrypt, Throne of the Shade King ',
+		short_name: 'frostcrypt'
+	},
 	{ id: 403, long_name: 'Sunderock Springs ', short_name: 'sunderock' },
 	{ id: 404, long_name: 'Vergalid Mines ', short_name: 'vergalid' },
 	{ id: 405, long_name: 'Direwind Cliffs ', short_name: 'direwind' },
-	{ id: 406, long_name: 'Ashengate, Reliquary of the Scale ', short_name: 'ashengate' },
+	{
+		id: 406,
+		long_name: 'Ashengate, Reliquary of the Scale ',
+		short_name: 'ashengate'
+	},
 	{ id: 407, long_name: 'Highpass Hold ', short_name: 'highpasshold' },
 	{ id: 408, long_name: 'The Commonlands ', short_name: 'commonlands' },
 	{ id: 409, long_name: 'The Ocean of Tears ', short_name: 'oceanoftears' },
@@ -383,9 +643,17 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 414, long_name: 'Toxxulia Forest ', short_name: 'toxxulia' },
 	{ id: 415, long_name: 'The Misty Thicket ', short_name: 'mistythicket' },
 	{ id: 416, long_name: 'Katta Castrum ', short_name: 'kattacastrum' },
-	{ id: 417, long_name: 'Thalassius, the Coral Keep ', short_name: 'thalassius' },
+	{
+		id: 417,
+		long_name: 'Thalassius, the Coral Keep ',
+		short_name: 'thalassius'
+	},
 	{ id: 418, long_name: 'Jewel of Atiiki ', short_name: 'atiiki' },
-	{ id: 419, long_name: 'Zhisza, the Shissar Sanctuary ', short_name: 'zhisza' },
+	{
+		id: 419,
+		long_name: 'Zhisza, the Shissar Sanctuary ',
+		short_name: 'zhisza'
+	},
 	{ id: 420, long_name: 'Silyssar, New Chelsith ', short_name: 'silyssar' },
 	{ id: 421, long_name: 'Solteris, the Throne of Ro ', short_name: 'solteris' },
 	{ id: 422, long_name: 'Barren Coast ', short_name: 'barren' },
@@ -412,9 +680,17 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 443, long_name: 'Loping Plains ', short_name: 'lopingplains' },
 	{ id: 444, long_name: 'Hills of Shade ', short_name: 'hillsofshade' },
 	{ id: 445, long_name: 'Bloodmoon Keep ', short_name: 'bloodmoon' },
-	{ id: 446, long_name: 'Crystallos, Lair of the Awakened ', short_name: 'crystallos' },
+	{
+		id: 446,
+		long_name: 'Crystallos, Lair of the Awakened ',
+		short_name: 'crystallos'
+	},
 	{ id: 447, long_name: 'The Mechamatic Guardian ', short_name: 'guardian' },
-	{ id: 448, long_name: 'The Steamfont Mountains ', short_name: 'steamfontmts' },
+	{
+		id: 448,
+		long_name: 'The Steamfont Mountains ',
+		short_name: 'steamfontmts'
+	},
 	{ id: 449, long_name: 'Crypt of Shade ', short_name: 'cryptofshade' },
 	{ id: 451, long_name: "Deepscar's Den ", short_name: 'dragonscaleb' },
 	{ id: 452, long_name: 'Field of Scale ', short_name: 'oldfieldofbone' },
@@ -432,11 +708,19 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 464, long_name: 'The Void F ', short_name: 'thevoidf' },
 	{ id: 465, long_name: 'The Void G ', short_name: 'thevoidg' },
 	{ id: 466, long_name: 'Oceangreen Hills ', short_name: 'oceangreenhills' },
-	{ id: 467, long_name: 'Oceangreen Village ', short_name: 'oceangreenvillage' },
+	{
+		id: 467,
+		long_name: 'Oceangreen Village ',
+		short_name: 'oceangreenvillage'
+	},
 	{ id: 468, long_name: 'BlackBurrow ', short_name: 'oldblackburrow' },
 	{ id: 469, long_name: 'Temple of Bertoxxulous ', short_name: 'bertoxtemple' },
 	{ id: 470, long_name: 'Korafax, Home of the Riders ', short_name: 'discord' },
-	{ id: 471, long_name: 'Citadel of the Worldslayer ', short_name: 'discordtower' },
+	{
+		id: 471,
+		long_name: 'Citadel of the Worldslayer ',
+		short_name: 'discordtower'
+	},
 	{ id: 472, long_name: 'Old Bloodfields ', short_name: 'oldbloodfield' },
 	{ id: 473, long_name: 'The Precipice of War ', short_name: 'precipiceofwar' },
 	{ id: 474, long_name: 'City of Dranik ', short_name: 'olddranik' },
@@ -447,7 +731,11 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 481, long_name: 'Fungal Forest ', short_name: 'fungalforest' },
 	{ id: 482, long_name: 'The Underquarry ', short_name: 'underquarry' },
 	{ id: 483, long_name: 'The Cooling Chamber ', short_name: 'coolingchamber' },
-	{ id: 484, long_name: 'Kernagir, the Shining City ', short_name: 'shiningcity' },
+	{
+		id: 484,
+		long_name: 'Kernagir, the Shining City ',
+		short_name: 'shiningcity'
+	},
 	{ id: 485, long_name: 'Arthicrex ', short_name: 'arthicrex' },
 	{ id: 486, long_name: 'The Foundation ', short_name: 'foundation' },
 	{ id: 487, long_name: 'Lichen Creep ', short_name: 'lichencreep' },
@@ -461,7 +749,11 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 495, long_name: 'Lair of the Risen ', short_name: 'dragoncrypt' },
 	{ id: 700, long_name: 'The Feerrott ', short_name: 'feerrott2' },
 	{ id: 701, long_name: 'House of Thule ', short_name: 'thulehouse1' },
-	{ id: 702, long_name: 'House of Thule, Upper Floors ', short_name: 'thulehouse2' },
+	{
+		id: 702,
+		long_name: 'House of Thule, Upper Floors ',
+		short_name: 'thulehouse2'
+	},
 	{ id: 703, long_name: 'The Grounds ', short_name: 'housegarden' },
 	{ id: 704, long_name: 'The Library ', short_name: 'thulelibrary' },
 	{ id: 705, long_name: 'The Well ', short_name: 'well' },
@@ -475,24 +767,56 @@ export const AllZones: ZoneIdNumberType[] = [
 	{ id: 724, long_name: 'Argath, Bastion of Illdaera ', short_name: 'argath' },
 	{ id: 725, long_name: 'Valley of Lunanyn ', short_name: 'arelis' },
 	{ id: 726, long_name: 'Sarith, City of Tides ', short_name: 'sarithcity' },
-	{ id: 727, long_name: 'Rubak Oseka, Temple of the Sea ', short_name: 'rubak' },
+	{
+		id: 727,
+		long_name: 'Rubak Oseka, Temple of the Sea ',
+		short_name: 'rubak'
+	},
 	{ id: 728, long_name: "Beasts' Domain ", short_name: 'beastdomain' },
 	{ id: 729, long_name: 'The Resplendent Temple ', short_name: 'resplendent' },
 	{ id: 730, long_name: 'Pillars of Alra ', short_name: 'pillarsalra' },
 	{ id: 731, long_name: 'Windsong Sanctuary ', short_name: 'windsong' },
-	{ id: 732, long_name: 'Erillion, City of Bronze ', short_name: 'cityofbronze' },
+	{
+		id: 732,
+		long_name: 'Erillion, City of Bronze ',
+		short_name: 'cityofbronze'
+	},
 	{ id: 733, long_name: 'Sepulcher of Order ', short_name: 'sepulcher' },
 	{ id: 734, long_name: 'Sepulcher East ', short_name: 'eastsepulcher' },
 	{ id: 735, long_name: 'Sepulcher West ', short_name: 'westsepulcher' },
 	{ id: 752, long_name: "Shard's Landing ", short_name: 'shardslanding' },
 	{ id: 753, long_name: 'Valley of King Xorbb ', short_name: 'xorbb' },
-	{ id: 754, long_name: "Kael Drakkel: The King's Madness ", short_name: 'kaelshard' },
-	{ id: 755, long_name: "East Wastes: Zeixshi-Kar's Awakening ", short_name: 'eastwastesshard' },
-	{ id: 756, long_name: 'The Crystal Caverns: Fragment of Fear ', short_name: 'crystalshard' },
-	{ id: 757, long_name: 'The Breeding Grounds ', short_name: 'breedinggrounds' },
+	{
+		id: 754,
+		long_name: "Kael Drakkel: The King's Madness ",
+		short_name: 'kaelshard'
+	},
+	{
+		id: 755,
+		long_name: "East Wastes: Zeixshi-Kar's Awakening ",
+		short_name: 'eastwastesshard'
+	},
+	{
+		id: 756,
+		long_name: 'The Crystal Caverns: Fragment of Fear ',
+		short_name: 'crystalshard'
+	},
+	{
+		id: 757,
+		long_name: 'The Breeding Grounds ',
+		short_name: 'breedinggrounds'
+	},
 	{ id: 758, long_name: 'Evantil, the Vile Oak ', short_name: 'eviltree' },
-	{ id: 759, long_name: "Grelleth's Palace, the Chateau of Filth ", short_name: 'grelleth' },
-	{ id: 760, long_name: 'Chapterhouse of the Fallen ', short_name: 'chapterhouse' },
+	{
+		id: 759,
+		long_name: "Grelleth's Palace, the Chateau of Filth ",
+		short_name: 'grelleth'
+	},
+	{
+		id: 760,
+		long_name: 'Chapterhouse of the Fallen ',
+		short_name: 'chapterhouse'
+	},
 	{ id: 996, long_name: 'Art Testing Domain ', short_name: 'arttest' },
 	{ id: 998, long_name: 'The Forgotten Halls ', short_name: 'fhalls' },
 	{ id: 999, long_name: 'Designer Apprentice ', short_name: 'apprentice' }
@@ -507,11 +831,13 @@ export function getZoneFromNumber(id: number): ZoneIdNumberType {
 	} else return f;
 }
 
-export function getZoneFromShortName(short_name: string): ZoneIdNumberType {
+export function getZoneFromShortName(
+	short_name: string | null
+): ZoneIdNumberType {
 	const f = AllZones.find((value, idx) => {
 		return value.short_name === short_name;
 	});
 	if (f === undefined) {
-		return { id: 0, short_name: 'UNDEFINED', long_name: 'UNDEFINED' };
+		return { id: 0, short_name: 'not_found', long_name: 'Not Found' };
 	} else return f;
 }
