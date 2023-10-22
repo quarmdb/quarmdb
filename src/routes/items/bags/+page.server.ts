@@ -2,6 +2,7 @@ import { error } from '@sveltejs/kit';
 import type { PageServerLoadEvent } from './$types';
 import { pool } from '$lib/db';
 import {
+	getAllBags,
 	getDropsForItem,
 	getItem,
 	getMerchantsForItem,
@@ -13,7 +14,7 @@ export async function load({ params }: PageServerLoadEvent) {
 
 	try {
 		return {
-			bags: await searchItemCardData(`WHERE i.bagtype != 0`, 0, client)
+			bags: await getAllBags(client)
 		};
 	} catch (e) {
 		console.error(e);

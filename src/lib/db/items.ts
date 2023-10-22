@@ -149,6 +149,17 @@ export const ItemsSearchSchema = ItemsSchema.pick({
 });
 export type ItemsSearchType = z.infer<typeof ItemsSearchSchema>;
 
+export const getAllBags = async (client: PoolClient) => {
+	const result = await client.query(`SELECT * FROM items WHERE bagtype != 0`);
+	const parse = ItemsSchema.array().safeParse(result.rows);
+	if (!parse.success) {
+		console.error(parse.error.message);
+		throw error(404);
+	}
+
+	return parse.data;
+};
+
 export const searchItemCardData = async (
 	whereString: string,
 	limit: number,
