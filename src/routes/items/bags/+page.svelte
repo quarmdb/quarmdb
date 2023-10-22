@@ -4,7 +4,6 @@
 	import type { ItemsType } from '$lib/schema';
 	import SvelteTable from 'svelte-table';
 	import type { PageData } from './$types';
-	import SvelteTableCellHref from '$lib/components/SvelteTableCellHref.svelte';
 	import { urlBlob } from '$lib/utils';
 	export let data: PageData;
 
