@@ -5,13 +5,15 @@
 	export let data: PageData;
 </script>
 
+<!-- <pre>{JSON.stringify(data.zones, null, 2)}</pre> -->
 <section>
-	{#each Object.keys(data.zones).sort() as key}
-		{#if expansionLookup.get(parseInt(key)) !== undefined}
-			<span class="expansion">{expansionLookup.get(parseInt(key))}</span>
+	{#each data.zones as exp}
+		{#if expansionLookup.get(exp.expansion) !== undefined}
+			<span class="expansion">{expansionLookup.get(exp.expansion)}</span>
 			<div class="expansion">
-				{#each groupByExpansion(data.zones).get(parseInt(key)) || [] as zone}
-					<span class="zone"><a href="/zone/{zone.short_name}">{zone.long_name}</a></span>
+				{#each exp.zones as zone}
+					<span class="zone"
+						><a href="/zone/{zone.short_name}">{zone.long_name}</a></span>
 				{/each}
 			</div>
 		{/if}

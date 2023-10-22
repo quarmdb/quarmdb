@@ -2,10 +2,16 @@ import { NpcTypesSchema, Spawn2Schema, ZoneSchema } from '$lib/schema';
 import { error } from '@sveltejs/kit';
 import type { Pool, PoolClient } from 'pg';
 import { z } from 'zod';
-import { getZoneFromNumber, type ZoneIdNumberType } from './constants/zoneidnumber';
+import {
+	getZoneFromNumber,
+	type ZoneIdNumberType
+} from './constants/zoneidnumber';
 import { ZoneShortInfoSchema } from './constants/zone';
 
-export const getSpawnsByZone = async (short_name: string, client: PoolClient) => {
+export const getSpawnsByZone = async (
+	short_name: string,
+	client: PoolClient
+) => {
 	const spawnRes = await client.query(
 		`
     SELECT
@@ -53,7 +59,10 @@ export const getSpawnsByZone = async (short_name: string, client: PoolClient) =>
 	return spawnsParsed.data;
 };
 
-export const getUniqueNpcsByZone = async (short_name: string, client: PoolClient) => {
+export const getUniqueNpcsByZone = async (
+	short_name: string,
+	client: PoolClient
+) => {
 	const npcsRes = await client.query(
 		`
 			SELECT DISTINCT
@@ -82,7 +91,10 @@ export const getUniqueNpcsByZone = async (short_name: string, client: PoolClient
 	return parsedNpcs.data;
 };
 
-export const getConnectedZones = async (short_name: string, client: PoolClient) => {
+export const getConnectedZones = async (
+	short_name: string,
+	client: PoolClient
+) => {
 	const connectedZonesRes = await client.query(
 		`
 		SELECT DISTINCT
@@ -113,7 +125,10 @@ export const getConnectedZones = async (short_name: string, client: PoolClient) 
 	return connected_zones;
 };
 
-export const getGroundSpawns = async (short_name: string, client: PoolClient) => {
+export const getGroundSpawns = async (
+	short_name: string,
+	client: PoolClient
+) => {
 	const groundSpawnRes = await client.query(
 		`
 		SELECT 
@@ -190,7 +205,10 @@ export const getZone = async (short_name: string, client: PoolClient) => {
 	return parsedZones.data[0];
 };
 
-export const getAllZonesShortInfo = async (expansion: number, client: PoolClient) => {
+export const getAllZonesShortInfo = async (
+	expansion: number,
+	client: PoolClient
+) => {
 	const result = await client.query(
 		`
 		SELECT
@@ -254,4 +272,30 @@ export const getAllZonesWithPullInfo = async (client: PoolClient) => {
 	}
 
 	return parsed.data;
+};
+
+export const getAllZonesByExpansion = async (client: PoolClient) => {
+	const result = await client.query(`
+		SELECT 
+			z.expansion,
+			JSON_AGG(row_to_json(z)) zones
+		FROM
+			(SELECT * FROM zone) z
+		GROUP BY
+			z.expansion
+		ORDER BY
+			z.expansion
+	`);
+
+	const parse = z
+		.object({ expansion: z.number(), zones: ZoneSchema.array() })
+		.array()
+		.safeParse(result.rows);
+
+	if (!parse.success) {
+		console.error(parse.error.message);
+		throw error(404);
+	}
+
+	return parse.data;
 };
