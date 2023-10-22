@@ -4,6 +4,8 @@
 	import type { ItemsType } from '$lib/schema';
 	import SvelteTable from 'svelte-table';
 	import type { PageData } from './$types';
+	import SvelteTableCellHref from '$lib/components/SvelteTableCellHref.svelte';
+	import { urlBlob } from '$lib/utils';
 	export let data: PageData;
 
 	const rows = data.bags;
@@ -12,7 +14,10 @@
 			key: 'name',
 			title: 'Name',
 			value: (e: ItemsType) => e.name,
-			sortable: true
+			sortable: true,
+			renderValue: (e: ItemsType) =>
+				`<a href='/items/${e.id}/${urlBlob(e.name)}'>${e.name}</a>`,
+			parseHTML: true
 		},
 		{
 			key: 'slots',
@@ -31,6 +36,7 @@
 			key: 'wr',
 			title: 'Weight Reduction',
 			value: (e: ItemsType) => e.bagwr,
+			renderValue: (e: ItemsType) => e.bagwr + '%',
 			sortable: true
 		},
 		{
