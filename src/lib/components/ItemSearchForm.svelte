@@ -3,16 +3,22 @@
 	import { page } from '$app/stores';
 	import { ItemSlots, ItemTypes } from '$lib/db/constants/item';
 	import { SearchNameSchema } from '$lib/inputSchemas';
+	import { z } from 'zod';
 
 	let name = $page.url.searchParams.get('name') || '';
-	let slot = $page.url.searchParams.get('slot') || 'all';
-	let type = $page.url.searchParams.get('type') || 'all';
+	let slot: number | string = $page.url.searchParams.get('slot') || 'all';
+	let type: number | string = $page.url.searchParams.get('type') || 'all';
+
+	$: if (slot || type) {
+		if (slot !== 'all') slot = parseInt(slot + '');
+		if (type !== 'all') type = parseInt(type + '');
+	}
 
 	const search = async () => {
 		let u = new URL('/items/search');
 		u.searchParams.set('name', name);
-		u.searchParams.set('type', type);
-		u.searchParams.set('slot', slot);
+		u.searchParams.set('type', type + '');
+		u.searchParams.set('slot', slot + '');
 		await goto(u);
 	};
 
@@ -29,7 +35,7 @@
 			>{/if}
 	</section>
 	<section class="input-group">
-		<label for="type">Type {type}</label>
+		<label for="type">Type</label>
 		<select id="type" name="type" bind:value={type}>
 			<option value="all">All</option>
 			{#each ItemTypes as itemtype}
@@ -38,7 +44,7 @@
 		</select>
 	</section>
 	<section class="input-group">
-		<label for="slot">Slot {slot}</label>
+		<label for="slot">Slot</label>
 		<select id="slot" name="slot" bind:value={slot}>
 			<option value="all">All</option>
 			{#each ItemSlots as itemslot}
