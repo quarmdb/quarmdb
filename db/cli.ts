@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'fs/promises';
 import { convertFile } from './conversion';
 import { fstat, readFileSync, readdir } from 'fs';
+import Database from 'better-sqlite3';
 
 if (process.argv.length === 2) {
 	console.error('Expected at least one argument!');
@@ -27,3 +28,9 @@ readdir(fileDir, (err, files) => {
 
 	writeFile(outputFile, convertedSql, 'utf-8');
 });
+
+
+const db = Database('quarm.db');
+db.pragma('journal_mode = WAL');
+db.exec(readFileSync(outputFile, 'utf-8'));
+db.close();
