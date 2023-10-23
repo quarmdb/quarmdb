@@ -122,3 +122,53 @@ export const getNpc = async (id: number, client: PoolClient) => {
 	}
 	return npcParse.data;
 };
+
+export const NPCSpawnChanceSchema = z.object({
+	zone: z.string(),
+	spawninfo: z
+		.object({
+			spawngroupID: z.number(),
+			chance: z.number(),
+			respawntime: z.number(),
+			x: z.number(),
+			y: z.number(),
+			z: z.number()
+		})
+		.array()
+});
+
+export const getSpawnChanceByNPC = async (id: number, client: PoolClient) => {
+	const result = await client.query(
+		`
+    SELECT
+      zone,
+			JSON_AGG(JSON_BUILD_OBJECT(
+				'spawngroupID', spawn.spawngroupID,
+				'chance', se.chance,
+				'respawntime', spawn.respawntime,
+				'x', spawn.x,
+				'y', spawn.y,
+				'z', spawn.z
+			)) spawninfo
+		FROM 
+			npc_types npc
+		INNER JOIN spawnentry se
+			ON npc.id = se.npcID
+    INNER JOIN spawn2 spawn
+      ON spawn.spawngroupID = se.spawngroupID
+    WHERE
+      npc.id = $1
+    GROUP BY
+      zone
+  `,
+		[id]
+	);
+
+	const parse = NPCSpawnChanceSchema.array().safeParse(result.rows);
+	if (!parse.success) {
+		console.error(parse.error.message);
+		throw error(404);
+	}
+
+	return parse.data;
+};
