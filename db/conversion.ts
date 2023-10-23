@@ -19,7 +19,8 @@ function convert(lines: string[]): string {
 		let line = lines[i].trim();
 		let m: RegExpExecArray | null = null;
 		// Skip lines that match regexes in the skip[] array above
-		for (var j = 0; j < skip.length; j++) if (skip[j].test(line)) continue lineLoop;
+		for (var j = 0; j < skip.length; j++)
+			if (skip[j].test(line)) continue lineLoop;
 		// Include all `INSERT` lines. Replace \' by ''
 		if (/^(INSERT|\()/i.test(line)) {
 			sqlite += line.replace(/\\'/gi, "''") + '\n';
@@ -28,6 +29,7 @@ function convert(lines: string[]): string {
 		// Print the ´CREATE´ line as is and capture the table name
 		if ((m = /^\s*CREATE TABLE.*[`"](.*)[`"]/i.exec(line)) !== null) {
 			currentTable = m[1];
+			sqlite += `\nDROP TABLE IF EXISTS ${currentTable};`;
 			sqlite += '\n' + line + '\n';
 			continue;
 		}
@@ -45,7 +47,11 @@ function convert(lines: string[]): string {
 		// Lines starting with (UNIQUE) KEY are extracted so we declare them all at the end of the script
 		// We also append key name with table name to avoid duplicate index name
 		// Example: KEY `name` (`permission_name`)
-		if ((m = /^(UNIQUE\s)*KEY\s+[`'"](\w+)[`'"]\s+\([`'"](\w+)[`'"]/gi.exec(line)) !== null) {
+		if (
+			(m = /^(UNIQUE\s)*KEY\s+[`'"](\w+)[`'"]\s+\([`'"](\w+)[`'"]/gi.exec(
+				line
+			)) !== null
+		) {
 			let keyUnique = m[1] || '';
 			let keyName = m[2];
 			let colName = m[3];
@@ -71,7 +77,10 @@ function convert(lines: string[]): string {
 		// Print all fields definition lines except "KEY" lines and lines starting with ")"
 		if (/^[^)]((?![\w]+\sKEY).)*$/gi.test(line)) {
 			// Clear invalid keywords
-			line = line.replace(/AUTO_INCREMENT|CHARACTER SET [^ ]+|CHARACTER SET [^ ]+|UNSIGNED/gi, '');
+			line = line.replace(
+				/AUTO_INCREMENT|CHARACTER SET [^ ]+|CHARACTER SET [^ ]+|UNSIGNED/gi,
+				''
+			);
 			line = line.replace(
 				/DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP|COLLATE [^ ]+/gi,
 				''

@@ -28,9 +28,3 @@ readdir(fileDir, (err, files) => {
 
 	writeFile(outputFile, convertedSql, 'utf-8');
 });
-
-
-const db = Database('quarm.db');
-db.pragma('journal_mode = WAL');
-db.exec(readFileSync(outputFile, 'utf-8'));
-db.close();
