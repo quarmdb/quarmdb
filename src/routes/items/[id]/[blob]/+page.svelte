@@ -35,7 +35,8 @@
 		{
 			key: 'chance',
 			title: 'Drop Chance',
-			value: (z: NPCDropsType) => z.chances[0] + '%',
+			value: (z: NPCDropsType) => z.chances[0],
+			renderValue: (z: NPCDropsType) => z.chances[0].toFixed(2) + '%',
 			sortable: true
 		},
 		{
