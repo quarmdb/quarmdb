@@ -12,7 +12,7 @@ export async function load({ params }: PageServerLoadEvent) {
 
 		return {
 			item: await getItem(id, client),
-			dropnpcs: await getDropsForItem(id, client),
+			drops: await getDropsForItem(id, client),
 			merchants: await getMerchantsForItem(id, client)
 		};
 	} catch (e) {

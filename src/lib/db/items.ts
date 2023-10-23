@@ -27,31 +27,42 @@ export const getItem = async (id: number, client: PoolClient) => {
 	return (await searchItemCardData(`WHERE i.id = ${id} `, 1, client))[0];
 };
 
+export const NPCDropsSchema = z.object({
+	name: z.string(),
+	id: z.number(),
+	zone: z.string(),
+	chances: z.number().array()
+});
+
+export type NPCDropsType = z.infer<typeof NPCDropsSchema>;
+
 export const getDropsForItem = async (id: number, client: PoolClient) => {
 	const dropnpcs = await client.query(
 		`
   SELECT
-    npc.name, npc.id
+    npc.name, npc.id, sp2.zone,
+		JSON_AGG(ld_e.chance) chances
   From
     npc_types npc
   INNER JOIN loottable_entries lt_e ON
     npc.loottable_id = lt_e.loottable_id
   INNER JOIN lootdrop_entries ld_e ON
     lt_e.lootdrop_id = ld_e.lootdrop_id
+	INNER JOIN spawnentry se
+		ON se.npcID = npc.id
+	INNER JOIN spawn2 sp2
+		ON sp2.spawngroupID = se.spawngroupID
   WHERE
-    ld_e.item_id = ${id}
-  `
+    ld_e.item_id = $1
+	GROUP BY npc.id, npc.name, sp2.zone
+  `,
+		[id]
 	);
 
-	const dropnpcsParsed = NpcTypesSchema.pick({
-		name: true,
-		id: true
-	})
-		.array()
-		.safeParse(dropnpcs.rows);
+	const dropnpcsParsed = NPCDropsSchema.array().safeParse(dropnpcs.rows);
 
 	if (!dropnpcsParsed.success) {
-		console.log(dropnpcsParsed.error);
+		console.log(dropnpcsParsed.error.message);
 		throw error(404);
 	}
 
