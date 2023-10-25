@@ -32,6 +32,10 @@
 					>Project Quarm</a
 				>. Just a labor of love.
 			</p>
+			<p>
+				<a href="https://github.com/joshuawjulian/quarmdb/issues"
+					>Suggestions/Issues</a>
+			</p>
 		</footer>
 	</div>
 </ThemeWrapper>
@@ -140,6 +144,14 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		flex-direction: column;
 		padding-top: 1rem;
+		width: 100%;
+
+		& p {
+			display: block;
+			width: 100%;
+			text-align: center;
+		}
 	}
 </style>
