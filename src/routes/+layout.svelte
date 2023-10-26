@@ -32,10 +32,6 @@
 					>Project Quarm</a
 				>. Just a labor of love.
 			</p>
-			<p>
-				<a href="https://github.com/joshuawjulian/quarmdb/issues"
-					>Suggestions/Issues</a>
-			</p>
 		</footer>
 	</div>
 </ThemeWrapper>

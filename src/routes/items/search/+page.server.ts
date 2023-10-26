@@ -23,9 +23,7 @@ export async function load({ url }: PageServerLoadEvent) {
 		let whereArray = [];
 		if (name.trim() !== '') {
 			name = (name as string).trim().split(' ').join(' & ');
-			whereArray.push(
-				`to_tsvector(items.name) @@ to_tsquery('${name}')`
-			);
+			whereArray.push(`to_tsvector(items.name) @@ to_tsquery('${name}')`);
 		}
 
 		if (type !== 'all') {
@@ -40,9 +38,7 @@ export async function load({ url }: PageServerLoadEvent) {
 				slotmask = ItemSlots[slotmask].mask;
 				whereArray.push(`items.slots = ${slotmask}`);
 			} catch (e) {
-				console.error(
-					`Someone sent a not good slotmask: ${slot}`
-				);
+				console.error(`Someone sent a not good slotmask: ${slot}`);
 			}
 		}
 
