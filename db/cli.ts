@@ -1,7 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
 import { convertFile } from './conversion';
 import { fstat, readFileSync, readdir } from 'fs';
-import Database from 'better-sqlite3';
 
 if (process.argv.length === 2) {
 	console.error('Expected at least one argument!');
