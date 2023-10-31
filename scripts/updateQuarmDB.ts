@@ -76,7 +76,26 @@ files.forEach((fileName) => {
 let sqlMap = convertFiles(sqlFiles);
 console.log(`sqlMap.size = ${sqlMap.size}`);
 const keys = sqlMap.keys();
-let key = '';
+
+//do an information table
+const infoSql: string[] = [];
+infoSql.push(`DROP TABLE IF EXISTS dbinfo CASCADE;`);
+infoSql.push(`CREATE TABLE dbinfo (
+	id SERIAL NOT NULL,
+	year TEXT NOT NULL,
+	month TEXT NOT NULL,
+	day TEXT NOT NULL,
+	hour TEXT NOT NULL,
+	minute TEXT NOT NULL,
+	CONSTRAINT info_id PRIMARY KEY (id)
+);`);
+
+let dbDate = dbDateSplit(dbFileName || '');
+infoSql.push(
+	`INSERT INTO dbinfo(year, month, day, hour, minute) VALUES ('${dbDate.year}','${dbDate.month}','${dbDate.day}','${dbDate.hour}','${dbDate.minute}')`
+);
+
+sqlMap.set('dbinfo', infoSql);
 for (let [key, value] of sqlMap) {
 	//console.log(`Writing ${key}`);
 	writeFileSync(postgresFilePath + key + '.sql', value.join('\n'));
@@ -87,6 +106,7 @@ if (!sendNetwork) process.exit(1);
 console.log('before import');
 
 import { exec, spawn } from 'child_process';
+import { dbDateSplit } from './dbDateSplit';
 let sqls = '';
 
 console.log('after import');

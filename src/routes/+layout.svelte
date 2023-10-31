@@ -3,6 +3,8 @@
 	import ThemeWrapper from '$lib/components/ThemeWrapper.svelte';
 	import Hamburger from '$lib/svg/Hamburger.svelte';
 	import '../app.css';
+	import type { LayoutData } from './$types';
+	export let data: LayoutData;
 
 	let mobileNavClosed = true;
 </script>
@@ -30,10 +32,14 @@
 			<p>
 				This is not affiliated with <a href="https://www.projectquarm.com"
 					>Project Quarm</a
-				>. Just a labor of love.
+				>.
 			</p>
 			<p>
 				<a href="https://github.com/quarmdb/quarmdb/issues">Issues/Feedback</a>
+			</p>
+			<p>
+				Quarm Database: {data.dbinfo.year}-{data.dbinfo.month}-{data.dbinfo.day}
+				at {data.dbinfo.hour}:{data.dbinfo.minute}
 			</p>
 		</footer>
 	</div>
