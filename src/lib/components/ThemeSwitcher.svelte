@@ -27,7 +27,7 @@
 	label::before {
 		content: '';
 		border-radius: 100%;
-		background-color: var(--surface-4);
+		background-color: var(--surface-2);
 		position: absolute;
 		left: 0;
 	}

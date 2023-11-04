@@ -108,8 +108,7 @@
 			display: block;
 			padding-right: 1rem;
 			text-align: right;
-			color: var(--text-2);
-			text-decoration-color: var(--text-2);
+			color: var(--text);
 		}
 
 		& a.title:hover {
@@ -154,7 +153,7 @@
 	a:visited,
 	a {
 		color: var(--brand);
-		text-decoration-color: var(--text-2);
+		text-decoration-color: var(--text);
 	}
 
 	a.selected {

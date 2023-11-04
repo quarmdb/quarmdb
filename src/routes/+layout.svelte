@@ -129,7 +129,7 @@
 
 		article {
 			padding: 1rem;
-			border-left: 1px solid var(--surface-3);
+			border-left: 1px solid var(--surface-2);
 			position: relative;
 			width: 100%;
 			flex-grow: 1;

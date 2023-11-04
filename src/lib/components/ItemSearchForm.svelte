@@ -77,7 +77,6 @@
 		}
 		& input {
 			background-color: var(--surface-2);
-			border-bottom: 1px solid black;
 			width: 100%;
 			border-radius: 0.25em;
 			padding: 1rem;
@@ -92,11 +91,9 @@
 
 		& select {
 			background-color: var(--surface-2);
-			border-bottom: 1px solid black;
 			width: 100%;
 			border-radius: 0.25em;
 			padding: 1rem;
-			font-size: 1.25rem;
 			cursor: pointer;
 		}
 	}
