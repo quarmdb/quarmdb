@@ -29,19 +29,9 @@
 	<section class="info">
 		<span>Damage Per Round: {npc.mindmg} - {npc.maxdmg}</span>
 		{#if data.coin.maxcash === 0}
-			<span
-				><a
-					href="https://github.com/SecretsOTheP/EQMacEmu/blob/bafd299d1d331ac6bbd81be4e520a9cf60c2121e/zone/loottables.cpp#L39"
-					>Coin</a
-				>: None</span>
+			<span>Coin: None</span>
 		{:else}
-			<span
-				>Min <a
-					href="https://github.com/SecretsOTheP/EQMacEmu/blob/bafd299d1d331ac6bbd81be4e520a9cf60c2121e/zone/loottables.cpp#L39"
-					>Coin</a
-				>:
-				{coinString(data.coin.mincash)}
-			</span>
+			<span>Min Coin:{coinString(data.coin.mincash)} </span>
 			{#if data.coin.avgcoin === 0}
 				<span
 					>Avg Coin: {coinString(
@@ -52,6 +42,11 @@
 			{/if}
 			<span>Max Coin: {coinString(data.coin.maxcash)} </span>
 		{/if}
+		<span
+			><a
+				href="https://github.com/SecretsOTheP/EQMacEmu/blob/bafd299d1d331ac6bbd81be4e520a9cf60c2121e/zone/loottables.cpp#L39"
+				>How Coin Drops Work</a
+			></span>
 	</section>
 </section>
 <RawJsonViewer bind:obj={npc} />
