@@ -40,6 +40,11 @@
 			sortable: true
 		},
 		{
+			key: 'min_level',
+			title: 'Min Loot Level',
+			value: (z: NPCDropsType) => z.min_looter_level
+		},
+		{
 			key: 'spawns',
 			title: 'Number of Spawns',
 			value: (z: NPCDropsType) => z.chances.length + '',

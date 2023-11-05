@@ -81,12 +81,14 @@ button:active {
 
 table {
 	border-radius: 0;
-	border: 0;
+	border: 1px solid var(--surface-3);
 	border-collapse: collapse;
 }
 
-tr {
-	border: 0;
+tr,
+td {
+	border: 1px solid var(--surface-3);
+	text-align: center;
 }
 
 tr:hover {

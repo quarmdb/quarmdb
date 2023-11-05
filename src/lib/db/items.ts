@@ -31,7 +31,8 @@ export const NPCDropsSchema = z.object({
 	name: z.string(),
 	id: z.number(),
 	zone: z.string(),
-	chances: z.number().array()
+	chances: z.number().array(),
+	min_looter_level: z.number()
 });
 
 export type NPCDropsType = z.infer<typeof NPCDropsSchema>;
@@ -40,7 +41,7 @@ export const getDropsForItem = async (id: number, client: PoolClient) => {
 	const dropnpcs = await client.query(
 		`
   SELECT
-    npc.name, npc.id, sp2.zone,
+    npc.name, npc.id, sp2.zone, ld_e.min_looter_level,
 		JSON_AGG(ld_e.chance) chances
   From
     npc_types npc
@@ -54,7 +55,7 @@ export const getDropsForItem = async (id: number, client: PoolClient) => {
 		ON sp2.spawngroupID = se.spawngroupID
   WHERE
     ld_e.item_id = $1
-	GROUP BY npc.id, npc.name, sp2.zone
+	GROUP BY npc.id, npc.name, sp2.zone,ld_e.min_looter_level
   `,
 		[id]
 	);
