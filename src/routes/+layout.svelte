@@ -99,7 +99,7 @@
 			font-size: 2rem;
 			border-radius: 0 100% 100% 0;
 			opacity: 0.7;
-			padding: 1rem;
+			padding: 4rem 2rem;
 		}
 
 		& button:hover {
