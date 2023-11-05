@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { nameCompare, nameParse } from '$lib/utils';
+	import { nameCompare, nameParse, urlBlob } from '$lib/utils';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
@@ -39,8 +39,7 @@
 		<span class="gs"
 			><img src="/icon/{gs.icon}.gif" alt="icon" /><a href="/items/{gs.id}"
 				>{gs.name} ({gs.locs.length})</a
-			></span
-		>
+			></span>
 		<span class="gsGroup">
 			{#each gs.locs as loc, idx}
 				<span>{loc.x}, {loc.y}, {loc.z}</span>
@@ -53,11 +52,12 @@
 		{#each data.spawns as spawn}
 			<tr
 				><td>{spawn.x.toPrecision(5)}</td><td>{spawn.y.toPrecision(5)}</td><td
-					>{spawn.z.toPrecision(5)}</td
-				>
+					>{spawn.z.toPrecision(5)}</td>
 				<td class="spawncell">
 					{#each spawn.spawns as s}
-						<span><a href="/npc/{s.npcid}">{nameParse(s.name)}</a>({s.chance}%)</span>
+						<span
+							><a href="/npc/{s.npcid}/{urlBlob(s.name)}">{nameParse(s.name)}</a
+							>({s.chance}%)</span>
 					{/each}
 				</td>
 				<td>{spawn.respawntime}s</td>
