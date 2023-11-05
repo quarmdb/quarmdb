@@ -6,24 +6,20 @@
 	import type { LayoutData } from './$types';
 	export let data: LayoutData;
 
-	let mobileNavClosed = true;
+	let navClosed = true;
 </script>
 
 <ThemeWrapper>
 	<div class="wrapper">
-		<main>
-			<nav class="left" class:closed={mobileNavClosed}>
-				<button
-					class="menu"
-					class:closed={mobileNavClosed}
-					on:click={() => (mobileNavClosed = !mobileNavClosed)}
-					><Hamburger bind:open={mobileNavClosed} /></button>
-				<LeftNav
-					on:navClicked={() => {
-						console.log('recieve nav click');
-						mobileNavClosed = true;
-					}} />
-			</nav>
+		<nav class:closed={navClosed}>
+			<LeftNav />
+			<div>
+				<button on:click={() => (navClosed = !navClosed)}>
+					{navClosed ? '>' : '<'}
+				</button>
+			</div>
+		</nav>
+		<main class:closed={!navClosed}>
 			<article>
 				<slot />
 			</article>
@@ -46,9 +42,11 @@
 </ThemeWrapper>
 
 <style>
+	* {
+		--nav-width: 25ch;
+	}
 	.wrapper {
-		width: 100%;
-		min-height: calc(100dvh - 4rem);
+		min-height: 100dvh;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
@@ -59,12 +57,14 @@
 
 	main {
 		display: flex;
-		flex-direction: row;
 		width: 100%;
 		flex-grow: 1;
 		position: relative;
-		padding-top: 4rem;
 		margin: 0;
+		transition: all 0.5s;
+	}
+	main.closed {
+		padding-left: var(--nav-width);
 	}
 
 	article {
@@ -74,75 +74,41 @@
 		flex-grow: 1;
 	}
 
-	nav.left {
-		width: 100%;
-		height: 100dvh;
-		background-color: var(--surface-2);
+	nav {
+		width: var(--nav-width);
+		height: 100vh;
 		z-index: 5;
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
-		align-self: flex-start;
+
 		transition: all 0.5s;
 		padding: 0;
 		margin: 0;
-	}
+		display: grid;
+		grid-template-columns: var(--nav-width) 1fr;
 
-	nav.left.closed {
-		transform: translateX(-100%);
-	}
-
-	button.menu {
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 4rem;
-		height: 4rem;
-		z-index: 10;
-		transform: none;
-		transition: all 0.5s;
-	}
-
-	button.menu.closed {
-		transform: translateX(4rem);
-	}
-
-	@media (min-width: 768px) {
-		main {
-			padding: 0;
-		}
-		nav.left {
-			position: sticky;
-			padding-top: 1rem;
-			width: 16rem;
-			height: fit-content;
-			background-color: var(--surface-1);
-		}
-
-		nav.left.closed {
-			transform: none;
-		}
-
-		button.menu {
-			display: none;
-		}
-
-		article {
-			padding: 1rem;
-			border-left: 1px solid var(--surface-2);
-			position: relative;
-			width: 100%;
-			flex-grow: 1;
-		}
-
-		.wrapper {
-			width: 100%;
-			min-height: 100dvh;
-			padding: 0 1rem 1rem 1rem;
+		& div {
 			display: flex;
-			flex-direction: column;
-			background-color: var(--surface-1);
+			width: 100%;
+			height: 100%;
+			align-items: center;
 		}
+
+		& button {
+			font-size: 2rem;
+			border-radius: 0 100% 100% 0;
+			opacity: 0.7;
+			padding: 1rem;
+		}
+
+		& button:hover {
+			opacity: 1;
+		}
+	}
+
+	nav.closed {
+		transform: translateX(calc(-1 * var(--nav-width)));
 	}
 
 	footer {

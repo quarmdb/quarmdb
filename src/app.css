@@ -14,7 +14,7 @@
 	--brand: var(--blue-9);
 
 	--text: var(--gray-12);
-	--text-muted: var(--gray-10);
+	--text-muted: var(--blue-11);
 
 	--surface-1: var(--gray-4);
 	--surface-2: var(--gray-5);
@@ -39,11 +39,11 @@ html {
 a,
 a:visited {
 	color: var(--text-muted);
-	text-decoration: none;
+	text-decoration: underline;
 }
 
 a:hover {
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 input[type='text'],
@@ -52,7 +52,9 @@ select {
 	border: 1px solid var(--text);
 	background-color: var(--surface-2);
 	color: var(--text);
+	caret-color: var(--text);
 	border-radius: 0.25em;
+	stroke: var(--text);
 }
 
 input[type='text']:active,
