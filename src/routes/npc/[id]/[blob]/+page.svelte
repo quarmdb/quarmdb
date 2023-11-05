@@ -31,7 +31,7 @@
 		{#if data.coin.maxcash === 0}
 			<span>Coin: None</span>
 		{:else}
-			<span>Min Coin:{coinString(data.coin.mincash)} </span>
+			<span>Min Coin: {coinString(data.coin.mincash)} </span>
 			{#if data.coin.avgcoin === 0}
 				<span
 					>Avg Coin: {coinString(
