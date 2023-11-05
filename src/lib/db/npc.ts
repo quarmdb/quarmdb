@@ -3,6 +3,7 @@ import { error } from '@sveltejs/kit';
 import type { PoolClient } from 'pg';
 import { z } from 'zod';
 import { getZoneFromShortName } from './constants/zoneidnumber';
+import { errorMonitor } from 'events';
 
 type WhereStringOptionsType = {
 	name: string;
@@ -165,6 +166,45 @@ export const getSpawnChanceByNPC = async (id: number, client: PoolClient) => {
 	);
 
 	const parse = NPCSpawnChanceSchema.array().safeParse(result.rows);
+	if (!parse.success) {
+		console.error(parse.error.message);
+		throw error(404);
+	}
+
+	return parse.data;
+};
+
+export const CoinDropSchema = z.object({
+	mincash: z.number().default(0),
+	maxcash: z.number().default(0),
+	avgcoin: z.number().default(0)
+});
+
+export const getCoinDropFromNpc = async (id: number, client: PoolClient) => {
+	const result = await client.query(
+		`
+  SELECT
+    lt.mincash, lt.maxcash, lt.avgcoin
+  FROM
+    loottable lt
+  INNER JOIN npc_types npc ON
+    npc.loottable_id = lt.id
+  WHERE
+    npc.id = $1
+  `,
+		[id]
+	);
+
+	if (result.rowCount === 0) {
+		console.error(`getCointDropFromNpc.rowCount === 0`);
+		return {
+			mincash: 0,
+			maxcash: 0,
+			avgcoin: 0
+		};
+	}
+
+	const parse = CoinDropSchema.safeParse(result.rows[0]);
 	if (!parse.success) {
 		console.error(parse.error.message);
 		throw error(404);

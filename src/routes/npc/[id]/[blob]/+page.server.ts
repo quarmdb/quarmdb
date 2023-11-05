@@ -3,7 +3,7 @@ import type { PageServerLoadEvent } from './$types';
 import { pool } from '$lib/db';
 import { FactionListSchema, NpcTypesSchema, Spawn2Schema } from '$lib/schema';
 import { z } from 'zod';
-import { getNpc, getSpawnChanceByNPC } from '$lib/db/npc';
+import { getCoinDropFromNpc, getNpc, getSpawnChanceByNPC } from '$lib/db/npc';
 
 export async function load({ params }: PageServerLoadEvent) {
 	const client = await pool.connect();
@@ -105,6 +105,7 @@ export async function load({ params }: PageServerLoadEvent) {
 		return {
 			npc: await getNpc(id, client),
 			spawns: await getSpawnChanceByNPC(id, client),
+			coin: await getCoinDropFromNpc(id, client),
 			loot: lootParse.data,
 			factions: factionParse.data
 		};

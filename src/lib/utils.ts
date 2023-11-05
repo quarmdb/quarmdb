@@ -36,7 +36,9 @@ export function nameParse(name: string): string {
 	return name;
 }
 
-export function groupSpawnTable(spawns: Spawn2Type[]): Map<string, Spawn2Type[]> {
+export function groupSpawnTable(
+	spawns: Spawn2Type[]
+): Map<string, Spawn2Type[]> {
 	const spawnMap = new Map<string, Spawn2Type[]>();
 
 	spawns.forEach((spawn) => {
@@ -73,7 +75,9 @@ export function removeLeadingA(str: string) {
 }
 
 export function nameCompare(a: string, b: string) {
-	return removeLeadingA(nameParse(a)).localeCompare(removeLeadingA(nameParse(b)));
+	return removeLeadingA(nameParse(a)).localeCompare(
+		removeLeadingA(nameParse(b))
+	);
 }
 
 export const omitFalsy = <T extends object>(
@@ -91,9 +95,40 @@ export const omitFalsy = <T extends object>(
 	) as any;
 
 export const urlBlob = (str: string) => {
-	return str.replace(/\s+/gi, '-').replace(/_/gi, '-').replace(/#/gi, '').toLowerCase();
+	return str
+		.replace(/\s+/gi, '-')
+		.replace(/_/gi, '-')
+		.replace(/#/gi, '')
+		.toLowerCase();
 };
 
 export const getRandomInt = (max: number) => {
 	return Math.floor(Math.random() * max);
+};
+
+export const coinSplit = (coin: number) => {
+	let plat = Math.floor(coin / 1000);
+	coin -= plat * 1000;
+	let gold = Math.floor(coin / 100);
+	coin -= gold * 100;
+	let silver = Math.floor(coin / 10);
+	coin -= silver * 10;
+	let copper = coin;
+
+	return {
+		plat,
+		gold,
+		silver,
+		copper
+	};
+};
+
+export const coinString = (coin: number) => {
+	const coinObj = coinSplit(coin);
+	let str: string[] = [];
+	if (coinObj.plat !== 0) str.push(`${coinObj.plat}pp`);
+	if (coinObj.gold !== 0) str.push(`${coinObj.gold}gp`);
+	if (coinObj.silver !== 0) str.push(`${coinObj.silver}sp`);
+	if (coinObj.copper !== 0) str.push(`${coinObj.copper}cp`);
+	return str.join(', ');
 };

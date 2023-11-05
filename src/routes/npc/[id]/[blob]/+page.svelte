@@ -3,7 +3,13 @@
 	import type { PageData } from './$types';
 	export let data: PageData;
 	import type { FactionListType, NpcTypesType, Spawn2Type } from '$lib/schema';
-	import { groupSpawnTable, nameParse, urlBlob } from '$lib/utils';
+	import {
+		coinSplit,
+		coinString,
+		groupSpawnTable,
+		nameParse,
+		urlBlob
+	} from '$lib/utils';
 	import { getZoneFromShortName } from '$lib/db/constants/zoneidnumber';
 	import RawJsonViewer from '$lib/components/RawJSONViewer.svelte';
 
@@ -21,8 +27,31 @@
 		{npc.racename}
 	</h2>
 	<section class="info">
-		<span>Damage Per Round</span>
-		<span>{npc.mindmg} - {npc.maxdmg}</span>
+		<span>Damage Per Round: {npc.mindmg} - {npc.maxdmg}</span>
+		{#if data.coin.maxcash === 0}
+			<span
+				><a
+					href="https://github.com/SecretsOTheP/EQMacEmu/blob/bafd299d1d331ac6bbd81be4e520a9cf60c2121e/zone/loottables.cpp#L39"
+					>Coin</a
+				>: None</span>
+		{:else}
+			<span
+				>Min <a
+					href="https://github.com/SecretsOTheP/EQMacEmu/blob/bafd299d1d331ac6bbd81be4e520a9cf60c2121e/zone/loottables.cpp#L39"
+					>Coin</a
+				>:
+				{coinString(data.coin.mincash)}
+			</span>
+			{#if data.coin.avgcoin === 0}
+				<span
+					>Avg Coin: {coinString(
+						Math.floor((data.coin.maxcash + data.coin.mincash) / 2)
+					)}</span>
+			{:else}
+				<span>Avg Coin: {coinString(data.coin.avgcoin)} </span>
+			{/if}
+			<span>Max Coin: {coinString(data.coin.maxcash)} </span>
+		{/if}
 	</section>
 </section>
 <RawJsonViewer bind:obj={npc} />
@@ -94,6 +123,11 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 1rem;
+	}
+
+	section.info {
+		display: flex;
+		flex-direction: column;
 	}
 	section.loot {
 		display: flex;
