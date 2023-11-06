@@ -25,33 +25,3 @@
 	</section>
 {/if}
 
-<style>
-	section.rawData {
-		width: 100%;
-		display: none;
-		grid-template-columns: repeat(4, 1fr);
-	}
-
-	section.show {
-		display: grid;
-	}
-
-	div.kvPair {
-		width: 100%;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		padding: 0.1rem;
-	}
-
-	span.key {
-		background-color: var(--surface-4);
-		color: var(--text-3);
-		text-align: center;
-		font-weight: 900;
-	}
-
-	span.value {
-		border: 1px solid var(--surface-4);
-		padding-left: 0.25rem;
-	}
-</style>
