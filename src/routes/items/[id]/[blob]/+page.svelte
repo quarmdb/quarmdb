@@ -79,9 +79,3 @@
 		{/each}
 	</ul>
 {/if}
-
-<style>
-	.faded {
-		opacity: 0.5;
-	}
-</style>
