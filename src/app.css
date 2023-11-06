@@ -146,25 +146,24 @@ th {
 		margin: 0;
 		display: grid;
 		grid-template-columns: var(--nav-width) 1fr;
-
-		& div {
+	}
+		nav div {
 			display: flex;
 			width: 100%;
 			height: 100%;
 			align-items: center;
 		}
 
-		& button {
+		nav button {
 			font-size: 2rem;
 			border-radius: 0 100% 100% 0;
 			opacity: 0.7;
 			padding: 4rem 2rem;
 		}
 
-		& button:hover {
+		nav button:hover {
 			opacity: 1;
 		}
-	}
 
 	nav.closed {
 		transform: translateX(calc(-1 * var(--nav-width)));
@@ -177,13 +176,12 @@ th {
 		flex-direction: column;
 		padding-top: 1rem;
 		width: 100%;
-
-		& p {
+	}
+	footer p {
 			display: block;
 			width: 100%;
 			text-align: center;
 		}
-	}
 /* layout.svelte styles */
 
 
@@ -196,9 +194,9 @@ th {
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: center;
-
-		& a.title:visited,
-		& a.title {
+	}
+		span.title a.title:visited,
+		span.title a.title {
 			font-size: 3rem;
 			display: block;
 			padding-right: 1rem;
@@ -206,11 +204,11 @@ th {
 			color: var(--text);
 		}
 
-		& a.title:hover {
+		span.title a.title:hover {
 			color: var(--brand);
 			text-decoration-color: var(--brand);
 		}
-	}
+
 	nav {
 		width: 100%;
 		background-color: var(--surface-2);
@@ -271,38 +269,36 @@ th {
 		border: var(--surface-3) 1px solid;
 		border-radius: 0.5rem;
 		padding: 1rem;
-
-		& header {
+	}
+		article.item header {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			font-size: 2rem;
 		}
 
-		& main {
+		article.item main {
 			display: flex;
 			flex-direction: row;
 			width: 100%;
 			height: 100%;
-
-			& section.stats {
+		}
+			article.item main section.stats {
 				display: flex;
 				flex-direction: column;
 				flex-grow: 1;
 				width: 100%;
 			}
 
-			& section.icon {
+			article.item main section.icon {
 				display: flex;
 				height: 100%;
 				justify-content: end;
-				& img {
+			}
+				article.item main section.icon img {
 					width: 7rem;
 					aspect-ratio: 1/1;
 				}
-			}
-		}
-	}
 /* item.svelte styles */
 
 
@@ -337,18 +333,18 @@ th {
 		flex-direction: row;
 		padding: 0;
 		margin: 0;
-
-		& ul {
+	}
+		nav ul {
 			width: 100%;
 			padding: 0;
 			display: flex;
-			flex-direction: row;
-			& li {
+			flex-direction: row;}
+			nav ul li {
 				width: 100%;
 				list-style: none;
 				padding: 0;
-
-				& a {
+			}
+				nav ul li a {
 					width: 100%;
 					text-decoration: none;
 					display: block;
@@ -357,10 +353,10 @@ th {
 					color: var(--text-2);
 					border-radius: 5rem;
 				}
-				& a.selected {
+				nav ul li a.selected {
 					border: 1px solid var(--brand);
 				}
-				& a:hover {
+				nav ul li a:hover {
 					background-color: var(--surface-1);
 					color: var(--text-2);
 					text-decoration: underline;
@@ -504,12 +500,12 @@ th {
 		flex-direction: column;
 		z-index: 2;
 
-		& label {
+		section.input-group label {
 			padding-left: 0.5rem;
 			display: flex;
 			width: 100%;
 		}
-		& input {
+		section.input-group input {
 			background-color: var(--surface-2);
 			border-bottom: 1px solid black;
 			width: 100%;
@@ -518,11 +514,11 @@ th {
 			cursor: text;
 		}
 
-		& input.error {
+		section.input-group input.error {
 			border: red;
 		}
 
-		& select {
+		section.input-group select {
 			background-color: var(--surface-2);
 			border-bottom: 1px solid black;
 			width: 100%;
@@ -532,7 +528,7 @@ th {
 			cursor: pointer;
 		}
 
-		& span.error {
+		section.input-group span.error {
 			padding-top: 0.5rem;
 			font-size: 0.7rem;
 			color: red;
