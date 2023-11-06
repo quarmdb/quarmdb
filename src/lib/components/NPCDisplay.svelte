@@ -63,30 +63,3 @@
 		{/each}
 	{/if}
 </section>
-
-<style>
-	section.header {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-	}
-	section.lootWrapper {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1rem;
-	}
-	section.loot {
-		display: flex;
-		flex-direction: row;
-	}
-
-	section.spawnGroup {
-		display: flex;
-		flex-direction: column;
-	}
-
-	section.factionWrapper {
-		display: flex;
-		flex-direction: column;
-	}
-</style>
