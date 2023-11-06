@@ -150,7 +150,7 @@ nav {
     grid-template-columns: var(--nav-width) 1fr;
 }
 
-nav div {
+body > div > div.wrapper > nav > div {
     display: flex;
     width: 100%;
     height: 100%;
@@ -158,7 +158,7 @@ nav div {
     flex-direction: column-reverse;
 }
 
-nav button {
+body > div > div.wrapper.svelte-vrnx3i > nav > div > button {
     font-size: 20px;
     border-radius: 0 100% 100% 0;
     opacity: 1;
