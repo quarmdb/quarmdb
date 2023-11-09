@@ -98,3 +98,263 @@ tr:hover {
 th {
 	border-bottom: 1px solid var(--brand);
 }
+
+/* cm.buttons */
+button {
+    background-color: var(--surface-2);
+    color: var(--text-3);
+
+    font-weight: 300;
+    text-shadow: none;
+    padding: 0.5rem;
+    border-radius: 0.25em;
+    border: none;
+    background: #081769;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease;
+
+    margin-top: 1em;
+    width: 100px;
+    min-width: auto;
+    text-align: center;
+}
+
+button:hover {
+    background: #182d9d;
+    cursor: pointer;
+}
+/* cm.buttons */
+
+/* cm.form-inputs*/
+section.input-group.svelte-1p7sm9t input {
+    color: var(--text);
+}
+
+input,
+select {
+    background-color: var(--surface-2);
+    border:none;
+    border: 0!important;
+    border-radius: 0!important;
+    padding: 0.5em!important;
+    font-size: 1em!important;
+    outline: 0!important;
+}
+/* cm.form-inputs*/
+
+/* cm. general-styles */
+body > div > div.wrapper.svelte-vrnx3i > main > article {
+    padding: 3em 0 1em 3em;
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
+    line-height: 1.2;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 1em 0 .5em;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+p {
+    margin: 1em 0 .5em 0;
+}
+tr,td{        
+    padding: 0.5em;    
+}
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(1),
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(3),
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(5),
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(7),
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(9),
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(11) {
+    margin: 1em 0 .5em;
+}
+
+body > div > div.wrapper.svelte-vrnx3i > main > article > div > img{
+    width:50%!important;    
+}
+pre {
+    border: 3px solid var(--surface-2);
+    padding: 1rem;
+    width: 90%;
+}
+tr, td {
+    padding: 0.5em;
+    font-weight: normal!important;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 transparent!important;
+}
+body > div > div.wrapper.svelte-vrnx3i > main > article > table > thead > tr:nth-child(2) > th,
+table > tr:first-child > th{
+    font-weight: normal!important;
+    padding:1em!important;    
+}
+/* cm. general-styles */
+
+/* navbar */
+body > div > div.wrapper > nav > div {
+    display: flex;
+    width: 2.2em;
+    height: 3em;
+    align-items: end;
+    margin-top: -15px;
+    position: absolute;
+    right: -2.2em;
+    top: 0;
+}
+
+body > div > div.wrapper.svelte-vrnx3i > nav > div > button {
+    font-size: 20px;
+    opacity: 1;
+    border-radius: 0;
+    background: transparent;
+    cursor: e-resize;
+    padding: 0.25em;
+    color: var(--text);
+}
+
+body > div > div.wrapper.svelte-vrnx3i > nav > div > button:hover {
+    background: rgba(0, 0, 0, .06);
+    color: var(--text);
+}
+
+body > div > div.wrapper.svelte-vrnx3i > nav {
+    transition: all .52s;
+}
+
+body > div > div.wrapper.svelte-vrnx3i > nav > div > button:hover,
+body > div > div.wrapper.svelte-vrnx3i > nav > div > button {
+    content: '';
+    background: url(https://imgeasy.com/share/c3unj0ogrM9xVa2PBgfW.png) no-repeat;
+    filter: invert(1);
+    background-size: cover;
+    color: transparent!important;
+    outline: none;
+}
+
+body > div > div.wrapper.svelte-vrnx3i > .closed > div > button:hover,
+body > div > div.wrapper.svelte-vrnx3i > .closed > div > button {
+    color: var(--text);
+    filter: invert(1);
+    background: #ffa929 url(https://imgeasy.com/share/n9vSiJJc8IR63r83FmGJ.png) no-repeat;
+    background-size: cover;
+    color: transparent!important;
+    outline: none;
+}
+[data-theme="dark"] nav {
+    background: url(https://imgeasy.com/share/w8ETZg1yz99rLd4TOQ2R.png)!important;
+}
+/* navbar */
+
+/* cm.navbar-brand */
+body > div > div.wrapper.svelte-vrnx3i > nav > nav > span > a {
+    /* font-size: 100%; */
+    xcolor: var(--text);
+    display: block;
+    margin: .5em;
+    padding: .25em!important;
+    text-align: center;
+    font-size: 30px!important;
+    text-decoration:none;
+    border:3px solid;
+}
+/* cm.navbar-brand */
+
+/* cm.navbar-links */
+ul li a{
+    text-decoration:none;
+    font-size:20px!important;
+    padding:.3em 0;
+    box-shadow:none!important;
+    border:0!important;
+    color:inherit!important;
+}
+ul li a:hover{
+    box-shadow:none!important;
+    border:0!important;
+    background:rgba(255,255,255,.1);
+}
+ul ul li a{
+    font-size:15px!important;
+}
+nav ul li a.selected{
+    text-decoration:none!important;
+    box-shadow:inset -3px 0 #fff!important;
+}
+/* cm.navbar-links */
+
+/* cm.navbar-title-spacing */
+body > div > div.wrapper.svelte-vrnx3i > nav > nav > span{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2em;
+}
+/* cm.navbar-title-spacing */
+
+/* cm.zone-page */
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(1),
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(3),
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(5),
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(7),
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(9) {
+    position: relative;
+}
+
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(1):before,
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(3):before,
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(5):before,
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(7):before,
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(9):before{
+    background: url('https://everquest.allakhazam.com/gallery/loading/loading-original.jpg') no-repeat;
+    width: 65px;
+    height: 50px;
+    content: '';
+    background-size: contain!important;
+    position: absolute;
+    top: 5px;
+    right: -90px;
+    overflow: visible;
+    display: inline-block;
+}
+
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(3):before {
+    background: url('https://everquest.allakhazam.com/gallery/loading/loading-kunark.jpg') no-repeat;
+}
+
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(5):before {
+    background: url('https://everquest.allakhazam.com/gallery/loading/loading-velious.jpg') no-repeat;
+}
+
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(7):before {
+    background: url('https://everquest.allakhazam.com/gallery/loading/loading-luclin.jpg') no-repeat;
+}
+
+body > div > div.wrapper.svelte-vrnx3i > main > article > section > span:nth-child(9):before {
+    background: url('https://everquest.allakhazam.com/gallery/loading/loading-planes.jpg') no-repeat;
+}
+.zone {
+    font-size: 1em!important;
+    line-height: 1.5!important;
+}
+/* cm.zone-page */
