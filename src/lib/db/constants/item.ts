@@ -124,14 +124,15 @@ export const getBardLine = (item: ItemsType) => {
 };
 
 export const getStatsLine = (item: ItemsType) => {
-	let stats = '';
-	if (item.astr !== 0) stats += `STR: ${item.astr} `;
-	if (item.adex !== 0) stats += `DEX: ${item.adex} `;
-	if (item.asta !== 0) stats += `STA: ${item.asta} `;
-	if (item.aint !== 0) stats += `INT: ${item.aint} `;
-	if (item.aagi !== 0) stats += `AGI: ${item.aagi} `;
-	if (item.awis !== 0) stats += `WIS: ${item.awis} `;
-	return stats;
+	let stats: string[] = [];
+	if (item.astr !== 0) stats.push(`STR: ${item.astr}`);
+	if (item.adex !== 0) stats.push(`DEX: ${item.adex}`);
+	if (item.asta !== 0) stats.push(`STA: ${item.asta}`);
+	if (item.aint !== 0) stats.push(`INT: ${item.aint}`);
+	if (item.aagi !== 0) stats.push(`AGI: ${item.aagi}`);
+	if (item.awis !== 0) stats.push(`WIS: ${item.awis}`);
+	if (item.acha !== 0) stats.push(`CHA: ${item.acha}`);
+	return stats.join(' ');
 };
 
 export const getResistsLine = (item: ItemsType) => {
