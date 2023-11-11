@@ -3,7 +3,10 @@
 	import { page } from '$app/stores';
 	import { expansionLookup } from '$lib/db/constants';
 	import { BodyTypes } from '$lib/db/constants/bodytype';
-	import { groupByExpansionShortInfo, type ZoneShortInfoType } from '$lib/db/constants/zone';
+	import {
+		groupByExpansionShortInfo,
+		type ZoneShortInfoType
+	} from '$lib/db/constants/zone';
 	import { AllZones } from '$lib/db/constants/zoneidnumber';
 	import { SearchNameSchema } from '$lib/inputSchemas';
 
@@ -32,8 +35,15 @@
 <form method="get" action="/npc/search/">
 	<section class="input-group">
 		<label for="name">Name</label>
-		<input id="name" name="name" type="text" bind:value={name} class:error={!nameParse.success} />
-		{#if !nameParse.success}<span class="error">{nameParse.error.issues[0].message}</span>{/if}
+		<input
+			id="name"
+			name="name"
+			type="text"
+			bind:value={name}
+			class:error={!nameParse.success} />
+		{#if !nameParse.success}<span class="error"
+				>{nameParse.error.issues[0].message}</span
+			>{/if}
 	</section>
 	<section class="sidebyside-group">
 		<section class="input-group">
@@ -45,8 +55,7 @@
 				max="100"
 				step="1"
 				type="number"
-				bind:value={min_level}
-			/>
+				bind:value={min_level} />
 		</section>
 		<section class="input-group">
 			<label for="max_level">Max Level</label>
@@ -57,8 +66,7 @@
 				max="100"
 				step="1"
 				type="number"
-				bind:value={max_level}
-			/>
+				bind:value={max_level} />
 		</section>
 	</section>
 	<section class="input-group">
@@ -83,7 +91,8 @@
 		</select>
 	</section>
 	<button type="reset">Reset</button>
-	<button type="submit" on:submit|preventDefault={async () => await search()}>Search</button>
+	<button type="submit" on:submit|preventDefault={async () => await search()}
+		>Search</button>
 </form>
 
 <style>
@@ -112,27 +121,9 @@
 			display: flex;
 			width: 100%;
 		}
-		& input {
-			background-color: var(--surface-2);
-			border-bottom: 1px solid black;
-			width: 100%;
-			border-radius: 0.25em;
-			padding: 0.5rem;
-			cursor: text;
-		}
 
 		& input.error {
 			border: red;
-		}
-
-		& select {
-			background-color: var(--surface-2);
-			border-bottom: 1px solid black;
-			width: 100%;
-			border-radius: 0.25em;
-			padding: 1rem;
-			font-size: 1.25rem;
-			cursor: pointer;
 		}
 
 		& span.error {
