@@ -114,8 +114,7 @@
 		& a.title {
 			font-size: 3rem;
 			display: block;
-			padding-right: 1rem;
-			text-align: right;
+			text-align: center;
 			color: var(--text);
 		}
 
@@ -127,11 +126,11 @@
 	nav {
 		width: 100%;
 		background-color: var(--surface-2);
-	}
 
-	ul {
-		width: 100%;
-		display: block;
+		& ul {
+			width: 100%;
+			display: block;
+		}
 	}
 
 	li {
@@ -143,8 +142,8 @@
 	a.major,
 	a.minor {
 		display: block;
-		text-align: right;
-		padding-right: 1rem;
+		padding: 0.25rem 1rem;
+		text-decoration: none;
 	}
 	a.major {
 		font-size: 2.5rem;
@@ -152,11 +151,14 @@
 
 	a.minor {
 		font-size: 1.75rem;
+		padding-left: 2rem;
 	}
 
 	a.major:hover,
 	a.minor:hover {
-		border-right: 2px solid var(--brand);
+		text-decoration: underline;
+		border-right: 0.25rem solid var(--brand);
+		background-color: var(--surface-3);
 	}
 
 	a:visited,
@@ -167,6 +169,7 @@
 
 	a.selected {
 		text-decoration: underline;
-		border-right: 2px solid var(--brand);
+		border-right: 0.25rem solid var(--brand);
+		background-color: var(--surface-3);
 	}
 </style>

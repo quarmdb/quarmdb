@@ -98,6 +98,7 @@
 			& button {
 				font-size: 2rem;
 				border-radius: 0 100% 100% 0;
+				border: none;
 				opacity: 0.7;
 				padding: 4rem 2rem;
 				pointer-events: all;
