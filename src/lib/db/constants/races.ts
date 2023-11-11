@@ -9,12 +9,12 @@ export const getRaceList = (raceMask: number): string => {
 		.join(' ');
 };
 
-export type PlayerClassExpType = {
+export type PlayerRaceExpType = {
 	name: string;
 	mod: number;
 };
 
-export const PlayerClassExp: PlayerClassExpType[] = [
+export const PlayerRaceExp: PlayerRaceExpType[] = [
 	{ name: 'Barbarian', mod: 105.0 },
 	{ name: 'Dwarf', mod: 100.0 },
 	{ name: 'Dark Elf', mod: 100.0 },

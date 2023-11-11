@@ -87,13 +87,16 @@
 		<li>
 			<a
 				class="major"
-				href="/info/random"
+				href="/info"
 				class:selected={subDir === 'info'}
 				on:click={navClicked}>Info</a>
 		</li>
 		<ul>
 			<li>
 				<a class="minor" href="/info/exp" on:click={navClicked}>Experience</a>
+			</li>
+			<li>
+				<a class="minor" href="/info/rules" on:click={navClicked}>Rules</a>
 			</li>
 		</ul>
 	</ul>
