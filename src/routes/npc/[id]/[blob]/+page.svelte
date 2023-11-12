@@ -92,9 +92,14 @@
 								>X: {s.x.toFixed(2)} Y: {s.y.toFixed(2)} Z: {s.z.toFixed(
 									2
 								)}</td>
-							<td>{s.chance}%</td><td>{s.respawntime}s</td><td
-								>±{Math.floor(s.variance / 2)}s</td
-							></tr>
+							<td>{s.chance}%</td><td>{s.respawntime}s</td>
+							<td>
+								{#if s.variance === 0}
+									None
+								{:else}
+									±{Math.floor(s.variance / 2)}s
+								{/if}
+							</td></tr>
 					{/each}
 				</table>
 			</section>
