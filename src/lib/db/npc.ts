@@ -131,6 +131,7 @@ export const NPCSpawnChanceSchema = z.object({
 			spawngroupID: z.number(),
 			chance: z.number(),
 			respawntime: z.number(),
+			variance: z.number(),
 			x: z.number(),
 			y: z.number(),
 			z: z.number()
@@ -147,6 +148,7 @@ export const getSpawnChanceByNPC = async (id: number, client: PoolClient) => {
 				'spawngroupID', spawn.spawngroupID,
 				'chance', se.chance,
 				'respawntime', spawn.respawntime,
+				'variance', spawn.variance,
 				'x', spawn.x,
 				'y', spawn.y,
 				'z', spawn.z

@@ -80,7 +80,11 @@
 			<section class="spawnGroup">
 				<table>
 					<tr>
-						<th>Location</th><th>Chance</th><th>Respawn</th>
+						<th>Location</th><th>Chance</th><th>Respawn</th><th
+							><a
+								href="https://github.com/EQMacEmu/Server/blob/1af8bcc8f939e188e93bd02f0991474ec0a9389b/zone/spawn2.cpp#L95"
+								>Variance</a
+							></th>
 					</tr>
 					{#each spawn.spawninfo as s}
 						<tr>
@@ -88,7 +92,9 @@
 								>X: {s.x.toFixed(2)} Y: {s.y.toFixed(2)} Z: {s.z.toFixed(
 									2
 								)}</td>
-							<td>{s.chance}%</td><td>{s.respawntime}s</td></tr>
+							<td>{s.chance}%</td><td>{s.respawntime}s</td><td
+								>±{Math.floor(s.variance / 2)}s</td
+							></tr>
 					{/each}
 				</table>
 			</section>

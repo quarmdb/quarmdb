@@ -7,7 +7,12 @@
 	import { getZoneFromShortName } from '$lib/db/constants/zoneidnumber';
 
 	export let npc: NpcTypesType & { racename: string };
-	export let loot: { icon: number; id: number; name: string; chance: number }[] = [];
+	export let loot: {
+		icon: number;
+		id: number;
+		name: string;
+		chance: number;
+	}[] = [];
 	export let spawn: Spawn2Type[] = [];
 	export let factions: (FactionListType & { value: number })[] = [];
 
@@ -16,7 +21,11 @@
 
 <section class="header">
 	<h1>{nameParse(npc.name)}</h1>
-	<h2>Level {npc.level} {npc.maxlevel > 0 ? '- ' + npc.maxlevel : ''} {npc.racename}</h2>
+	<h2>
+		Level {npc.level}
+		{npc.maxlevel > 0 ? '- ' + npc.maxlevel : ''}
+		{npc.racename}
+	</h2>
 	<section class="info">
 		<span>Damage Per Round</span>
 		<span>{npc.mindmg} - {npc.maxdmg}</span>
@@ -30,7 +39,9 @@
 		{#each loot as loot}
 			<section class="loot">
 				<img src="/icon/{loot.icon}.gif" alt="icon" />
-				<span><a href="/items/{loot.id}/{urlBlob(loot.name)}">{loot.name}</a>({loot.chance}%)</span>
+				<span
+					><a href="/items/{loot.id}/{urlBlob(loot.name)}">{loot.name}</a
+					>({loot.chance}%)</span>
 			</section>
 		{/each}
 	{:else}
@@ -47,7 +58,8 @@
 			<h3><a href="/zone/{keys}">{getZoneFromShortName(keys).long_name}</a></h3>
 			<section class="spawnGroup">
 				{#each spawns as s}
-					<span>(X:{s.x}, Y:{s.y}, Z:{s.z}) - Respawn: {s.respawntime}s</span>
+					<span
+						>(X:{s.x}, Y:{s.y}, Z:{s.z}) - Respawn: {s.respawntime}s - Variance: {s.variance}</span>
 				{/each}
 			</section>
 		{/each}
@@ -59,7 +71,9 @@
 		<span>No Factions</span>
 	{:else}
 		{#each factions as faction}
-			<span><a href="/faction/{faction.id}">{faction.name}({faction.value})</a></span>
+			<span
+				><a href="/faction/{faction.id}">{faction.name}({faction.value})</a
+				></span>
 		{/each}
 	{/if}
 </section>
