@@ -1,7 +1,19 @@
 <div>
-	<a href="https://discord.com/channels/1133452007412334643/1133453587675103323/1158158969349607454"
-		>Meme Posting</a
-	>
+	<h2>
+		All,<br />
+		<br />
+		Thank you for your continued support. Please remember to post issues and requests
+		in the issues on github.<br />
+		<br />
+		I am looking to use the ingame map files (for future clients) to draw zones dynamically.
+		I will need help adjusting the map files to have them draw well.<br />
+		<br />
+		<a href="/zone/test">This</a> is an example of what I am going for. These
+		are one level from NParse Data files.<br />
+		<br />
+		Any help would be awesome! Thank you!<br />
+		-Toxic
+	</h2>
 </div>
 
 <style>
@@ -11,5 +23,6 @@
 		height: 100%;
 		align-items: center;
 		justify-content: center;
+		flex-direction: column;
 	}
 </style>
