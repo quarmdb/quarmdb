@@ -55,6 +55,5 @@
 	svg {
 		background-color: #c0c0c0;
 		border: 1px solid red;
-		width: 100%;
 	}
 </style>
