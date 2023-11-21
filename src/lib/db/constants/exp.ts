@@ -1,4 +1,4 @@
-import type { PlayerClassExpType } from './races';
+import type { PlayerRaceExpType } from './races';
 
 export const getExpModifier = (level: number) => {
 	if (level <= 29) return 1.0;
@@ -29,9 +29,14 @@ export const getBaseExp = (level: number) => {
 
 export const getExpForLevel = (
 	level: number,
-	playerClass: PlayerClassExpType
+	playerClass: PlayerRaceExpType
 ) => {
+	const BASE_MOD = 10.0;
 	return Math.floor(
-		getBaseExp(level) * getExpModifier(level) * playerClass.mod
+		getBaseExp(level) * getExpModifier(level) * playerClass.mod * BASE_MOD
 	);
+};
+
+export const expForKill = (myLevel: number, otherLevel: number) => {
+	//save this for another day
 };
