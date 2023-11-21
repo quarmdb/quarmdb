@@ -4,9 +4,9 @@
 </script>
 
 <section>
-	<label for="theme-selector" data-theme="test" id="theme-selector-label"
-		>Dark/Light</label>
 	<input type="checkbox" id="theme-selector" bind:checked={$darkModeStore} />
+	<label for="theme-selector" data-theme="test" id="theme-selector-label"
+	></label>
 </section>
 
 <style>
@@ -19,16 +19,37 @@
 		padding-right: 1rem;
 	}
 
-	label {
-		position: relative;
-		width: 5rem;
+	input {
+		display: none;
 	}
 
-	label::before {
+	label {
+		position: relative;
+		width: 4rem;
+		background-color: var(--surface-3);
+		border-radius: 3rem;
+		height: 2rem;
+		transition: 0.5s;
+	}
+
+	label:before {
 		content: '';
 		border-radius: 100%;
-		background-color: var(--surface-2);
+		background-color: yellow;
 		position: absolute;
 		left: 0;
+		top: 0;
+		z-index: 10;
+		width: 2rem;
+		height: 2rem;
+		transition: 0.25s;
+	}
+
+	input:checked + label:before {
+		content: '';
+		border-radius: 100%;
+		background-color: gray;
+		position: absolute;
+		transform: translateX(2rem);
 	}
 </style>

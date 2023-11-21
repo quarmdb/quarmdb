@@ -126,6 +126,7 @@
 	nav {
 		width: 100%;
 		background-color: var(--surface-2);
+		font-size: 1rem;
 
 		& ul {
 			width: 100%;
