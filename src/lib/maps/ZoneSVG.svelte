@@ -2,6 +2,7 @@
 	import innothule from './data/innothule.txt?raw';
 	import ecommons from './data/ecommons.txt?raw';
 	import { minMaxMapFile, parseMapFile } from './zonesvg';
+	import type { MouseEventHandler } from 'svelte/elements';
 
 	let parse = parseMapFile(innothule);
 	let minmax = minMaxMapFile(parse);
@@ -14,6 +15,14 @@
 		if (to === 'innothule') parse = parseMapFile(innothule);
 		else if (to === 'ecommons') parse = parseMapFile(ecommons);
 		minmax = minMaxMapFile(parse);
+	}
+
+	type LineClickEvent = MouseEvent & {
+		currentTarget: EventTarget & SVGLineElement;
+	};
+
+	function lineClick(evt: LineClickEvent) {
+		console.log(evt.currentTarget.getAttribute('data-points'));
 	}
 </script>
 
@@ -29,16 +38,27 @@
 			minmax.y.max - minmax.y.min
 		) +
 			2 * pad}"
-		width="500px"
+		width="75vw"
 		xmlns="http://www.w3.org/2000/svg">
 		{#each parse as line}
-			<line
-				stroke-width="5"
-				x1={line.start.x}
-				y1={line.start.y}
-				x2={line.end.x}
-				y2={line.end.y}
-				style="stroke: rgb({line.color.r} {line.color.g} {line.color.b})" />
+			{#if line.type === 'line'}
+				<line
+					on:click={lineClick}
+					data-points="{line.start.x} {line.start.y} {line.end.x} {line.end.y}"
+					x1={line.start.x}
+					y1={line.start.y}
+					x2={line.end.x}
+					y2={line.end.y}
+					style="stroke: rgb({line.color.r} {line.color.g} {line.color.b})" />
+			{:else}
+				<circle
+					cx={line.location.x}
+					cy={line.location.y}
+					stroke="red"
+					fill="grey" />
+				<text x={line.location.x} y={line.location.y}>{line.text}</text>
+				<!-- point -->
+			{/if}
 		{/each}
 	</svg>
 </div>
@@ -55,5 +75,28 @@
 	svg {
 		background-color: #c0c0c0;
 		border: 1px solid red;
+
+		& line {
+			stroke-width: 10;
+		}
+		& line:hover {
+			stroke-width: 100;
+		}
+
+		& text {
+			font-size: 5rem;
+		}
+
+		& circle:hover + text {
+			font-size: 10rem;
+		}
+
+		& circle {
+			r: 5vw;
+		}
+
+		& circle:hover {
+			r: 10vw;
+		}
 	}
 </style>
