@@ -85,6 +85,7 @@
 
 		& text {
 			font-size: 5rem;
+			transition: all 0.5s;
 		}
 
 		& circle:hover + text {
